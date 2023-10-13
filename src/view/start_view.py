@@ -14,7 +14,7 @@ class StartView(AbstractView):
                 "choices": [
                     "Connection",
                     "Battle",
-                    "List pokemons (TODO)",
+                    "List pokemons",
                     "List attacks (TODO)",
                     "Quit",
                     "AttackListView",
@@ -40,3 +40,8 @@ class StartView(AbstractView):
             from view.battle_view import BattleView
 
             return BattleView()
+
+        elif reponse["choix"] == "List pokemons":
+            from view.pokemon_list_view import PokemonListView
+
+            return PokemonListView()
