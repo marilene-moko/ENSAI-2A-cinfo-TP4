@@ -15,12 +15,12 @@ class Utilisateur(Visiteur):
 
     def create_alert(self, criteria):
         if self.authenticated:
-            # Création d'alerte sécurisée ici
+            # Création d'alerte
             # ...
 
     def edit_wishlist(self, stage_id, data):
         if self.authenticated:
-            # Modification de la liste de souhaits sécurisée ici
+            # Modification de la liste de souhaits
             # ...
 
     # Autres méthodes de la classe Utilisateur
