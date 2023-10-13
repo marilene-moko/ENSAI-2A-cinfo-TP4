@@ -17,6 +17,7 @@ class StartView(AbstractView):
                     "List pokemons (TODO)",
                     "List attacks (TODO)",
                     "Quit",
+                    "AttackListView",
                 ],
             }
         ]
