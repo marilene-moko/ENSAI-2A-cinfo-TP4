@@ -1,6 +1,5 @@
-from abc import ABC, abstractmethod
 
-class Alerte(ABC):
+class Alerte:
     def __init__(
         self,
         ID_alerte,
@@ -13,5 +12,8 @@ class Alerte(ABC):
         self._dateCreation = dateCreation
         self._lastCheck = lastCheck
 
-        @abstractmethod
-        def methodeCheckNouveauxStages()
+    def methodeCheckNouveauxStages(self):
+
+    def verifierNouveauxStages(self):
+
+
