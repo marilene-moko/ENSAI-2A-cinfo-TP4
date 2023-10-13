@@ -13,11 +13,9 @@ class StartView(AbstractView):
                 "message": f"Hello {Session().user_name}",
                 "choices": [
                     "Connection",
-                    "Battle",
-                    "List pokemons",
-                    "List attacks (TODO)",
+                    "Inscription",
+                    "Utiliser sans s'authentifier",
                     "Quit",
-                    "AttackListView",
                 ],
             }
         ]
@@ -36,12 +34,12 @@ class StartView(AbstractView):
 
             return ConnectionView()
 
-        elif reponse["choix"] == "Battle":
-            from view.battle_view import BattleView
+        elif reponse["choix"] == "Inscription":
+            from view.inscription_view import InscriptionView
 
-            return BattleView()
+            return InscriptionView()
 
-        elif reponse["choix"] == "List pokemons":
-            from view.pokemon_list_view import PokemonListView
+        elif reponse["choix"] == "Utiliser sans s'authentifier":
+            from view.sans_authentification_view import SansauthentificationView
 
-            return PokemonListView()
+            return SansauthentificationView()
