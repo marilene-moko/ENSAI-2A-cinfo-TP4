@@ -1,7 +1,7 @@
 INSERT INTO "Projet_Info".personne(nom, prenom, adresse_mail, mot_de_passe, statut) VALUES
 ('Mathieu','Maude','maude.mathieu@gmail.com','MaUdE123456','administrateur'),
 ('Mounier','Clément','clement.mounier@gmail.com','ClEmEnT987654321','administrateur'),
-('Heidsieck', 'Suzanne','suzanne.heidsieck@gmail.com','Susudu35','admnistrateur'),
+('Heidsieck', 'Suzanne','suzanne.heidsieck@gmail.com','Susudu35','administrateur'),
 ('Kougoum Moko Mani','Marilene','marilene.kougoum-moko-mani@gmail.com','RiRidu35000','administrateur'),
 ('Boubet','Sophie','sophie.boubet@gmail.com','SoPhIe35','administrateur'),
 ('Bouzeria','Abdel','abdel.bouzeria@gmail.com','Abdel98765432100','professeur'),
