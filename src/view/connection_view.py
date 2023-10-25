@@ -3,7 +3,7 @@ from InquirerPy import prompt
 from view.abstract_view import AbstractView
 from view.session import Session
 
- from  dao.utilisateur_dao import UtilisateurDao
+from  dao.utilisateur_dao import UtilisateurDao
 
 class ConnectionView(AbstractView):
     def __init__(self):

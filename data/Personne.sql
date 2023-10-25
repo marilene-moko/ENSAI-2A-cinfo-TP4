@@ -11,7 +11,7 @@ connection = mysql.connector.connect(
 
 cursor = connection.cursor()
 
-insert_query = "INSERT INTO Utilisateurs (nom, prenom, email, mot_de_passe, profil) VALUES (%s, %s, %s, %s, %s)"
+insert_query = "INSERT INTO Utilisateurs (email, nom, prenom, mdp, profil) VALUES (%s, %s, %s, %s, %s)"
 user_data = ("John", "Doe", "johndoe@example.com", "mot_de_passe_hache", "eleve")
 
 cursor.execute(insert_query, user_data)
