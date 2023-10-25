@@ -7,19 +7,20 @@ from view.session import Session
 class ConnectionView(AbstractView):
     def __init__(self):
         self.__questions = [
-            {
-                "type": "input",
-                "name": "pseudo",
-                "message": "What's your pseudo",
-            }
+            {"type": "input", "message": "Email:"},
+            {"type": "input", "message": "Mot de passe: "},
         ]
 
     def display_info(self):
-        print(f"Hello, please choose your pseudo")
+        print("Veuillez renseigner les champs suivants:")
 
     def make_choice(self):
         answers = prompt(self.__questions)
-        Session().user_name = answers["pseudo"]
+        self.email = answers[0]
+        self.mot_de_passe = answers[1]
+        # if email in utilisateur:
+        #    raiseValueError()
+        Session().user_name = answers[1] + " " + answers[2]
 
         from view.start_view import StartView
 
