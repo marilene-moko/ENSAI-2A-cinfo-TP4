@@ -23,20 +23,20 @@ class ConnectionView(AbstractView):
         return self.email
 
     def authentification_reussie(self):
-        utilisateur = UtilisateurDao().get_utilisateur_by_email(self.email)
+        answers = prompt(self.__questions)
+        utilisateur = UtilisateurDao.utilisateur_exists(answers[0], answers[1])
+        if utilisateur is not None:
+            if utilisateur["statut"] == "eleve":
+                from view.ap_connexion_view_eleve import ApConnexionViewEleve
 
-        if utilisateur["statut"] == "eleve":
-            from view.ap_connexion_view_eleve import ApConnexionViewEleve
+                return ApConnexionViewEleve()
+            elif utilisateur["statut"] == "professeur":
+                from view.ap_connexion_view_prof import ApConnexionViewProf
 
-            return ApConnexionViewEleve()
-        elif utilisateur["statut"] == "professeur":
-            from view.ap_connexion_view_prof import ApConnexionViewProf
+                return ApConnexionViewProf()
+            elif utilisateur["statut"] == "administrateur":
+                from view.ap_connexion_view_admin import ApConnexionViewAdmin
 
-            return ApConnexionViewProf()
-        elif utilisateur["statut"] == "administrateur":
-            from view.ap_connexion_view_admin import ApConnexionViewAdmin
-
-            return ApConnexionViewAdmin()
-
-    if UtilisateurDao.utilisateur_exists(answers[0], answers[1]):
-        raise ValueError("Email ou mot de passe incorrect")
+                return ApConnexionViewAdmin()
+        else:
+            raise ValueError("L'email et/ou le mot de passe est incorrect")
