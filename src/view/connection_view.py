@@ -3,7 +3,8 @@ from InquirerPy import prompt
 from view.abstract_view import AbstractView
 from view.session import Session
 
-from  dao.utilisateur_dao import UtilisateurDao
+from dao.utilisateur_dao import UtilisateurDao
+
 
 class ConnectionView(AbstractView):
     def __init__(self):
@@ -19,22 +20,23 @@ class ConnectionView(AbstractView):
         answers = prompt(self.__questions)
         self.email = answers[0]
         self.mot_de_passe = answers[1]
-        # if email in utilisateur:
-        #    raiseValueError()
-        Session().user_name = answers[1] + " " + answers[2]
+        return self.email
 
-        #if utilisateur = eleve:
+    def authentification_reussie(self):
+        utilisateur = UtilisateurDao().get_utilisateur_by_email(self.email)
+
+        if utilisateur["statut"] == "eleve":
             from view.ap_connexion_view_eleve import ApConnexionViewEleve
-            return ApConnexionViewEleve()
-        #elif utilisateur = prof:
-            #from view.ap_connexion_view_prof import ApConnexionViewProf
-            #return ApConnexionViewProf()
-        #elif utilisateur = admin:
-            #from view.ap_connexion_view_admin import ApConnexionViewAdmin
-            #return ApConnexionViewAdmin()
 
+            return ApConnexionViewEleve()
+        elif utilisateur["statut"] == "professeur":
+            from view.ap_connexion_view_prof import ApConnexionViewProf
+
+            return ApConnexionViewProf()
+        elif utilisateur["statut"] == "administrateur":
+            from view.ap_connexion_view_admin import ApConnexionViewAdmin
+
+            return ApConnexionViewAdmin()
 
     if UtilisateurDao.utilisateur_exists(answers[0], answers[1]):
-         raise ValueError("Email ou mot de passe incorrect")
-
-
+        raise ValueError("Email ou mot de passe incorrect")
