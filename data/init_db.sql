@@ -1,82 +1,66 @@
-DROP SCHEMA IF EXISTS tp CASCADE;
-CREATE SCHEMA tp;
+DROP TABLE "Projet_Info".stage ;
+DROP TABLE "Projet_Info".page_visitee ;
+DROP TABLE "Projet_Info".voeu;
+DROP TABLE "Projet_Info".recommander ;
+DROP TABLE "Projet_Info".personne;
+DROP SCHEMA "Projet_Info";
 
---------------------------------------------------------------
--- Types d Attaques
---------------------------------------------------------------
+CREATE SCHEMA "Projet_Info" AUTHORIZATION id2241;
 
-DROP TABLE IF EXISTS tp.attack_type CASCADE ;
-CREATE TABLE tp.attack_type (
-    id_attack_type serial PRIMARY KEY,
-    attack_type_name text UNIQUE NOT NULL,
-    attack_type_description text NOT NULL
+CREATE TABLE "Projet_Info".personne (
+    identifiant_personne SERIAL4 PRIMARY KEY,
+    nom text NOT NULL,
+    prenom text NOT NULL,
+    adresse_mail VARCHAR(255) NOT NULL,
+    mot_de_passe VARCHAR(255) NOT NULL,
+    statut text NOT NULL
 );
 
-
---------------------------------------------------------------
--- Attaques
---------------------------------------------------------------
-
-DROP TABLE IF EXISTS tp.attack;
-
-CREATE TABLE tp.attack (
-    id_attack SERIAL PRIMARY KEY,
-    id_attack_type integer REFERENCES tp.attack_type(id_attack_type),
-    power integer,
-    accuracy integer,
-    element text,
-    attack_name text UNIQUE NOT NULL,
-    attack_description text
+-- Table Recommander
+CREATE TABLE "Projet_Info".recommander (
+    identifiant_personne_recommandant int4,
+    identifiant_personne_recommandee int4,
+    date DATE,
+    PRIMARY KEY (identifiant_personne_recommandant, identifiant_personne_recommandee),
+    FOREIGN KEY (identifiant_personne_recommandant) REFERENCES "Projet_Info".personne(identifiant_personne),
+    FOREIGN KEY (identifiant_personne_recommandee) REFERENCES "Projet_Info".personne(identifiant_personne)
 );
 
-
---------------------------------------------------------------
--- Types de Pokemons
---------------------------------------------------------------
-
-DROP TABLE IF EXISTS tp.pokemon_type CASCADE ;
-
-CREATE TABLE tp.pokemon_type (
-    id_pokemon_type serial PRIMARY KEY,
-    pokemon_type_name text UNIQUE NOT NULL,
-    pokemon_type_description text
+-- Table Voeu
+CREATE TABLE "Projet_Info".voeu (
+    identifiant_voeu SERIAL4 PRIMARY KEY,
+    URL_voeu VARCHAR(255),
+    Categorie text,
+    Intitule text,
+    Ville text,
+    Poste text,
+    Entreprise VARCHAR(255),
+    identifiant_personne int4,
+    FOREIGN KEY (identifiant_personne) REFERENCES "Projet_Info".personne(identifiant_personne)
 );
 
-
---------------------------------------------------------------
--- Pokemons
---------------------------------------------------------------
-
-DROP TABLE IF EXISTS tp.pokemon CASCADE;
-
-CREATE TABLE tp.pokemon (
-    id_pokemon_type integer REFERENCES tp.pokemon_type(id_pokemon_type),
-    name text UNIQUE NOT NULL,
-    id_pokemon serial PRIMARY KEY,
-    level integer,
-    hp integer,
-    attack integer,
-    defense integer,
-    spe_atk integer,
-    spe_def integer,
-    speed integer,
-    url_image text
+-- Table Page_visitee
+CREATE TABLE "Projet_Info".page_visitee (
+    Identifiant_page SERIAL4 PRIMARY KEY,
+    date_visite DATE,
+    URL_page text,
+    identifiant_personne int4,
+    FOREIGN KEY (identifiant_personne) REFERENCES "Projet_Info".personne(identifiant_personne)
 );
 
--- Comme on va creer des pokemon en forcant les id_pokemon
--- il faut maj a la main la valeur de la sequence de la PK
-ALTER SEQUENCE tp.pokemon_id_pokemon_seq RESTART WITH 899;
-
-
---------------------------------------------------------------
--- Attaques des Pokemons
---------------------------------------------------------------
-
-DROP TABLE IF EXISTS tp.pokemon_attack CASCADE;
-
-CREATE TABLE tp.pokemon_attack (
-    id_pokemon integer REFERENCES tp.pokemon(id_pokemon) ON DELETE CASCADE,
-    id_attack integer REFERENCES tp.attack(id_attack) ON DELETE CASCADE,
-    level integer,
-    PRIMARY KEY (id_pokemon, id_attack)
+-- Table Stage
+CREATE TABLE "Projet_Info".stage (
+    identifiant_stage SERIAL4 PRIMARY KEY,
+    URL_stage VARCHAR(255),
+    Categorie text,
+    Intitule text,
+    Ville text,
+    Poste text,
+    Entreprise VARCHAR(255),
+    identifiant_personne_sauvegarde int4,
+    identifiant_personne_ajout int4,
+    identifiant_modif int4,
+    FOREIGN KEY (identifiant_personne_sauvegarde) REFERENCES "Projet_Info".personne(identifiant_personne),
+    FOREIGN KEY (identifiant_personne_ajout) REFERENCES "Projet_Info".personne(identifiant_personne),
+    FOREIGN KEY (identifiant_modif) REFERENCES "Projet_Info".personne(identifiant_personne)
 );

@@ -61,7 +61,7 @@ class UtilisateurDao(metaclass=Singleton):
                         "nom": nom,
                         "prenom": prenom,
                         "mdp": mdp,
-                        "profil": profil #=eleve par defaut 
+                        "statut": statut #=eleve par defaut 
                     },
                 )
                 res = cursor.fetchone()
@@ -93,7 +93,7 @@ class UtilisateurDao(metaclass=Singleton):
                         "nom": nom,
                         "prenom": prenom,
                         "mdp": mdp,
-                        "profil": profil #=eleve par defaut 
+                        "statut": statut #=eleve par defaut 
                     },
                 )
                 if cursor.rowcount:
@@ -111,13 +111,12 @@ if __name__ == "__main__":
     dotenv.load_dotenv(override=True)
 
     # Création d'une attaque et ajout en BDD
-    mon_attaque = PhysicalFormulaAttack(
-        power=50,
-        name="chatouille",
-        description="guili-guilis",
-        accuracy=90,
-        element="Normal",
+    mon_utilisateur = PhysicalFormulaAttack(
+        nom=,
+        prenom=,
+        email=,
+        mdp=
     )
 
-    succes = AttackDao().add_attack(mon_attaque)
-    print("Attack created in database : " + str(succes))
+    succes = UtilisateurDao().add_utilisateur(mon_utilisateur)
+    print("Utilisateur created in database : " + str(succes))
