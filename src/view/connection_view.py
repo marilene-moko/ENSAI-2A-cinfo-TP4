@@ -4,23 +4,38 @@ from view.abstract_view import AbstractView
 from view.session import Session
 
 
-class ConnectionView(AbstractView):
+class ConnectionView:
     def __init__(self):
         self.__questions = [
             {
                 "type": "input",
-                "name": "pseudo",
-                "message": "What's your pseudo",
+                "name": "email",
+                "message": "Email:",
+            },
+            {
+                "type": "password",
+                "name": "password",
+                "message": "Password:",
             }
         ]
 
     def display_info(self):
-        print(f"Hello, please choose your pseudo")
+        print("Welcome, please log in")
 
     def make_choice(self):
         answers = prompt(self.__questions)
-        Session().user_name = answers["pseudo"]
+        user_email = answers["email"]
+        user_password = answers["password"]
 
-        from view.start_view import StartView
+        if user_email in users and users[user_email] == user_password:
+            print("Login successful!")
+            # Vous pouvez ajouter ici la logique pour rediriger l'utilisateur connecté vers la page suivante.
+        else:
+            print("Login failed. Incorrect email or password.")
+            # Vous pouvez ajouter ici la logique pour gérer l'échec de la connexion, par exemple, rediriger l'utilisateur vers la page de connexion.
 
-        return StartView()
+if __name__ == "__main__":
+    connection_view = ConnectionView()
+    connection_view.display_info()
+    connection_view.make_choice()
+
