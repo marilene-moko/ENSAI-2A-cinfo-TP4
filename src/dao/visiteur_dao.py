@@ -12,33 +12,41 @@ class VisiteurDao(metaclass=Singleton):
         created = False
 
         # Get the id type
-        email = TypeAttackDAO().find_id_by_label(attack.type)
-        if email in #email dans Personne:
-            raise ValueError(
-                "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
-            )
-
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    "INSERT INTO Personne (email, nom, prenom, mdp)             "
-                    "VALUES                                                     "
-                    "(%(email)s, %(nom)s, %(prenom)s, %(mdp)s)                  "
-                    "RETURNING email;",
+                    "SELECT *                                         "
+                    "FROM Personne                                    "
+                    "WHERE adresse_mail = %(email)s;                  ",
                     {
-                        "email": email,
-                        "nom": nom,
-                        "prenom": prenom,
-                        "mdp": mdp,
-                        "statut": statut #=eleve par defaut 
+                        "adresse_mail": email
                     },
                 )
                 res = cursor.fetchone()
-        if res:
-            email = res["email"]
-            created = True
+        if not res:
+            raise ValueError(
+                "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
+            )
+        else:
+            with DBConnection().connection as connection:
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        "INSERT INTO Personne (email, nom, prenom, mdp)             "
+                        "VALUES                                                     "
+                        "(%(email)s, %(nom)s, %(prenom)s, %(mdp)s);                 ",
+                        {
+                            "email": email,
+                            "nom": nom,
+                            "prenom": prenom,
+                            "mdp": mdp,
+                            "statut": statut="eleve"
+                        },
+                    )
+                    res = cursor.fetchone()
+            if res:
+                created = True
 
-        return created
+            return created
 
     def voir_historique(self):
         return HistoriqueDao().voir_historique()

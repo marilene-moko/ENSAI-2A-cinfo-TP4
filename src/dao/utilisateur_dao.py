@@ -1,12 +1,12 @@
 from typing import List, Optional
-from utils.singleton import Singleton
 
 from dao.db_connection import DBConnection
 from dao.visiteur_dao import VisiteurDao
 from dao.historique_dao import HistoriqueDao
 
+
 class UtilisateurDao(VisiteurDao):
-    def utilisateur_exists(self, email: str, mdp: str) -> Optional[AbstractAttack]:
+    def utilisateur_exists(self, email: str, mdp: str):
         """
         Regarder si l'utilisateur existe bien
         """
@@ -36,8 +36,17 @@ class UtilisateurDao(VisiteurDao):
         updated = False
 
         # Get the email
-        email = #TypeAttackDAO().find_email_by_label(attack.type)
-        if email is None:
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    "SELECT *                                         "
+                    "FROM Personne                                    "
+                    "WHERE adresse_mail = %(email)s                   "
+                    "RETURNING adresse_mail;                          ",
+                    {"adresse_mail": email},
+                )
+                res = cursor.fetchone()
+        if res["adresse_mail"] is None:
             return updated
 
         with DBConnection().connection as connection:
@@ -54,7 +63,7 @@ class UtilisateurDao(VisiteurDao):
                         "nom": nom,
                         "prenom": prenom,
                         "mdp": mdp,
-                        "statut": statut #=eleve par defaut 
+                        "statut": statut,
                     },
                 )
                 if cursor.rowcount:
@@ -65,8 +74,7 @@ class UtilisateurDao(VisiteurDao):
             return HistoriqueDao().modifier_historique()
 
 
-
-
+""" 
 if __name__ == "__main__":
     # Pour charger les variables d'environnement contenues dans le fichier .env
     import dotenv
@@ -84,3 +92,4 @@ if __name__ == "__main__":
 
     succes = UtilisateurDao().add_utilisateur(mon_utilisateur)
     print("Utilisateur created in database : " + str(succes))
+ """
