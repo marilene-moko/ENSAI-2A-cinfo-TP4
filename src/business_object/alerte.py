@@ -6,7 +6,7 @@ class Alerte:
         self._ID_alerte = ID_alerte
         self._criteres = criteres
         self._dateCreation = dateCreation
-        self._lastCheck = lastCheck #liste de stage
+        self._lastCheck = lastCheck #liste de id de stages
 
     def verifierNouveauxStages(self):
         """
@@ -19,6 +19,8 @@ class Alerte:
         for s in lancerRecherche(self.criteres) : #on parcoure tous les résultats de la recherche
             if not s in self.lastCheck : #on vérifie que nous avions pas déjà ce stage dans la dernière liste de stages cherchés par cette alerte
                 nouveaux_stages.append(s)
+        
+        self._lastCheck = nouveaux_stages #on met à jour lastCheck
         
         return nouveaux_stages
 
