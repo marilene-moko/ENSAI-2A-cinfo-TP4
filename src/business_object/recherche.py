@@ -3,7 +3,7 @@ class Recherche:
         self,
         ID_recherche, 
         date, 
-        criteres,, 
+        criteres, 
         resultats
         ):
 
