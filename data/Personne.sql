@@ -1,4 +1,10 @@
 import mysql.connector
+import bcrypt
+
+
+# Hacher le mdp
+
+mot_de_passe_hache = bcrypt.hashpw(mot_de_passe.encode('utf-8'), bcrypt.gensalt())
 
 connection = mysql.connector.connect(
     host="localhost",
