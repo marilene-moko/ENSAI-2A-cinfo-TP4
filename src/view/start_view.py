@@ -40,6 +40,6 @@ class StartView(AbstractView):
             return InscriptionView()
 
         elif reponse["choix"] == "Utiliser sans s'authentifier":
-            from view.sans_authentification_view import SansauthentificationView
+            from view.ap_sans_authentification_view import ApSansAuthentificationView
 
-            return SansauthentificationView()
+            return ApSansAuthentificationView()

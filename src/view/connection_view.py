@@ -22,6 +22,6 @@ class ConnectionView(AbstractView):
         #    raiseValueError()
         Session().user_name = answers[1] + " " + answers[2]
 
-        from view.start_view import StartView
+        from view.ap_connexion_view import ApConnexionView
 
-        return StartView()
+        return ApConnexionView()

@@ -24,7 +24,6 @@ class InscriptionView(AbstractView):
         self.mot_de_passe = answers[3]
         # if email in utilisateur:
         #    raiseValueError()
-        Session().user_name = answers[1] + " " + answers[2]
 
         from view.start_view import StartView
 

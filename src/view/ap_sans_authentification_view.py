@@ -4,19 +4,16 @@ from view.abstract_view import AbstractView
 from view.session import Session
 
 
-class ApConnexionView(AbstractView):
+class ApSansAuthentificationView(AbstractView):
     def __init__(self):
         self.__questions = [
             {
                 "type": "list",
                 "name": "choix",
-                "message": f" {Session().user_name}",
+                "message": "",
                 "choices": [
                     "Rechercher",
                     "Historique",
-                    "Liste d'envie",
-                    "Profil",
-                    "Notifications",
                     "Quitter",
                 ],
             }
@@ -37,21 +34,6 @@ class ApConnexionView(AbstractView):
             return ConnectionView()
 
         elif reponse["choix"] == "Historique":
-            from view.inscription_view import InscriptionView
-
-            return InscriptionView()
-
-        elif reponse["choix"] == "Liste d'envie":
-            from view.inscription_view import InscriptionView
-
-            return InscriptionView()
-
-        elif reponse["choix"] == "Profil":
-            from view.inscription_view import InscriptionView
-
-            return InscriptionView()
-
-        elif reponse["choix"] == "Notifications":
             from view.inscription_view import InscriptionView
 
             return InscriptionView()
