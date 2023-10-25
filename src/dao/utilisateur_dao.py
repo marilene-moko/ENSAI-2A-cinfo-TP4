@@ -14,7 +14,7 @@ class UtilisateurDao(VisiteurDao):
             with connection.cursor() as cursor:
                 cursor.execute(
                     "SELECT *                                       "
-                    "  FROM Personne                                "
+                    'FROM "Projet_Info".Personne                                '
                     " WHERE email=%(email)s   AND mdp=%(mdp)s       ",
                     {"email": email, "mdp": mdp},
                 )
@@ -36,17 +36,8 @@ class UtilisateurDao(VisiteurDao):
         updated = False
 
         # Get the email
-        with DBConnection().connection as connection:
-            with connection.cursor() as cursor:
-                cursor.execute(
-                    "SELECT *                                         "
-                    "FROM Personne                                    "
-                    "WHERE adresse_mail = %(email)s                   "
-                    "RETURNING adresse_mail;                          ",
-                    {"adresse_mail": email},
-                )
-                res = cursor.fetchone()
-        if res["adresse_mail"] is None:
+        email = utilisateur["email"]
+        if email is None:
             return updated
 
         with DBConnection().connection as connection:
@@ -60,10 +51,10 @@ class UtilisateurDao(VisiteurDao):
                     " WHERE email = %(email)s                             ",
                     {
                         "email": email,
-                        "nom": nom,
-                        "prenom": prenom,
-                        "mdp": mdp,
-                        "statut": statut,
+                        "nom": utilisateur["nom"],
+                        "prenom": utilisateur["prenom"],
+                        "mdp": utilisateur["mdp"],
+                        "statut": utilisateur["statut"],
                     },
                 )
                 if cursor.rowcount:

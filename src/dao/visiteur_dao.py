@@ -15,9 +15,9 @@ class VisiteurDao(metaclass=Singleton):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    "SELECT *                                         "
-                    "FROM Personne                                    "
-                    "WHERE adresse_mail = %(email)s;                  ",
+                    'SELECT *                                         '
+                    'FROM "Projet_Info".Personne                      '
+                    'WHERE adresse_mail = %(email)s;                  ',
                     {
                         "adresse_mail": email
                     },
@@ -31,15 +31,15 @@ class VisiteurDao(metaclass=Singleton):
             with DBConnection().connection as connection:
                 with connection.cursor() as cursor:
                     cursor.execute(
-                        "INSERT INTO Personne (email, nom, prenom, mdp)             "
-                        "VALUES                                                     "
-                        "(%(email)s, %(nom)s, %(prenom)s, %(mdp)s);                 ",
+                        'INSERT INTO "Projet_Info".Personne (email, nom, prenom, mdp)             '
+                        'VALUES                                                                   '
+                        '(%(email)s, %(nom)s, %(prenom)s, %(mdp)s);                               ',
                         {
                             "email": email,
                             "nom": nom,
                             "prenom": prenom,
                             "mdp": mdp,
-                            "statut": statut="eleve"
+                            "statut": statut
                         },
                     )
                     res = cursor.fetchone()
