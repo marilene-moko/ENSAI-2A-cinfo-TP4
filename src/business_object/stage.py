@@ -2,14 +2,13 @@ class Stage:
     def __init__(
         self,
         ID_stage,
-        titre, 
-        description, 
-        specialite, 
+        titre,
+        description,
+        specialite,
         localisation,
         siteSource,
-        employeurContact
-        ):
-
+        employeurContact,
+    ):
         self.ID_stage = ID_stage
         self.titre = titre
         self.description = description
@@ -17,8 +16,3 @@ class Stage:
         self.localisation = localisation
         self.siteSource = siteSource
         self.employeurContact = employeurContact
-
-        
-
-    def recupererContact(self):
-
