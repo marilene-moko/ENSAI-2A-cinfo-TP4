@@ -4,7 +4,7 @@ from view.abstract_view import AbstractView
 from view.session import Session
 
 
-class StartView(AbstractView):
+class ListeEnvieView(AbstractView):
     def __init__(self):
         self.__questions = [
             {
@@ -12,9 +12,9 @@ class StartView(AbstractView):
                 "name": "choix",
                 "message": f" {Session().user_name}",
                 "choices": [
-                    "Connection",
-                    "Inscription",
-                    "Utiliser sans s'authentifier",
+                    "Afficher sa liste d'envie",
+                    "Sauvegarder une offre dans sa liste",
+                    "Modifier sa liste d'envie",
                     "Quitter",
                 ],
             }
@@ -29,17 +29,11 @@ class StartView(AbstractView):
         if reponse["choix"] == "Quitter":
             pass
 
-        elif reponse["choix"] == "Connection":
-            from view.connection_view import ConnectionView
+        elif reponse["choix"] == "Afficher sa liste d'envie":
+            
 
-            return ConnectionView()
+        elif reponse["choix"] == "Sauvegarder une offre dans sa liste":
+            
 
-        elif reponse["choix"] == "Inscription":
-            from view.inscription_view import InscriptionView
-
-            return InscriptionView()
-
-        elif reponse["choix"] == "Utiliser sans s'authentifier":
-            from view.ap_sans_authentification_view import ApSansAuthentificationView
-
-            return ApSansAuthentificationView()
+        elif reponse["choix"] == "Modifier sa liste d'envie":
+            

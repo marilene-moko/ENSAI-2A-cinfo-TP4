@@ -33,31 +33,29 @@ class ApConnexionViewProf(AbstractView):
             pass
 
         elif reponse["choix"] == "Rechercher":
-            from view.connection_view import ConnectionView
-
-            return ConnectionView()
+            
 
         elif reponse["choix"] == "Historique":
-            from view.inscription_view import InscriptionView
+            from view.historique_view import HistoriqueView
 
-            return InscriptionView()
+            return HistoriqueView()
 
         elif reponse["choix"] == "Liste d'envie":
-            from view.inscription_view import InscriptionView
+            from view.liste_envie_view import ListeEnvieView
 
-            return InscriptionView()
+            return ListeEnvieView()
 
         elif reponse["choix"] == "Profil":
-            from view.inscription_view import InscriptionView
+            from view.profil_view import ProfilView
 
-            return InscriptionView()
+            return ProfilView()
 
         elif reponse["choix"] == "Notifications":
-            from view.inscription_view import InscriptionView
+            from view.notifications_view import NotificationsView
 
-            return InscriptionView()
+            return NotificationsView()
 
         elif reponse["choix"] == "Publication":
-            from view.inscription_view import InscriptionView
+            from view.publication_view import PublicationView
 
-            return InscriptionView()
+            return PublicationView()

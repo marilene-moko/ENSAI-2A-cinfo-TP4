@@ -4,7 +4,7 @@ from view.abstract_view import AbstractView
 from view.session import Session
 
 
-class StartView(AbstractView):
+class PublicationView(AbstractView):
     def __init__(self):
         self.__questions = [
             {
@@ -12,9 +12,8 @@ class StartView(AbstractView):
                 "name": "choix",
                 "message": f" {Session().user_name}",
                 "choices": [
-                    "Connection",
-                    "Inscription",
-                    "Utiliser sans s'authentifier",
+                    "Afficher ses publications",
+                    "Publier des offres",
                     "Quitter",
                 ],
             }
@@ -29,17 +28,8 @@ class StartView(AbstractView):
         if reponse["choix"] == "Quitter":
             pass
 
-        elif reponse["choix"] == "Connection":
-            from view.connection_view import ConnectionView
+        elif reponse["choix"] == "Afficher ses publications":
+            
 
-            return ConnectionView()
-
-        elif reponse["choix"] == "Inscription":
-            from view.inscription_view import InscriptionView
-
-            return InscriptionView()
-
-        elif reponse["choix"] == "Utiliser sans s'authentifier":
-            from view.ap_sans_authentification_view import ApSansAuthentificationView
-
-            return ApSansAuthentificationView()
+        elif reponse["choix"] == "Publier des offres":
+            
