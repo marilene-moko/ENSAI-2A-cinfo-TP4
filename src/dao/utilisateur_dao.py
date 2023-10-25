@@ -61,7 +61,7 @@ class UtilisateurDao(metaclass=Singleton):
                         "nom": nom,
                         "prenom": prenom,
                         "mdp": mdp,
-                        "profil": profil #=eleve par defaut 
+                        "statut": statut #=eleve par defaut 
                     },
                 )
                 res = cursor.fetchone()
@@ -93,7 +93,7 @@ class UtilisateurDao(metaclass=Singleton):
                         "nom": nom,
                         "prenom": prenom,
                         "mdp": mdp,
-                        "profil": profil #=eleve par defaut 
+                        "statut": statut #=eleve par defaut 
                     },
                 )
                 if cursor.rowcount:
