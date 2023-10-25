@@ -22,6 +22,12 @@ class ConnectionView(AbstractView):
         #    raiseValueError()
         Session().user_name = answers[1] + " " + answers[2]
 
-        from view.ap_connexion_view import ApConnexionView
-
-        return ApConnexionView()
+        #if utilisateur = eleve:
+            from view.ap_connexion_view_eleve import ApConnexionViewEleve
+            return ApConnexionViewEleve()
+        #elif utilisateur = prof:
+            #from view.ap_connexion_view_prof import ApConnexionViewProf
+            #return ApConnexionViewProf()
+        #elif utilisateur = admin:
+            #from view.ap_connexion_view_admin import ApConnexionViewAdmin
+            #return ApConnexionViewAdmin()

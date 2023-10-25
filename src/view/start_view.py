@@ -15,7 +15,7 @@ class StartView(AbstractView):
                     "Connection",
                     "Inscription",
                     "Utiliser sans s'authentifier",
-                    "Quit",
+                    "Quitter",
                 ],
             }
         ]
@@ -26,7 +26,7 @@ class StartView(AbstractView):
 
     def make_choice(self):
         reponse = prompt(self.__questions)
-        if reponse["choix"] == "Quit":
+        if reponse["choix"] == "Quitter":
             pass
 
         elif reponse["choix"] == "Connection":
