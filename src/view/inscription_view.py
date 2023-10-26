@@ -37,7 +37,9 @@ class InscriptionView(AbstractView):
             Session().pseudo = Session().nom + " " + Session().prenom
             Session().mot_de_passe = answers[3]
         else:
-            print("Une erreur est survenue. Veuillez réessayer ultérieurement.")
+            print(
+                "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
+            )
         from view.start_view import StartView
 
         return StartView()

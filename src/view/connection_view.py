@@ -18,13 +18,9 @@ class ConnectionView(AbstractView):
 
     def make_choice(self):
         answers = prompt(self.__questions)
-        self.email = answers[0]
-        self.mot_de_passe = answers[1]
-        return self.email
-
-    def authentification_reussie(self):
-        answers = prompt(self.__questions)
-        utilisateur = UtilisateurDao.utilisateur_exists(answers[0], answers[1])
+        utilisateur = UtilisateurDao.utilisateur_exists(
+            self=self, email=answers[0], mdp=answers[1]
+        )
         if utilisateur is not None:
             if utilisateur.statut == "eleve":
                 Session().nom = utilisateur["nom"]
@@ -62,4 +58,7 @@ class ConnectionView(AbstractView):
 
                 return ApConnexionViewAdmin()
         else:
-            raise ValueError("L'email et/ou le mot de passe est incorrect")
+            print("L'email et/ou le mot de passe est incorrect")
+            from view.start_view import StartView
+
+            return StartView()

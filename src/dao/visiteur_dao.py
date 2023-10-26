@@ -10,7 +10,6 @@ import hashlib
 
 class VisiteurDao(metaclass=Singleton):
     def hash_mdp(self, mdp):
-<<<<<<< HEAD
         # Créez un objet de hachage SHA-256
         hasher = hashlib.sha256()
 
@@ -21,18 +20,6 @@ class VisiteurDao(metaclass=Singleton):
         hashed_mdp = hasher.hexdigest()
 
         return hashed_mdp
-=======
-    # Créez un objet de hachage SHA-256
-    hasher = hashlib.sha256()
-        
-    # Mettez le mot de passe dans l'objet de hachage
-    hasher.update(mdp.encode('utf-8'))
-        
-    # Récupérez la valeur de hachage (représentation hexadécimale)
-    hashed_mdp = hasher.hexdigest()
-        
-    return hashed_mdp
->>>>>>> edd7224ffd0692c8dcb448083eef1ea55cb7fe42
 
     def inscription(
         self, adresse_mail, nom, prenom, mot_de_passe, statut="eleve"
@@ -56,9 +43,7 @@ class VisiteurDao(metaclass=Singleton):
                 )
                 res = cursor.fetchone()
         if res:
-            raise ValueError(
-                "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
-            )
+            return created
         else:
             with DBConnection().connection as connection:
                 with connection.cursor() as cursor:
@@ -74,7 +59,7 @@ class VisiteurDao(metaclass=Singleton):
                             "statut": statut,
                         },
                     )
-                    res = cursor.rowcount()
+                    res = cursor.rowcount
             if res:
                 created = True
 
