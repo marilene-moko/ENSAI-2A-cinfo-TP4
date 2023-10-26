@@ -1,7 +1,6 @@
 from typing import List, Optional
 from utils.singleton import Singleton
 from dao.db_connection import DBConnection
-from client.utilisateur import Utilisateur
 
 
 class HistoriqueDAO(metaclass=Singleton):
@@ -13,7 +12,7 @@ class HistoriqueDAO(metaclass=Singleton):
             return res
 
     def afficher_historique_utilisateur(self, utilisateur):
-        identifiant_personne = utilisateur["identifiant_personne"]
+        identifiant_personne = utilisateur.identifiant_personne
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
