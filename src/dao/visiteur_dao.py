@@ -59,7 +59,7 @@ class VisiteurDao(metaclass=Singleton):
                             "statut": statut,
                         },
                     )
-                    res = cursor.rowcount
+                    res = cursor.rowcount()
             if res:
                 created = True
 

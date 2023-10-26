@@ -1,0 +1,5 @@
+Bonjour,
+
+Vous avez reçu une notification de {notif_sender} pour le stage suivant :
+
+{internship_name}
