@@ -9,9 +9,9 @@ INSERT INTO "Projet_Info".personne(nom, prenom, adresse_mail, mot_de_passe, stat
 ('Zitoun','Sarah','sarah.zitoun@gmail.com','SAsaSAsa94','professeur'),
 ('Defour','Vincent','vincent.defour@gmail.com','CupCake35','professeur'),
 ('Funaer','Catherine','catherine.funaer@gmail.com','CHaCHabada93','professeur'),
-('Dupont','Kevin','kevin.dupont@gmail.com','Kev35','utilisateur'),
-('Dupont', 'Nathalie', 'nathalie.dupont@gmail.com','Jdetestelamusique35','utilisateur'),
-('Zaza','Jacob','jacob.zaza@gmail.com','1235Jac','utilisateur'),
-('Elkarif','Abdelraouf','abdelraouf.elkarif@gmail.com','Karirif35','utilisateur'),
-('Carofil','Mathieu','mathieu.carofil@gmail.com','JusteDance75','utilisateur'),
-('Gewoncik','Zuzana','zuzana.gewoncik@gmail.com','Gege75','utilisateur');
+('Dupont','Kevin','kevin.dupont@gmail.com','Kev35','eleve'),
+('Dupont', 'Nathalie', 'nathalie.dupont@gmail.com','Jdetestelamusique35','eleve'),
+('Zaza','Jacob','jacob.zaza@gmail.com','1235Jac','eleve'),
+('Elkarif','Abdelraouf','abdelraouf.elkarif@gmail.com','Karirif35','eleve'),
+('Carofil','Mathieu','mathieu.carofil@gmail.com','JusteDance75','eleve'),
+('Gewoncik','Zuzana','zuzana.gewoncik@gmail.com','Gege75','eleve');

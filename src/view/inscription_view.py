@@ -31,11 +31,11 @@ class InscriptionView(AbstractView):
             is True
         ):
             print("Votre compte a bien été créé")
-            Session().nom = answers[1]
+            """ Session().nom = answers[1]
             Session().prenom = answers[2]
             Session().email = answers[0]
             Session().pseudo = Session().nom + " " + Session().prenom
-            Session().mot_de_passe = answers[3]
+            Session().mot_de_passe = answers[3] """
         else:
             print(
                 "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
