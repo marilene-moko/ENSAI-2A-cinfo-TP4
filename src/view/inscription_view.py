@@ -20,12 +20,13 @@ class InscriptionView(AbstractView):
 
     def make_choice(self):
         answers = prompt(self.__questions)
+        mot_de_passe = VisiteurDao().hash_mdp(answers[3])
         if (
             VisiteurDao().inscription(
                 adresse_mail=answers[0],
                 nom=answers[1],
                 prenom=answers[2],
-                mot_de_passe=answers[3],
+                mot_de_passe=mot_de_passe,
             )
             is True
         ):

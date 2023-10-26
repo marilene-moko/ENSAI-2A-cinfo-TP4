@@ -7,7 +7,20 @@ from dao.historique_dao import HistoriqueDAO
 
 import hashlib
 
+
 class VisiteurDao(metaclass=Singleton):
+    def hash_mdp(self, mdp):
+        # Créez un objet de hachage SHA-256
+        hasher = hashlib.sha256()
+
+        # Mettez le mot de passe dans l'objet de hachage
+        hasher.update(mdp.encode("utf-8"))
+
+        # Récupérez la valeur de hachage (représentation hexadécimale)
+        hashed_mdp = hasher.hexdigest()
+
+        return hashed_mdp
+
     def inscription(
         self, adresse_mail, nom, prenom, mot_de_passe, statut="eleve"
     ) -> bool:
@@ -16,23 +29,9 @@ class VisiteurDao(metaclass=Singleton):
         """
         created = False
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        #hacher le mot de passe 
-        mdp_hache = self.hash_password(utilisateur.mdp)
+        # hacher le mot de passe
+        mdp_hache = self.hash_mdp(mot_de_passe)
 
-        # Get the id type
-        email = TypeAttackDAO().find_id_by_label(attack.type)
-        if email in #email dans Personne:
-            raise ValueError(
-                "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
-            )
-=======
-        email = utilisateur["email"]
->>>>>>> 34618408bd36e7d4560867c3665f1a93f4e0b4b8
-
-=======
->>>>>>> a1c815b9f8b60b127daa41cf333ad325744efca0
         # Get the id type
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -51,18 +50,18 @@ class VisiteurDao(metaclass=Singleton):
             with DBConnection().connection as connection:
                 with connection.cursor() as cursor:
                     cursor.execute(
-                        'INSERT INTO "Projet_Info".Personne (adresse_mail, nom, prenom, mot_de_passe)'
-                        "VALUES                                                                      "
-                        "(%(adresse_mail)s, %(nom)s, %(prenom)s, %(mot_de_passe)s);                  ",
+                        'INSERT INTO "Projet_Info".Personne (adresse_mail, nom, prenom, mot_de_passe, statut)'
+                        "VALUES                                                                              "
+                        "(%(adresse_mail)s, %(nom)s, %(prenom)s, %(mdp_hache)s, %(statut)s);                 ",
                         {
                             "adresse_mail": adresse_mail,
                             "nom": nom,
                             "prenom": prenom,
-                            "mot_de_passe": mot_de_passe,
+                            "mdp_hache": mot_de_passe,
                             "statut": statut,
                         },
                     )
-                    res = cursor.fetchone()
+                    res = cursor.rowcount()
             if res:
                 created = True
 
@@ -72,23 +71,7 @@ class VisiteurDao(metaclass=Singleton):
         return HistoriqueDAO().voir_historique()
 
     def exporter_historique(self):
-<<<<<<< HEAD
         return HistoriqueDao().exporter_historique()
-
-    def hash_password(self, password):
-        # Créez un objet de hachage SHA-256
-        hasher = hashlib.sha256()
-        
-        # Mettez le mot de passe dans l'objet de hachage
-        hasher.update(password.encode('utf-8'))
-        
-        # Récupérez la valeur de hachage (représentation hexadécimale)
-        hashed_password = hasher.hexdigest()
-        
-        return hashed_password
-=======
-        return HistoriqueDAO().exporter_historique()
->>>>>>> a1c815b9f8b60b127daa41cf333ad325744efca0
 
 
 """ 
