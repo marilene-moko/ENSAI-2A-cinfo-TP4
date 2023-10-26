@@ -57,6 +57,8 @@ CREATE TABLE "Projet_Info".stage (
     Ville text,
     Poste text,
     Entreprise VARCHAR(255),
+    Date_publication date,
+    Description_stage text,
     identifiant_personne_sauvegarde int4,
     identifiant_personne_ajout int4,
     identifiant_modif int4,
