@@ -1,4 +1,4 @@
-from src.dao.listeenvie_dao import *
+from dao.listeenvie_dao import *
 
 
 class ListeEnvie:
@@ -25,7 +25,7 @@ class ListeEnvie:
         """
         return supprimer_listeEnvie_utilisateur(self, utilisateur, id_stage)
 
-    def ajouterEnvie(self, stage_id):
+    def ajouterEnvie(self, utilisateur, stage_id):
         """
         Méthode qui permet d'ajouter un stage à la liste envies
 

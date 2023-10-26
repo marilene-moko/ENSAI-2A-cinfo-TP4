@@ -64,3 +64,6 @@ class HistoriqueDAO(metaclass=Singleton):
                             str(row["identifiant_personne"]),
                         ]
                         f.write(",".join(row_data) + "\n")
+
+
+########### il manque la fonction supprimer historique ###########
