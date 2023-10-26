@@ -53,3 +53,42 @@ class ListeEnvieDAO(metaclass=Singleton):
                 )
 
         return "Le voeu a été supprimé avec succès."
+
+    def ajouter_stage_listeEnvie_utilisateur(self, utilisateur, identifiant_stage):
+        # Vérifier si le stage existe et n'est pas déjà dans la liste d'envies de l'utilisateur
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor:
+                # Vérifier si le stage existe
+                cursor.execute(
+                    'SELECT * FROM "Projet_Info".stage WHERE identifiant_stage = %(identifiant_stage)s;',
+                    {"identifiant_stage": identifiant_stage},
+                )
+                stage = cursor.fetchone()
+
+                if stage is None:
+                    return "Le stage spécifié n'existe pas."
+
+                # Vérifier si le stage est déjà dans la liste d'envies de l'utilisateur
+                cursor.execute(
+                    'SELECT * FROM "Projet_Info".voeu WHERE identifiant_personne = %(identifiant_personne)s AND identifiant_stage = %(identifiant_stage)s;',
+                    {
+                        "identifiant_personne": utilisateur.identifiant_personne,
+                        "identifiant_stage": identifiant_stage,
+                    },
+                )
+                existing_entry = cursor.fetchone()
+
+                if existing_entry:
+                    return "Le stage est déjà dans la liste d'envies de l'utilisateur."
+
+                # Ajouter le stage à la liste d'envies de l'utilisateur
+                cursor.execute(
+                    'INSERT INTO "Projet_Info".voeu (identifiant_personne, identifiant_stage)'
+                    "VALUES (%(identifiant_personne)s, %(identifiant_stage)s);",
+                    {
+                        "identifiant_personne": utilisateur.identifiant_personne,
+                        "identifiant_stage": identifiant_stage,
+                    },
+                )
+
+        return "Le stage a été ajouté à la liste d'envies de l'utilisateur."
