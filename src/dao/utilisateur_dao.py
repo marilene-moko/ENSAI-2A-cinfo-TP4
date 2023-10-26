@@ -2,14 +2,10 @@ from typing import List, Optional
 from utils.singleton import Singleton
 
 from dao.db_connection import DBConnection
-from dao.type_attack_dao import TypeAttackDAO
+from dao.visiteur_dao import VisiteurDao
+from dao.historique_dao import HistoriqueDao
 
-from business_object.attack.abstract_attack import AbstractAttack
-from business_object.attack.attack_factory import AttackFactory
-from client.utilisateur import Utilisateur
-
-
-class UtilisateurDao(metaclass=Singleton):
+class UtilisateurDao(VisiteurDao):
     def utilisateur_exists(self, email: str, mdp: str) -> Optional[AbstractAttack]:
         """
         Regarder si l'utilisateur existe bien
@@ -35,41 +31,6 @@ class UtilisateurDao(metaclass=Singleton):
             )
 
         return utilisateur
-
-    def add_utilisateur(self, utilisateur) -> bool:
-        """
-        Add an utilisateur to the database
-        """
-        created = False
-
-        # Get the id type
-        email = TypeAttackDAO().find_id_by_label(attack.type)
-        if email in #email dans Personne:
-            raise ValueError(
-                "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
-            )
-
-        with DBConnection().connection as connection:
-            with connection.cursor() as cursor:
-                cursor.execute(
-                    "INSERT INTO Personne (email, nom, prenom, mdp)             "
-                    "VALUES                                                     "
-                    "(%(email)s, %(nom)s, %(prenom)s, %(mdp)s)                  "
-                    "RETURNING email;",
-                    {
-                        "email": email,
-                        "nom": nom,
-                        "prenom": prenom,
-                        "mdp": mdp,
-                        "statut": statut #=eleve par defaut 
-                    },
-                )
-                res = cursor.fetchone()
-        if res:
-            attack.id = res["email"]
-            created = True
-
-        return created
 
     def update_utilisateur(self, utilisateur) -> bool:
         updated = False
@@ -99,6 +60,9 @@ class UtilisateurDao(metaclass=Singleton):
                 if cursor.rowcount:
                     updated = True
         return updated
+
+        def modifier_historique(self):
+            return HistoriqueDao().modifier_historique()
 
 
 
