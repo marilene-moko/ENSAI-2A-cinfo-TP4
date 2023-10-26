@@ -26,7 +26,7 @@ class ConnectionView(AbstractView):
         answers = prompt(self.__questions)
         utilisateur = UtilisateurDao.utilisateur_exists(answers[0], answers[1])
         if utilisateur is not None:
-            if utilisateur["statut"] == "eleve":
+            if utilisateur.statut == "eleve":
                 Session().nom = utilisateur["nom"]
                 Session().prenom = utilisateur["prenom"]
                 Session().pseudo = Session().nom + " " + Session().prenom
@@ -38,7 +38,7 @@ class ConnectionView(AbstractView):
 
                 return ApConnexionViewEleve()
 
-            elif utilisateur["statut"] == "professeur":
+            elif utilisateur.statut == "professeur":
                 Session().nom = utilisateur["nom"]
                 Session().prenom = utilisateur["prenom"]
                 Session().pseudo = Session().nom + " " + Session().prenom
@@ -50,7 +50,7 @@ class ConnectionView(AbstractView):
 
                 return ApConnexionViewProf()
 
-            elif utilisateur["statut"] == "administrateur":
+            elif utilisateur.statut == "administrateur":
                 Session().nom = utilisateur["nom"]
                 Session().prenom = utilisateur["prenom"]
                 Session().pseudo = Session().nom + " " + Session().prenom

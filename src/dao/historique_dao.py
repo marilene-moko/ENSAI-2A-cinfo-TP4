@@ -4,13 +4,6 @@ from dao.db_connection import DBConnection
 
 
 class HistoriqueDAO(metaclass=Singleton):
-    def afficher_historique(self):
-        with DBConnection().connection as connection:
-            with connection.cursor() as cursor:
-                cursor.execute("Select *           " 'FROM "Projet_Info".personne;')
-                res = cursor.fetcall()
-            return res
-
     def afficher_historique_utilisateur(self, utilisateur):
         identifiant_personne = utilisateur.identifiant_personne
         with DBConnection().connection as connection:
@@ -24,7 +17,7 @@ class HistoriqueDAO(metaclass=Singleton):
                 res = cursor.fetchall()
             return res
 
-    def importer_historique(self):
+    def importer_historique(self, utilisateur):
         with open("data/importerHistorique.txt", "r") as f:
             next(f)  # Ignorer la première ligne si elle contient les en-têtes
             with DBConnection().connection as connection:
@@ -33,9 +26,12 @@ class HistoriqueDAO(metaclass=Singleton):
                         data = line.strip().split(
                             ","
                         )  # Supposer que le CSV est délimité par des virgules
+                        # Assurez-vous que l'identifiant de l'utilisateur est utilisé pour l'insertion
                         sql = """INSERT INTO "Projet_Info".page_visitee (date_visite, URL_page, identifiant_personne)
-                                    VALUES (%s, %s, %s);"""
-                        cursor.execute(sql, (data[0], data[1], data[2]))
+                                VALUES (%s, %s, %s);"""
+                        cursor.execute(
+                            sql, (data[0], data[1], utilisateur.identifiant_personne)
+                        )
 
     def exporter_historique(self, utilisateur):
         identifiant_personne = utilisateur.identifiant_personne

@@ -1,8 +1,10 @@
 from InquirerPy import prompt
 
 from view.abstract_view import AbstractView
+from view.session import Session
 
-from  dao.utilisateur_dao import UtilisateurDao
+from dao.visiteur_dao import VisiteurDao
+
 
 class InscriptionView(AbstractView):
     def __init__(self):
@@ -18,17 +20,23 @@ class InscriptionView(AbstractView):
 
     def make_choice(self):
         answers = prompt(self.__questions)
-        self.nom = answers[1]
-        self.prenom = answers[2]
-        self.email = answers[0]
-        self.mot_de_passe = answers[3]
-        # if email in utilisateur:
-        #    raiseValueError()
-
+        if (
+            VisiteurDao().inscription(
+                adresse_mail=answers[0],
+                nom=answers[1],
+                prenom=answers[2],
+                mot_de_passe=answers[3],
+            )
+            is True
+        ):
+            print("Votre compte a bien été créé")
+            Session().nom = answers[1]
+            Session().prenom = answers[2]
+            Session().email = answers[0]
+            Session().pseudo = Session().nom + " " + Session().prenom
+            Session().mot_de_passe = answers[3]
+        else:
+            print("Une erreur est survenue. Veuillez réessayer ultérieurement.")
         from view.start_view import StartView
 
         return StartView()
-
-
-if UtilisateurDao.email_exists(email):
-    raise ValueError("Cet email existe déjà")
