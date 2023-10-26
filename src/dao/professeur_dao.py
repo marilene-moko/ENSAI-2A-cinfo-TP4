@@ -23,10 +23,37 @@ class ProfesseurDao(UtilisateurDao):
                 with connection.cursor() as cursor:
                     cursor.execute(
                         'INSERT INTO "Projet_Info".stage(URL_stage, Categorie, Intitule, Ville, Poste, identifiant_personne_ajout) VALUE '
-                        "(URL_stage, categorie_stage, titre_stage, ville_stage, poste_stage, email);                                     "
+                        '(URL_stage, categorie_stage, titre_stage, ville_stage, poste_stage, email);                                     '
                     )
                     
                     if cursor.rowcount > 0:
                         return "Le stage a été ajouté avec succès !"
                     else:
                         return "Un problème est survenu et le stage n'a pas pu être ajouté"
+    
+
+    
+    def retirerStage(
+        self,
+        utilisateur,
+        titre_stage,
+        URL_stage,
+        categorie_stage,
+        ville_stage,
+        poste_stage,
+    ):
+        email = utilisateur["email"]
+
+
+        #if => vérifier si le stage est bien dans la BDD
+            with DBConnection().connection as connection:
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        'DELETE "Projet_Info".stage                                                                                                                                                        '
+                        'WHERE (URL_stage = URL_stage AND Categorie = categorie_stage AND Intitule =titre_stage AND Ville = ville_stage AND Poste = poste_stage AND identifiant_personne_ajout = email);   '
+                    )
+                    
+                    if cursor.rowcount > 0:
+                        return "Le stage a été retiré avec succès !"
+                    else:
+                        return "Un problème est survenu et le stage n'a pas pu être retiré"
