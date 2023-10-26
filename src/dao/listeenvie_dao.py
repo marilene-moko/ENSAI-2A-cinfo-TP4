@@ -4,14 +4,14 @@ from dao.db_connection import DBConnection
 
 
 class ListeEnvieDAO(metaclass=Singleton):
-    def afficher_liseEnvie(self):
+    def afficher_listeEnvie(self):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute("Select *           " 'FROM "Projet_Info".voeu;')
                 res = cursor.fetcall()
             return res
 
-    def afficher_liseEnvie_utilisateur(self, utilisateur):
+    def afficher_listeEnvie_utilisateur(self, utilisateur):
         identifiant_personne = utilisateur.identifiant_personne
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -25,6 +25,7 @@ class ListeEnvieDAO(metaclass=Singleton):
             return res
 
     def supprimer_listeEnvie_utilisateur(self, utilisateur, identifiant_voeu):
+        identifiant_personne = utilisateur.identifiant_personne
         # Vérifier si le voeu appartient à l'utilisateur
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -55,6 +56,7 @@ class ListeEnvieDAO(metaclass=Singleton):
         return "Le voeu a été supprimé avec succès."
 
     def ajouter_stage_listeEnvie_utilisateur(self, utilisateur, identifiant_stage):
+        identifiant_personne = utilisateur.identifiant_personne
         # Vérifier si le stage existe et n'est pas déjà dans la liste d'envies de l'utilisateur
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
