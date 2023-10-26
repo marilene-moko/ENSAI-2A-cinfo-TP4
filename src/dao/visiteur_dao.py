@@ -13,6 +13,7 @@ class VisiteurDao(metaclass=Singleton):
         """
         created = False
 
+<<<<<<< HEAD
         #hacher le mot de passe 
         mdp_hache = self.hash_password(utilisateur.mdp)
 
@@ -22,28 +23,46 @@ class VisiteurDao(metaclass=Singleton):
             raise ValueError(
                 "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
             )
+=======
+        email = utilisateur["email"]
+>>>>>>> 34618408bd36e7d4560867c3665f1a93f4e0b4b8
 
+        # Get the id type
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    "INSERT INTO Personne (email, nom, prenom, mdp)             "
-                    "VALUES                                                     "
-                    "(%(email)s, %(nom)s, %(prenom)s, %(mdp)s)                  "
-                    "RETURNING email;",
+                    'SELECT *                                         '
+                    'FROM "Projet_Info".Personne                      '
+                    'WHERE adresse_mail = %(email)s;                  ',
                     {
-                        "email": email,
-                        "nom": nom,
-                        "prenom": prenom,
-                        "mdp": mdp,
-                        "statut": statut #=eleve par defaut 
+                        "adresse_mail": email
                     },
                 )
                 res = cursor.fetchone()
         if res:
-            email = res["email"]
-            created = True
+            raise ValueError(
+                "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
+            )
+        else:
+            with DBConnection().connection as connection:
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        'INSERT INTO "Projet_Info".Personne (email, nom, prenom, mdp)             '
+                        'VALUES                                                                   '
+                        '(%(email)s, %(nom)s, %(prenom)s, %(mdp)s);                               ',
+                        {
+                            "email": email,
+                            "nom": nom,
+                            "prenom": prenom,
+                            "mdp": mdp,
+                            "statut": statut
+                        },
+                    )
+                    res = cursor.fetchone()
+            if res:
+                created = True
 
-        return created
+            return created
 
     def voir_historique(self):
         return HistoriqueDao().voir_historique()

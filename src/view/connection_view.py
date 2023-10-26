@@ -1,9 +1,9 @@
 from InquirerPy import prompt
 
 from view.abstract_view import AbstractView
-from view.session import Session
 
 from dao.utilisateur_dao import UtilisateurDao
+from view.session import Session
 
 
 class ConnectionView(AbstractView):
@@ -27,14 +27,37 @@ class ConnectionView(AbstractView):
         utilisateur = UtilisateurDao.utilisateur_exists(answers[0], answers[1])
         if utilisateur is not None:
             if utilisateur["statut"] == "eleve":
+                Session().nom = utilisateur["nom"]
+                Session().prenom = utilisateur["prenom"]
+                Session().pseudo = Session().nom + " " + Session().prenom
+                Session().email = answers[0]
+                Session().mot_de_passe = answers[1]
+                Session().statut = "eleve"
+
                 from view.ap_connexion_view_eleve import ApConnexionViewEleve
 
                 return ApConnexionViewEleve()
+
             elif utilisateur["statut"] == "professeur":
+                Session().nom = utilisateur["nom"]
+                Session().prenom = utilisateur["prenom"]
+                Session().pseudo = Session().nom + " " + Session().prenom
+                Session().email = answers[0]
+                Session().mot_de_passe = answers[1]
+                Session().statut = "professeur"
+
                 from view.ap_connexion_view_prof import ApConnexionViewProf
 
                 return ApConnexionViewProf()
+
             elif utilisateur["statut"] == "administrateur":
+                Session().nom = utilisateur["nom"]
+                Session().prenom = utilisateur["prenom"]
+                Session().pseudo = Session().nom + " " + Session().prenom
+                Session().email = answers[0]
+                Session().mot_de_passe = answers[1]
+                Session().statut = "administrateur"
+
                 from view.ap_connexion_view_admin import ApConnexionViewAdmin
 
                 return ApConnexionViewAdmin()

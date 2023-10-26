@@ -4,3 +4,4 @@ dataclasses
 python-dotenv
 fastapi
 inquirerPy
+datetime
