@@ -1,5 +1,6 @@
 from typing import List, Optional
 
+from client.utilisateur import Utilisateur
 from dao.db_connection import DBConnection
 from dao.visiteur_dao import VisiteurDao
 from dao.historique_dao import HistoriqueDao
