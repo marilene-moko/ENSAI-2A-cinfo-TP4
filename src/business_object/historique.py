@@ -10,7 +10,7 @@ class Historique :
         self.id_historique = id_historique
         self.historique_rechercher = historique_rechercher
 
-    def afficherHistorique(self, utilisateur):
+    def afficher(self, utilisateur):
         """ 
         Méthode qui permet à l'utilisateur d'afficher son historique
 
@@ -18,13 +18,13 @@ class Historique :
         """" 
         return afficher_historique_utilisateur(self, utilisateur)
 
-    def importer_historique(self, utilisateur):
+    def importer(self, utilisateur):
         """ 
         Méthode qui permet à l'utilisateur d'importer son historique
         """
         return importer_historique(self, utilisateur)
 
-    def exporter_historique(self, utilisateur):
+    def exporter(self, utilisateur):
         """ 
         Méthode qui permet à l'utilisater d'exporter son historique
         """ 
