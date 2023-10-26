@@ -2,27 +2,26 @@ from typing import List, Optional
 from utils.singleton import Singleton
 
 from dao.db_connection import DBConnection
-from dao.historique_dao import HistoriqueDao
+from dao.historique_dao import HistoriqueDAO
+
 
 class VisiteurDao(metaclass=Singleton):
-    def inscription(self, utilisateur) -> bool:
+    def inscription(
+        self, adresse_mail, nom, prenom, mot_de_passe, statut="eleve"
+    ) -> bool:
         """
         Add an utilisateur to the database
         """
         created = False
 
-        email = utilisateur["email"]
-
         # Get the id type
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    'SELECT *                                         '
+                    "SELECT *                                         "
                     'FROM "Projet_Info".Personne                      '
-                    'WHERE adresse_mail = %(email)s;                  ',
-                    {
-                        "adresse_mail": email
-                    },
+                    "WHERE adresse_mail = %(adresse_mail)s;                  ",
+                    {"adresse_mail": adresse_mail},
                 )
                 res = cursor.fetchone()
         if res:
@@ -33,15 +32,15 @@ class VisiteurDao(metaclass=Singleton):
             with DBConnection().connection as connection:
                 with connection.cursor() as cursor:
                     cursor.execute(
-                        'INSERT INTO "Projet_Info".Personne (email, nom, prenom, mdp)             '
-                        'VALUES                                                                   '
-                        '(%(email)s, %(nom)s, %(prenom)s, %(mdp)s);                               ',
+                        'INSERT INTO "Projet_Info".Personne (adresse_mail, nom, prenom, mot_de_passe)'
+                        "VALUES                                                                      "
+                        "(%(adresse_mail)s, %(nom)s, %(prenom)s, %(mot_de_passe)s);                  ",
                         {
-                            "email": email,
+                            "adresse_mail": adresse_mail,
                             "nom": nom,
                             "prenom": prenom,
-                            "mdp": mdp,
-                            "statut": statut
+                            "mot_de_passe": mot_de_passe,
+                            "statut": statut,
                         },
                     )
                     res = cursor.fetchone()
@@ -51,14 +50,13 @@ class VisiteurDao(metaclass=Singleton):
             return created
 
     def voir_historique(self):
-        return HistoriqueDao().voir_historique()
+        return HistoriqueDAO().voir_historique()
 
     def exporter_historique(self):
-        return HistoriqueDao().exporter_historique()
+        return HistoriqueDAO().exporter_historique()
 
 
-
-
+""" 
 if __name__ == "__main__":
     # Pour charger les variables d'environnement contenues dans le fichier .env
     import dotenv
@@ -76,4 +74,4 @@ if __name__ == "__main__":
 
     succes = UtilisateurDao().add_utilisateur(mon_utilisateur)
     print("Utilisateur created in database : " + str(succes))
-
+ """
