@@ -3,7 +3,7 @@ from typing import List, Optional
 from client.utilisateur import Utilisateur
 from dao.db_connection import DBConnection
 from dao.visiteur_dao import VisiteurDao
-from dao.historique_dao import HistoriqueDao
+from dao.historique_dao import HistoriqueDAO
 
 
 class UtilisateurDao(VisiteurDao):
@@ -94,7 +94,7 @@ class UtilisateurDao(VisiteurDao):
         return updated
 
     def modifier_historique(self):
-        return HistoriqueDao().modifier_historique()
+        return HistoriqueDAO().modifier_historique()
 
     def supprimer_profil(self, email):
         supp = False

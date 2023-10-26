@@ -10,6 +10,7 @@ import hashlib
 
 class VisiteurDao(metaclass=Singleton):
     def hash_mdp(self, mdp):
+<<<<<<< HEAD
         # Créez un objet de hachage SHA-256
         hasher = hashlib.sha256()
 
@@ -20,6 +21,18 @@ class VisiteurDao(metaclass=Singleton):
         hashed_mdp = hasher.hexdigest()
 
         return hashed_mdp
+=======
+    # Créez un objet de hachage SHA-256
+    hasher = hashlib.sha256()
+        
+    # Mettez le mot de passe dans l'objet de hachage
+    hasher.update(mdp.encode('utf-8'))
+        
+    # Récupérez la valeur de hachage (représentation hexadécimale)
+    hashed_mdp = hasher.hexdigest()
+        
+    return hashed_mdp
+>>>>>>> edd7224ffd0692c8dcb448083eef1ea55cb7fe42
 
     def inscription(
         self, adresse_mail, nom, prenom, mot_de_passe, statut="eleve"
@@ -51,8 +64,8 @@ class VisiteurDao(metaclass=Singleton):
                 with connection.cursor() as cursor:
                     cursor.execute(
                         'INSERT INTO "Projet_Info".Personne (adresse_mail, nom, prenom, mot_de_passe, statut)'
-                        "VALUES                                                                              "
-                        "(%(adresse_mail)s, %(nom)s, %(prenom)s, %(mdp_hache)s, %(statut)s);                 ",
+                        "VALUES                                                                      "
+                        "(%(adresse_mail)s, %(nom)s, %(prenom)s, %(mdp_hache)s, %(statut)s);                  ",
                         {
                             "adresse_mail": adresse_mail,
                             "nom": nom,
