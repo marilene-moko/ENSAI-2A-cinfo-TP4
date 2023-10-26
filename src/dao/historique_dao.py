@@ -4,7 +4,7 @@ from dao.db_connection import DBConnection
 
 
 class HistoriqueDAO(metaclass=Singleton):
-def afficher_historique_utilisateur(self, utilisateur):
+    def afficher_historique_utilisateur(self, utilisateur):
         identifiant_personne = utilisateur.identifiant_personne
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -23,12 +23,15 @@ def afficher_historique_utilisateur(self, utilisateur):
             with DBConnection().connection as connection:
                 with connection.cursor() as cursor:
                     for line in f:
-                        data = line.strip().split(",")  # Supposer que le CSV est délimité par des virgules
+                        data = line.strip().split(
+                            ","
+                        )  # Supposer que le CSV est délimité par des virgules
                         # Assurez-vous que l'identifiant de l'utilisateur est utilisé pour l'insertion
                         sql = """INSERT INTO "Projet_Info".page_visitee (date_visite, URL_page, identifiant_personne)
                                 VALUES (%s, %s, %s);"""
-                        cursor.execute(sql, (data[0], data[1], utilisateur.identifiant_personne))
-
+                        cursor.execute(
+                            sql, (data[0], data[1], utilisateur.identifiant_personne)
+                        )
 
     def exporter_historique(self, utilisateur):
         identifiant_personne = utilisateur.identifiant_personne
