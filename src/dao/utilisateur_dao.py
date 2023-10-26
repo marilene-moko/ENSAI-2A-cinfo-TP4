@@ -4,7 +4,6 @@ from client.utilisateur import Utilisateur
 from dao.db_connection import DBConnection
 from dao.visiteur_dao import VisiteurDao
 from dao.historique_dao import HistoriqueDao
-from client.utilisateur import Utilisateur
 
 
 class UtilisateurDao(VisiteurDao):
@@ -34,8 +33,8 @@ class UtilisateurDao(VisiteurDao):
 
         return utilisateur
 
-    def afficher_profil(self, utilisateur):
-        print(utilisateur)
+    def afficher_profil(self, email, pseudo, nom, prenom, mdp):
+        print(f"Voici les informations de votre profil: {email}")
 
     def modifier_nom(self, email, modification) -> bool:
         updated = False
