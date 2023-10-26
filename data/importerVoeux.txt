@@ -1,0 +1,4 @@
+URL_voeu,Categorie,Intitule,Ville,Poste,Entreprise,identifiant_personne
+https://www.example.com/1,Informatique,Développeur,Paris,Stage,ABC Inc.,1
+https://www.example.com/2,Marketing,Analyste,New York,Emploi,XYZ Corp.,2
+https://www.example.com/3,Finance,Comptable,Londres,Emploi,123 Ltd.,1

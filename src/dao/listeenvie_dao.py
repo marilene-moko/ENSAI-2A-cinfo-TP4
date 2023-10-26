@@ -92,3 +92,66 @@ class ListeEnvieDAO(metaclass=Singleton):
                 )
 
         return "Le stage a été ajouté à la liste d'envies de l'utilisateur."
+
+    def importer_voeux(self):
+        with open("data/importerVoeux.csv", "r") as f:
+            next(f)  # Ignorer la première ligne si elle contient les en-têtes
+            with DBConnection().connection as connection:
+                with connection.cursor() as cursor:
+                    for line in f:
+                        data = line.strip().split(
+                            ","
+                        )  # Supposer que le CSV est délimité par des virgules
+                        sql = """INSERT INTO "Projet_Info".voeu (URL_voeu, Categorie, Intitule, Ville, Poste, Entreprise, identifiant_personne)
+                                VALUES (%s, %s, %s, %s, %s, %s, %s);"""
+                        cursor.execute(
+                            sql,
+                            (
+                                data[0],
+                                data[1],
+                                data[2],
+                                data[3],
+                                data[4],
+                                data[5],
+                                data[6],
+                            ),
+                        )
+
+    def exporter_voeux(self, utilisateur):
+        identifiant_personne = utilisateur.identifiant_personne
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """SELECT *
+                    FROM "Projet_Info".voeu
+                    WHERE identifiant_personne = %(identifiant_personne)s""",
+                    {"identifiant_personne": identifiant_personne},
+                )
+                res = cursor.fetchall()
+                with open("data/exporterVoeux.csv", "w", newline="") as f:
+                    if f.tell() == 0:
+                        # Écrire le header seulement si le fichier est vide
+                        header = [
+                            "identifiant_voeu",
+                            "URL_voeu",
+                            "Categorie",
+                            "Intitule",
+                            "Ville",
+                            "Poste",
+                            "Entreprise",
+                            "identifiant_personne",
+                        ]
+                        f.write(",".join(header) + "\n")
+                    # Écrire les données
+                    for row in res:
+                        row_data = [
+                            str(row["identifiant_voeu"]),
+                            row["URL_voeu"],
+                            row["Categorie"],
+                            row["Intitule"],
+                            row["Ville"],
+                            row["Poste"],
+                            row["Entreprise"],
+                            str(row["identifiant_personne"]),
+                        ]
+                        f.write(",".join(row_data) + "\n")
