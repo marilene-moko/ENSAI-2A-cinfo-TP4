@@ -20,12 +20,13 @@ class InscriptionView(AbstractView):
 
     def make_choice(self):
         answers = prompt(self.__questions)
+        mot_de_passe = VisiteurDao().hash_mdp(answers[3])
         if (
             VisiteurDao().inscription(
                 adresse_mail=answers[0],
                 nom=answers[1],
                 prenom=answers[2],
-                mot_de_passe=answers[3],
+                mot_de_passe=mot_de_passe,
             )
             is True
         ):
@@ -36,7 +37,9 @@ class InscriptionView(AbstractView):
             Session().pseudo = Session().nom + " " + Session().prenom
             Session().mot_de_passe = answers[3]
         else:
-            print("Une erreur est survenue. Veuillez réessayer ultérieurement.")
+            print(
+                "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
+            )
         from view.start_view import StartView
 
         return StartView()

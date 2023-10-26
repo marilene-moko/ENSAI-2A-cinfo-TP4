@@ -7,18 +7,19 @@ from dao.historique_dao import HistoriqueDAO
 
 import hashlib
 
+
 class VisiteurDao(metaclass=Singleton):
     def hash_mdp(self, mdp):
-    # Créez un objet de hachage SHA-256
-    hasher = hashlib.sha256()
-        
-    # Mettez le mot de passe dans l'objet de hachage
-    hasher.update(mdp.encode('utf-8'))
-        
-    # Récupérez la valeur de hachage (représentation hexadécimale)
-    hashed_mdp = hasher.hexdigest()
-        
-    return hashed_mdp
+        # Créez un objet de hachage SHA-256
+        hasher = hashlib.sha256()
+
+        # Mettez le mot de passe dans l'objet de hachage
+        hasher.update(mdp.encode("utf-8"))
+
+        # Récupérez la valeur de hachage (représentation hexadécimale)
+        hashed_mdp = hasher.hexdigest()
+
+        return hashed_mdp
 
     def inscription(
         self, adresse_mail, nom, prenom, mot_de_passe, statut="eleve"
@@ -28,15 +29,9 @@ class VisiteurDao(metaclass=Singleton):
         """
         created = False
 
-        #hacher le mot de passe 
+        # hacher le mot de passe
         mdp_hache = self.hash_mdp(mot_de_passe)
 
-        # Get the id type
-        email = TypeAttackDAO().find_id_by_label(attack.type)
-        if email in #email dans Personne:
-            raise ValueError(
-                "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
-            )
         # Get the id type
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -48,9 +43,7 @@ class VisiteurDao(metaclass=Singleton):
                 )
                 res = cursor.fetchone()
         if res:
-            raise ValueError(
-                "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
-            )
+            return created
         else:
             with DBConnection().connection as connection:
                 with connection.cursor() as cursor:
@@ -62,7 +55,7 @@ class VisiteurDao(metaclass=Singleton):
                             "adresse_mail": adresse_mail,
                             "nom": nom,
                             "prenom": prenom,
-                            "mot_de_passe": mot_de_passe,
+                            "mdp_hache": mot_de_passe,
                             "statut": statut,
                         },
                     )
@@ -76,8 +69,8 @@ class VisiteurDao(metaclass=Singleton):
         return HistoriqueDAO().voir_historique()
 
     def exporter_historique(self):
-
         return HistoriqueDao().exporter_historique()
+
 
 """ 
 if __name__ == "__main__":

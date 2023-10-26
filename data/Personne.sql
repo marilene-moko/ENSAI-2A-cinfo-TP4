@@ -1,33 +1,3 @@
-<<<<<<< HEAD
-import mysql.connector
-import bcrypt
-
-
-# Hacher le mdp
-
-mot_de_passe_hache = bcrypt.hashpw(mot_de_passe.encode('utf-8'), bcrypt.gensalt())
-
-connection = mysql.connector.connect(
-    host="localhost",
-    email="email",
-    nom="nom",
-    prenom="prenom",
-    mdp="mdp"
-    profil="profil"
-)
-
-cursor = connection.cursor()
-
-insert_query = "INSERT INTO Utilisateurs (email, nom, prenom, mdp, profil) VALUES (%s, %s, %s, %s, %s)"
-user_data = ("John", "Doe", "johndoe@example.com", "mot_de_passe_hache", "eleve")
-
-cursor.execute(insert_query, user_data)
-
-connection.commit()
-
-cursor.close()
-connection.close()
-=======
 INSERT INTO "Projet_Info".personne(nom, prenom, adresse_mail, mot_de_passe, statut) VALUES
 ('Mathieu','Maude','maude.mathieu@gmail.com','MaUdE123456','administrateur'),
 ('Mounier','Clément','clement.mounier@gmail.com','ClEmEnT987654321','administrateur'),
@@ -45,4 +15,3 @@ INSERT INTO "Projet_Info".personne(nom, prenom, adresse_mail, mot_de_passe, stat
 ('Elkarif','Abdelraouf','abdelraouf.elkarif@gmail.com','Karirif35','utilisateur'),
 ('Carofil','Mathieu','mathieu.carofil@gmail.com','JusteDance75','utilisateur'),
 ('Gewoncik','Zuzana','zuzana.gewoncik@gmail.com','Gege75','utilisateur');
->>>>>>> 34e21df1d7b1631123fd8ecfb4b696613df3ca1f

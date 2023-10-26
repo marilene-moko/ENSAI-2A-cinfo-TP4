@@ -68,7 +68,7 @@ class ProfesseurDao(UtilisateurDao):
 
 
 
-        def conseillerStageAEleve(self,):
+    def conseillerStageAEleve(self,):
         
 
             
