@@ -96,7 +96,7 @@ class ListeEnvieDAO(metaclass=Singleton):
         return "Le stage a été ajouté à la liste d'envies de l'utilisateur."
 
     def importer_voeux(self, utilisateur):
-        with open("data/importerVoeux.csv", "r") as f:
+        with open("data/importerVoeux.txt", "r") as f:
             next(f)  # Ignorer la première ligne si elle contient les en-têtes
             with DBConnection().connection as connection:
                 with connection.cursor() as cursor:
