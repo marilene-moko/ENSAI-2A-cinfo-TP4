@@ -36,11 +36,10 @@ class UtilisateurDao(VisiteurDao):
     def afficher_profil(self, utilisateur):
         print(utilisateur)
 
-    def modifier_profil(self, utilisateur, modification) -> bool:
+    def modifier_nom(self, email, modification) -> bool:
         updated = False
 
         # Get the email
-        email = utilisateur["email"]
         if email is None:
             return updated
 
@@ -48,18 +47,47 @@ class UtilisateurDao(VisiteurDao):
             with connection.cursor() as cursor:
                 cursor.execute(
                     'UPDATE "Projet_Info".Personne                        '
-                    "   SET email = %(email)s,                            "
-                    "       nom = %(nom)s,                                "
-                    "       prenom = %(prenom)s,                          "
-                    "       mdp = %(mdp)s,                                "
+                    "   SET    nom = %(modification)s                     "
                     " WHERE email = %(email)s                             ",
-                    {
-                        "email": email,
-                        "nom": modification["nom"],
-                        "prenom": modification["prenom"],
-                        "mdp": modification["mdp"],
-                        "statut": "statut",
-                    },
+                    {"email": email, "nom": modification},
+                )
+                if cursor.rowcount:
+                    updated = True
+        return updated
+
+    def modifier_prenom(self, email, modification) -> bool:
+        updated = False
+
+        # Get the email
+        if email is None:
+            return updated
+
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    'UPDATE "Projet_Info".Personne                        '
+                    "   SET    prenom = %(modification)s                     "
+                    " WHERE email = %(email)s                             ",
+                    {"email": email, "prenom": modification},
+                )
+                if cursor.rowcount:
+                    updated = True
+        return updated
+
+    def modifier_mdp(self, email, modification) -> bool:
+        updated = False
+
+        # Get the email
+        if email is None:
+            return updated
+
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    'UPDATE "Projet_Info".Personne                        '
+                    "   SET    mot_de_passe = %(modification)s                     "
+                    " WHERE email = %(email)s                             ",
+                    {"email": email, "mot_de_passe": modification},
                 )
                 if cursor.rowcount:
                     updated = True

@@ -27,7 +27,9 @@ class ConnectionView(AbstractView):
         utilisateur = UtilisateurDao.utilisateur_exists(answers[0], answers[1])
         if utilisateur is not None:
             if utilisateur["statut"] == "eleve":
-                Session().user_name = utilisateur["nom"] + " " + utilisateur["prenom"]
+                Session().nom = utilisateur["nom"]
+                Session().prenom = utilisateur["prenom"]
+                Session().pseudo = Session().nom + " " + Session().prenom
                 Session().email = answers[0]
                 Session().mot_de_passe = answers[1]
                 Session().statut = "eleve"
@@ -37,7 +39,9 @@ class ConnectionView(AbstractView):
                 return ApConnexionViewEleve()
 
             elif utilisateur["statut"] == "professeur":
-                Session().user_name = utilisateur["nom"] + " " + utilisateur["prenom"]
+                Session().nom = utilisateur["nom"]
+                Session().prenom = utilisateur["prenom"]
+                Session().pseudo = Session().nom + " " + Session().prenom
                 Session().email = answers[0]
                 Session().mot_de_passe = answers[1]
                 Session().statut = "professeur"
@@ -47,7 +51,9 @@ class ConnectionView(AbstractView):
                 return ApConnexionViewProf()
 
             elif utilisateur["statut"] == "administrateur":
-                Session().user_name = utilisateur["nom"] + " " + utilisateur["prenom"]
+                Session().nom = utilisateur["nom"]
+                Session().prenom = utilisateur["prenom"]
+                Session().pseudo = Session().nom + " " + Session().prenom
                 Session().email = answers[0]
                 Session().mot_de_passe = answers[1]
                 Session().statut = "administrateur"
