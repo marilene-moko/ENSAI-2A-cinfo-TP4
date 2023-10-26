@@ -4,12 +4,12 @@ from dao.db_connection import DBConnection
 
 
 class ListeEnvieDAO(metaclass=Singleton):
-    def afficher_listeEnvie(self):
-        with DBConnection().connection as connection:
-            with connection.cursor() as cursor:
-                cursor.execute("Select *           " 'FROM "Projet_Info".voeu;')
-                res = cursor.fetcall()
-            return res
+    # def afficher_listeEnvie(self):
+    # with DBConnection().connection as connection:
+    # with connection.cursor() as cursor:
+    # cursor.execute("Select *           " 'FROM "Projet_Info".voeu;')
+    # res = cursor.fetcall()
+    # return res
 
     def afficher_listeEnvie_utilisateur(self, utilisateur):
         identifiant_personne = utilisateur.identifiant_personne
@@ -95,7 +95,7 @@ class ListeEnvieDAO(metaclass=Singleton):
 
         return "Le stage a été ajouté à la liste d'envies de l'utilisateur."
 
-    def importer_voeux(self):
+    def importer_voeux(self, utilisateur):
         with open("data/importerVoeux.csv", "r") as f:
             next(f)  # Ignorer la première ligne si elle contient les en-têtes
             with DBConnection().connection as connection:
@@ -104,6 +104,7 @@ class ListeEnvieDAO(metaclass=Singleton):
                         data = line.strip().split(
                             ","
                         )  # Supposer que le CSV est délimité par des virgules
+                        # Assurez-vous que l'identifiant de l'utilisateur est utilisé pour l'insertion
                         sql = """INSERT INTO "Projet_Info".voeu (URL_voeu, Categorie, Intitule, Ville, Poste, Entreprise, identifiant_personne)
                                 VALUES (%s, %s, %s, %s, %s, %s, %s);"""
                         cursor.execute(
@@ -115,7 +116,7 @@ class ListeEnvieDAO(metaclass=Singleton):
                                 data[3],
                                 data[4],
                                 data[5],
-                                data[6],
+                                utilisateur.identifiant_personne,
                             ),
                         )
 
