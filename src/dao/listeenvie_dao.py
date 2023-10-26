@@ -12,6 +12,10 @@ class ListeEnvieDAO(metaclass=Singleton):
     # return res
 
     def afficher_listeEnvie_utilisateur(self, utilisateur):
+        """
+        Affiche la liste d'envie d'une personne en fonction de so identifiant
+        """
+
         identifiant_personne = utilisateur.identifiant_personne
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -25,7 +29,12 @@ class ListeEnvieDAO(metaclass=Singleton):
             return res
 
     def supprimer_listeEnvie_utilisateur(self, utilisateur, identifiant_voeu):
-        identifiant_personne = utilisateur.identifiant_personne
+        """
+        Supprime un voeu de la liste d'envie d'un utilisateur.
+        Plusieurs tests pour savoir si le voeu existe et s'il appartient
+        bien à l'utilisateur sont fait.
+        """
+
         # Vérifier si le voeu appartient à l'utilisateur
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -56,7 +65,11 @@ class ListeEnvieDAO(metaclass=Singleton):
         return "Le voeu a été supprimé avec succès."
 
     def ajouter_stage_listeEnvie_utilisateur(self, utilisateur, identifiant_stage):
-        identifiant_personne = utilisateur.identifiant_personne
+        """
+        Permet d'ajouter un stage a la liste d'envie d'un utilisateur en utilisant son id.
+        On vérifie en amont si le voeu est déjà présent ou non et si le stage existe bien
+        """
+
         # Vérifier si le stage existe et n'est pas déjà dans la liste d'envies de l'utilisateur
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -96,6 +109,14 @@ class ListeEnvieDAO(metaclass=Singleton):
         return "Le stage a été ajouté à la liste d'envies de l'utilisateur."
 
     def importer_voeux(self, utilisateur):
+        """
+        Importe une liste d'envies aux entêtes URL_voeu,Categorie,Intitule,Ville,Poste,Entreprise,identifiant_personne
+
+        L'importation se fait nécessairement d'un fichier nommé "importerVoeux" situé
+        dans le dosser data.
+        L'utilisateur qui importe ne peut importer des voeux que dans sa propre liste d'envies
+        """
+
         with open("data/importerVoeux.txt", "r") as f:
             next(f)  # Ignorer la première ligne si elle contient les en-têtes
             with DBConnection().connection as connection:
@@ -121,6 +142,12 @@ class ListeEnvieDAO(metaclass=Singleton):
                         )
 
     def exporter_voeux(self, utilisateur):
+        """
+        Exporter un historique
+
+        L'exportation se fait en envoyés dans un ficher "exporterVoeux" dans le dossier data
+        L'utilisateur qui exporte ne peut exporter que SON historique
+        """
         identifiant_personne = utilisateur.identifiant_personne
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -131,7 +158,7 @@ class ListeEnvieDAO(metaclass=Singleton):
                     {"identifiant_personne": identifiant_personne},
                 )
                 res = cursor.fetchall()
-                with open("data/exporterVoeux.csv", "w", newline="") as f:
+                with open("data/exporterVoeux.txt", "w", newline="") as f:
                     if f.tell() == 0:
                         # Écrire le header seulement si le fichier est vide
                         header = [
