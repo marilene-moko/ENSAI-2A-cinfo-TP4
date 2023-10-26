@@ -3,7 +3,6 @@ from utilisateur import Utilisateur
 class Professeur(Utilisateur):
     def __init__(self):
         super().__init__()
-        self.specialties = []
 
     def add_stage(self, stage_data):
         if self.authenticated:
