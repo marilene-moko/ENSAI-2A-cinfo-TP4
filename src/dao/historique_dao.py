@@ -5,6 +5,9 @@ from dao.db_connection import DBConnection
 
 class HistoriqueDAO(metaclass=Singleton):
     def afficher_historique_utilisateur(self, utilisateur):
+        """
+        Affiche l'historique d'un utilisateur
+        """
         identifiant_personne = utilisateur.identifiant_personne
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -18,6 +21,13 @@ class HistoriqueDAO(metaclass=Singleton):
             return res
 
     def importer_historique(self, utilisateur):
+        """
+        Importe un historique aux entêtes date_visite,URL_page,identifiant_personne
+
+        L'importation se fait nécessairement d'un fichier nommé "importHistorique" situé
+        dans le dosser data.
+        L'utilisateur qui importe ne peut importer des lignes d'historiques que pour son id
+        """
         with open("data/importerHistorique.txt", "r") as f:
             next(f)  # Ignorer la première ligne si elle contient les en-têtes
             with DBConnection().connection as connection:
@@ -34,6 +44,12 @@ class HistoriqueDAO(metaclass=Singleton):
                         )
 
     def exporter_historique(self, utilisateur):
+        """
+        Exporter un historique
+
+        L'exportation se fait en envoyés dans un ficher "exporterHistorique"
+        L'utilisateur qui exporte ne peut exporter que SON historique
+        """
         identifiant_personne = utilisateur.identifiant_personne
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -65,5 +81,15 @@ class HistoriqueDAO(metaclass=Singleton):
                         ]
                         f.write(",".join(row_data) + "\n")
 
-
-########### il manque la fonction supprimer historique ###########
+    def supprimer_historique_utilisateur(self, utilisateur):
+        """
+        Supprime l'historique d'un utilisateur
+        """
+        identifiant_personne = utilisateur.identifiant_personne
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    'DELETE FROM "Projet_Info".page_visitee '
+                    "WHERE identifiant_personne = %(identifiant_personne)s;",
+                    {"identifiant_personne": identifiant_personne},
+                )
