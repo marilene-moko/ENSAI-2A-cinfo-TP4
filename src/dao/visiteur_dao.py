@@ -5,6 +5,8 @@ from dao.db_connection import DBConnection
 from dao.historique_dao import HistoriqueDAO
 
 
+import hashlib
+
 class VisiteurDao(metaclass=Singleton):
     def inscription(
         self, adresse_mail, nom, prenom, mot_de_passe, statut="eleve"
@@ -14,6 +16,23 @@ class VisiteurDao(metaclass=Singleton):
         """
         created = False
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+        #hacher le mot de passe 
+        mdp_hache = self.hash_password(utilisateur.mdp)
+
+        # Get the id type
+        email = TypeAttackDAO().find_id_by_label(attack.type)
+        if email in #email dans Personne:
+            raise ValueError(
+                "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
+            )
+=======
+        email = utilisateur["email"]
+>>>>>>> 34618408bd36e7d4560867c3665f1a93f4e0b4b8
+
+=======
+>>>>>>> a1c815b9f8b60b127daa41cf333ad325744efca0
         # Get the id type
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -53,7 +72,23 @@ class VisiteurDao(metaclass=Singleton):
         return HistoriqueDAO().voir_historique()
 
     def exporter_historique(self):
+<<<<<<< HEAD
+        return HistoriqueDao().exporter_historique()
+
+    def hash_password(self, password):
+        # Créez un objet de hachage SHA-256
+        hasher = hashlib.sha256()
+        
+        # Mettez le mot de passe dans l'objet de hachage
+        hasher.update(password.encode('utf-8'))
+        
+        # Récupérez la valeur de hachage (représentation hexadécimale)
+        hashed_password = hasher.hexdigest()
+        
+        return hashed_password
+=======
         return HistoriqueDAO().exporter_historique()
+>>>>>>> a1c815b9f8b60b127daa41cf333ad325744efca0
 
 
 """ 
@@ -72,6 +107,7 @@ if __name__ == "__main__":
         mdp=
     )
 
+    mon_utilisateur.mdp = UtilisateurDao().hash_password(mon_utilisateur.mdp)
     succes = UtilisateurDao().add_utilisateur(mon_utilisateur)
     print("Utilisateur created in database : " + str(succes))
  """
