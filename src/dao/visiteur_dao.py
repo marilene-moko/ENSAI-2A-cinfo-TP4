@@ -11,6 +11,8 @@ class VisiteurDao(metaclass=Singleton):
         """
         created = False
 
+        email = utilisateur["email"]
+
         # Get the id type
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -23,7 +25,7 @@ class VisiteurDao(metaclass=Singleton):
                     },
                 )
                 res = cursor.fetchone()
-        if not res:
+        if res:
             raise ValueError(
                 "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
             )

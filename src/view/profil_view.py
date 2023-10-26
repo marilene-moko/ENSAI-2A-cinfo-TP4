@@ -14,6 +14,7 @@ class ProfilView(AbstractView):
                 "choices": [
                     "Afficher son profil",
                     "Modifier son profil",
+                    "Supprimer son profil",
                     "Quitter",
                 ],
             }
@@ -32,4 +33,13 @@ class ProfilView(AbstractView):
             
 
         elif reponse["choix"] == "Modifier son profil":
+            from view.modif_profil_view import ModifProfilView
+
+            return ModifProfilView()
+
+
+        elif reponse["choix"] == "Supprimer son profil":
+            from view.start_view import StartView
+
+            return StartView()
             

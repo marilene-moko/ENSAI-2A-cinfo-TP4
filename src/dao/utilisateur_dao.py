@@ -4,6 +4,7 @@ from client.utilisateur import Utilisateur
 from dao.db_connection import DBConnection
 from dao.visiteur_dao import VisiteurDao
 from dao.historique_dao import HistoriqueDao
+from client.utilisateur import Utilisateur
 
 
 class UtilisateurDao(VisiteurDao):
@@ -15,7 +16,7 @@ class UtilisateurDao(VisiteurDao):
             with connection.cursor() as cursor:
                 cursor.execute(
                     "SELECT *                                       "
-                    'FROM "Projet_Info".Personne                                '
+                    'FROM "Projet_Info".Personne                    '
                     " WHERE email=%(email)s   AND mdp=%(mdp)s       ",
                     {"email": email, "mdp": mdp},
                 )
@@ -33,7 +34,10 @@ class UtilisateurDao(VisiteurDao):
 
         return utilisateur
 
-    def update_utilisateur(self, utilisateur) -> bool:
+    def afficher_profil(self, utilisateur):
+        print(utilisateur)
+
+    def modifier_profil(self, utilisateur, modification) -> bool:
         updated = False
 
         # Get the email
@@ -44,7 +48,7 @@ class UtilisateurDao(VisiteurDao):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    "UPDATE Personne                                      "
+                    'UPDATE "Projet_Info".Personne                        '
                     "   SET email = %(email)s,                            "
                     "       nom = %(nom)s,                                "
                     "       prenom = %(prenom)s,                          "
@@ -52,18 +56,36 @@ class UtilisateurDao(VisiteurDao):
                     " WHERE email = %(email)s                             ",
                     {
                         "email": email,
-                        "nom": utilisateur["nom"],
-                        "prenom": utilisateur["prenom"],
-                        "mdp": utilisateur["mdp"],
-                        "statut": utilisateur["statut"],
+                        "nom": modification["nom"],
+                        "prenom": modification["prenom"],
+                        "mdp": modification["mdp"],
+                        "statut": "statut",
                     },
                 )
                 if cursor.rowcount:
                     updated = True
         return updated
 
-        def modifier_historique(self):
-            return HistoriqueDao().modifier_historique()
+    def modifier_historique(self):
+        return HistoriqueDao().modifier_historique()
+
+    def supprimer_profil(self, utilisateur):
+        supp = False
+
+        # Get the email
+        email = utilisateur["email"]
+        if email is None:
+            return supp
+
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    'DELETE FROM "Projet_Info".Personne                  '
+                    "WHERE email = %(email)s                             ",
+                )
+                if cursor.rowcount:
+                    supp = True
+        return supp
 
 
 """ 
