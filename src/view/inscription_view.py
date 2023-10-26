@@ -1,8 +1,8 @@
 from InquirerPy import prompt
 
 from view.abstract_view import AbstractView
-from view.session import Session
 
+from  dao.utilisateur_dao import UtilisateurDao
 
 class InscriptionView(AbstractView):
     def __init__(self):
@@ -24,8 +24,11 @@ class InscriptionView(AbstractView):
         self.mot_de_passe = answers[3]
         # if email in utilisateur:
         #    raiseValueError()
-        Session().user_name = answers[1] + " " + answers[2]
 
         from view.start_view import StartView
 
         return StartView()
+
+
+if UtilisateurDao.email_exists(email):
+    raise ValueError("Cet email existe déjà")

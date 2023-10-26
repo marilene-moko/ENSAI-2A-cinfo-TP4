@@ -4,17 +4,16 @@ from view.abstract_view import AbstractView
 from view.session import Session
 
 
-class StartView(AbstractView):
+class ApSansAuthentificationView(AbstractView):
     def __init__(self):
         self.__questions = [
             {
                 "type": "list",
                 "name": "choix",
-                "message": f" {Session().pseudo}",
+                "message": "",
                 "choices": [
-                    "Connection",
-                    "Inscription",
-                    "Utiliser sans s'authentifier",
+                    "Rechercher",
+                    "Historique",
                     "Quitter",
                 ],
             }
@@ -29,17 +28,12 @@ class StartView(AbstractView):
         if reponse["choix"] == "Quitter":
             pass
 
-        elif reponse["choix"] == "Connection":
+        elif reponse["choix"] == "Rechercher":
             from view.connection_view import ConnectionView
 
             return ConnectionView()
 
-        elif reponse["choix"] == "Inscription":
+        elif reponse["choix"] == "Historique":
             from view.inscription_view import InscriptionView
 
             return InscriptionView()
-
-        elif reponse["choix"] == "Utiliser sans s'authentifier":
-            from view.ap_sans_authentification_view import ApSansAuthentificationView
-
-            return ApSansAuthentificationView()

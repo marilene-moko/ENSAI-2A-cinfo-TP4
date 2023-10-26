@@ -1,6 +1,8 @@
 from InquirerPy import prompt
 
 from view.abstract_view import AbstractView
+
+from dao.utilisateur_dao import UtilisateurDao
 from view.session import Session
 
 
@@ -18,10 +20,46 @@ class ConnectionView(AbstractView):
         answers = prompt(self.__questions)
         self.email = answers[0]
         self.mot_de_passe = answers[1]
-        # if email in utilisateur:
-        #    raiseValueError()
-        Session().user_name = answers[1] + " " + answers[2]
+        return self.email
 
-        from view.start_view import StartView
+    def authentification_reussie(self):
+        answers = prompt(self.__questions)
+        utilisateur = UtilisateurDao.utilisateur_exists(answers[0], answers[1])
+        if utilisateur is not None:
+            if utilisateur["statut"] == "eleve":
+                Session().nom = utilisateur["nom"]
+                Session().prenom = utilisateur["prenom"]
+                Session().pseudo = Session().nom + " " + Session().prenom
+                Session().email = answers[0]
+                Session().mot_de_passe = answers[1]
+                Session().statut = "eleve"
 
-        return StartView()
+                from view.ap_connexion_view_eleve import ApConnexionViewEleve
+
+                return ApConnexionViewEleve()
+
+            elif utilisateur["statut"] == "professeur":
+                Session().nom = utilisateur["nom"]
+                Session().prenom = utilisateur["prenom"]
+                Session().pseudo = Session().nom + " " + Session().prenom
+                Session().email = answers[0]
+                Session().mot_de_passe = answers[1]
+                Session().statut = "professeur"
+
+                from view.ap_connexion_view_prof import ApConnexionViewProf
+
+                return ApConnexionViewProf()
+
+            elif utilisateur["statut"] == "administrateur":
+                Session().nom = utilisateur["nom"]
+                Session().prenom = utilisateur["prenom"]
+                Session().pseudo = Session().nom + " " + Session().prenom
+                Session().email = answers[0]
+                Session().mot_de_passe = answers[1]
+                Session().statut = "administrateur"
+
+                from view.ap_connexion_view_admin import ApConnexionViewAdmin
+
+                return ApConnexionViewAdmin()
+        else:
+            raise ValueError("L'email et/ou le mot de passe est incorrect")

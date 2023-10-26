@@ -20,6 +20,8 @@ class Visiteur:
                 return True
         return False
 
+
+"""
     def search_stage(self, query):
         # Recherche de stage
         # ...
@@ -44,4 +46,4 @@ class Visiteur:
         # Création sécurisée du compte utilisateur
         # ...
 
-    # Autres méthodes de la classe Visiteur
+    # Autres méthodes de la classe Visiteur """

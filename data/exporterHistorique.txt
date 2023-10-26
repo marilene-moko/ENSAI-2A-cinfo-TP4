@@ -1,0 +1,4 @@
+Identifiant_page,date_visite,URL_page,identifiant_personne
+1,2023-10-25,https://www.example.com/page1,1
+6,2023-10-25,https://www.example.com/page1,1
+11,2023-10-25,https://www.example.com/page1,1
