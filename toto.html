@@ -1,0 +1,52 @@
+for i in range(0, len(intitules_stage)):
+stages.append(
+    stageFactory(
+        description[i], specialite, localisation, date_publication[i]
+    )
+)
+
+for stage in stages:
+print(stage.specialite)
+print(stage.description)
+print(stage.localisation)
+print(stage.date_publcation)
+print("\n")
+
+            
+            divs2 = []
+            for elt in divs:
+                if elt.get("class") == "media-body":
+                    divs2.append(elt)
+            print(len(divs))
+            print(len(divs2))
+            links = []
+            intitules_stage = []
+
+            liste_structures = [
+                elt
+                for elt in soup.find_all("span")
+                if elt.get("class")
+                == ["listing-item__info--item listing-item__info--item-company"]
+            ]
+
+            print(len(liste_structures))
+
+            divs = [
+                elt
+                for elt in soup.find_all("div")
+                if elt.get("class") == ["media-heading listing-item__title"]
+            ]
+
+            print(len(divs))
+
+            for div in divs:
+                a = div.find("a")
+                link = a["href"]
+                links.append(link)
+                intitules_stage.append(a.text)
+
+            print(len(intitules_stage))
+
+            print(len(links))
+
+        stages = []

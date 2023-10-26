@@ -12,7 +12,7 @@ class HistoriqueDAO(metaclass=Singleton):
             return res
 
     def afficher_historique_utilisateur(self, utilisateur):
-        identifiant_personne = utilisateur["identifiant_personne"]
+        identifiant_personne = utilisateur.identifiant_personne
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
@@ -25,7 +25,7 @@ class HistoriqueDAO(metaclass=Singleton):
             return res
 
     def importer_historique(self):
-        with open("data/importer.txt", "r") as f:
+        with open("data/importerHistorique.txt", "r") as f:
             next(f)  # Ignorer la première ligne si elle contient les en-têtes
             with DBConnection().connection as connection:
                 with connection.cursor() as cursor:
@@ -48,7 +48,7 @@ class HistoriqueDAO(metaclass=Singleton):
                     {"identifiant_personne": identifiant_personne},
                 )
                 res = cursor.fetchall()
-                with open("data/exporter.txt", "w", newline="") as f:
+                with open("data/exporterHistorique.txt", "w", newline="") as f:
                     if f.tell() == 0:
                         # Écrire le header seulement si le fichier est vide
                         header = [
