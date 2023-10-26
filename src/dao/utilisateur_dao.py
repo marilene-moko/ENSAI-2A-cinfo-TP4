@@ -97,11 +97,9 @@ class UtilisateurDao(VisiteurDao):
     def modifier_historique(self):
         return HistoriqueDao().modifier_historique()
 
-    def supprimer_profil(self, utilisateur):
+    def supprimer_profil(self, email):
         supp = False
 
-        # Get the email
-        email = utilisateur["email"]
         if email is None:
             return supp
 
@@ -109,7 +107,7 @@ class UtilisateurDao(VisiteurDao):
             with connection.cursor() as cursor:
                 cursor.execute(
                     'DELETE FROM "Projet_Info".Personne                  '
-                    "WHERE email = %(email)s                             ",
+                    "WHERE email = %(email)s;                            ",
                 )
                 if cursor.rowcount:
                     supp = True

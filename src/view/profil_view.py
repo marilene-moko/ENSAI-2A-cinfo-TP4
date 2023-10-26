@@ -2,6 +2,7 @@ from InquirerPy import prompt
 
 from view.abstract_view import AbstractView
 from view.session import Session
+from dao.utilisateur_dao import UtilisateurDao
 
 
 class ProfilView(AbstractView):
@@ -39,7 +40,22 @@ class ProfilView(AbstractView):
 
 
         elif reponse["choix"] == "Supprimer son profil":
-            from view.start_view import StartView
+            if UtilisateurDao().supprimer_profil(Session().email) is True:
+                print("Votre compte a bien été supprimé")
+                from view.start_view import StartView
+                return StartView()
+            else:
+                print("Une erreur est survenue. Veuillez essayer ultérieurement.")
+                if Session().statut == "eleve":
+                    from view.ap_connexion_view_eleve import ApConnexionViewEleve
 
-            return StartView()
+                    return ApConnexionViewEleve()
+                elif Session().statut == "prof":
+                    from view.ap_connexion_view_prof import ApConnexionViewProf
+
+                    return ApConnexionViewProf()
+                else:
+                    from view.ap_connexion_view_admin import ApConnexionViewAdmin
+
+                    return ApConnexionViewAdmin()
             
