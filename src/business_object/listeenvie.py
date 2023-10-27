@@ -1,4 +1,4 @@
-from dao.listeenvie_dao import *
+from dao.listeenvie_dao import ListeEnvieDAO
 
 
 class ListeEnvie:
@@ -6,16 +6,16 @@ class ListeEnvie:
         self.id_list = id_list
         self.envies = envies  # liste des id de stages
 
-    def afficherEnvie(self, utilisateur):
+    def afficher_listeEnvie_utilisateur(email):
         """
         Méthode qui permet d'afficher la liste d'envie
 
         retourne : la liste d'envie de l'utilisateur
         """
 
-        return afficher_listeEnvie_utilisateur(self, utilisateur)
+        return ListeEnvieDAO.afficher_listeEnvie_utilisateur(email)
 
-    def retirerEnvie(self, utilisateur, id_stage):
+    def supprimer_listeEnvie_utilisateur(email, id_stage):
         """
         Méthode qui permet de retirer un stage à la liste envies
 
@@ -23,9 +23,9 @@ class ListeEnvie:
 
         retourne : retourne un str qui indique si la tâche a été affectuée
         """
-        return supprimer_listeEnvie_utilisateur(self, utilisateur, id_stage)
+        return ListeEnvieDAO.supprimer_listeEnvie_utilisateur(email, id_stage)
 
-    def ajouterEnvie(self, utilisateur, stage_id):
+    def ajouter_stage_listeEnvie_utilisateur(email, id_stage):
         """
         Méthode qui permet d'ajouter un stage à la liste envies
 
@@ -33,20 +33,20 @@ class ListeEnvie:
 
         retourne : retourne rien met à mis à jour la liste envies
         """
-        return ajouter_stage_listeEnvie_utilisateur(self, utilisateur, id_stage)
+        return ListeEnvieDAO.ajouter_stage_listeEnvie_utilisateur(email, id_stage)
 
-    def importer_listeEnvie(self):
+    def importer_voeux(email):
         """
         Méthode qui permet d'importer des voeux à la liste d'envie
 
         """
 
-        return importer_voeux(self)
+        return ListeEnvieDAO.importer_voeux(email)
 
-    def exporter_listeEnvie(self, utilisateur):
+    def exporter_voeux(email):
         """
         Méthode qui permet d'exporter des voeux à la liste d'envie
 
         """
 
-        return exporter_voeux(self, utilisateur)
+        return ListeEnvie.exporter_voeux(email)

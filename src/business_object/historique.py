@@ -1,4 +1,4 @@
-from dao.historique_dao import *
+from dao.historique_dao import HistoriqueDAO
 
 class Historique :
     def __init__(
@@ -10,24 +10,32 @@ class Historique :
         self.id_historique = id_historique
         self.historique_rechercher = historique_rechercher
 
-    def afficher(self, utilisateur):
+    def afficher_historique_utilisateur(email):
         """ 
         Méthode qui permet à l'utilisateur d'afficher son historique
 
         retourne : l'historique
         """" 
-        return afficher_historique_utilisateur(self, utilisateur)
+        return HistoriqueDAO.afficher_historique_utilisateur(email)
 
-    def importer(self, utilisateur):
+    def importer_historique(email):
         """ 
         Méthode qui permet à l'utilisateur d'importer son historique
         """
-        return importer_historique(self, utilisateur)
+        return HistoriqueDAO.importer_historique(email)
 
-    def exporter(self, utilisateur):
+    def exporter_historique(email):
         """ 
         Méthode qui permet à l'utilisater d'exporter son historique
         """ 
-        return exporter_historique(self, utilisateur)
+        return HistoriqueDAO.exporter_historique(email)
 
-########### il manque la fonction supprimer historique ###########
+    def supprimer_historique(email):
+
+        return HistoriqueDAO.supprimer_historique_utilisateur(email)
+
+    def ajouter_historique(email, URL_page):
+
+        return HistoriqueDAO.ajouter_historique(email, URL_page)
+    
+    
