@@ -42,4 +42,4 @@ class RechercheView(AbstractView):
             )
             affichage = Stageclientvisiteur().afficher_stage(liste_stage)
 
-        Statut.def_statut(Session().email)
+        Statut.def_statut(Session().email, Session().statut)
