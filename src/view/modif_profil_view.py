@@ -50,7 +50,7 @@ class ModifProfilView(AbstractView):
         elif answers[1] == "N":
             Session().prenom = Session().prenom
         else:
-            raise ValueError("Vous devez répondre par Y ou N")
+            print("Vous devez répondre par Y ou N")
 
         if answers[2] == "Y":
             modif_mdp = input("Choisissez un nouveau mot de passe")
@@ -63,6 +63,6 @@ class ModifProfilView(AbstractView):
         elif answers[2] == "N":
             Session().mot_de_passe = Session().mot_de_passe
         else:
-            raise ValueError("Vous devez répondre par Y ou N")
+            print("Vous devez répondre par Y ou N")
 
         Statut.def_statut(self, Session().statut)

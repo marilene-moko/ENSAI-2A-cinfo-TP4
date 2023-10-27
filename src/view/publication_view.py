@@ -30,7 +30,7 @@ class PublicationView(AbstractView):
             pass
 
         elif reponse["choix"] == "Afficher ses publications":
-            Statut.def_statut(self, Session().statut)
+            Statut.def_statut(Session().statut)
 
         elif reponse["choix"] == "Publier des offres":
-            Statut.def_statut(self, Session().statut)
+            Statut.def_statut(Session().statut)

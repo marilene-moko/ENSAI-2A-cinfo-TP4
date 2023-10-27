@@ -20,7 +20,7 @@ class ConnectionView(AbstractView):
         answers = prompt(self.__questions)
         mdp = UtilisateurService.hash_mdp(self, answers[1])
         utilisateur = UtilisateurService.utilisateur_exists(
-            self=self, adresse_mail=answers[0], mot_de_passe=mdp
+            adresse_mail=answers[0], mot_de_passe=mdp
         )
         if utilisateur is not None:
             if utilisateur.statut == "eleve":
