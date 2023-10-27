@@ -1,8 +1,9 @@
 class Statut:
-    def __init__(self, statut):
-        self.statut = statut
+    def __init__(self):
+        pass
 
-    def def_statut(self, statut):
+    @staticmethod
+    def def_statut(statut):
         if statut == "eleve":
             from view.ap_connexion_view_eleve import ApConnexionViewEleve
 

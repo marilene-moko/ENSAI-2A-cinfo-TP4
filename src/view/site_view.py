@@ -56,7 +56,7 @@ class SiteView(AbstractView):
 
         elif reponse["choix"] == "Supprimer des profils":
             supp_profil = input("Veuillez entrer l'email que vous voulez supprimer: ")
-            if UtilisateurClient.supprimer_profil(self, supp_profil) is True:
+            if UtilisateurClient.supprimer_profil(supp_profil) is True:
                 print("Le compte a bien été supprimé")
             else:
                 print("Une erreur est survenue. Veuillez essayer ultérieurement.")
