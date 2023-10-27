@@ -38,10 +38,10 @@ class VisiteurDao(metaclass=Singleton):
                 cursor.execute(
                     "SELECT *                                         "
                     'FROM "Projet_Info".Personne                      '
-                    "WHERE adresse_mail = %(adresse_mail)s;                  ",
+                    "WHERE adresse_mail = %(adresse_mail)s;           ",
                     {"adresse_mail": adresse_mail},
                 )
-                res = cursor.fetchone()
+                res = cursor.fetchone
         if res:
             return created
         else:
@@ -49,8 +49,8 @@ class VisiteurDao(metaclass=Singleton):
                 with connection.cursor() as cursor:
                     cursor.execute(
                         'INSERT INTO "Projet_Info".Personne (adresse_mail, nom, prenom, mot_de_passe, statut)'
-                        "VALUES                                                                      "
-                        "(%(adresse_mail)s, %(nom)s, %(prenom)s, %(mdp_hache)s, %(statut)s);                  ",
+                        "VALUES                                                                              "
+                        "(%(adresse_mail)s, %(nom)s, %(prenom)s, %(mdp_hache)s, %(statut)s);                 ",
                         {
                             "adresse_mail": adresse_mail,
                             "nom": nom,
@@ -59,7 +59,7 @@ class VisiteurDao(metaclass=Singleton):
                             "statut": statut,
                         },
                     )
-                    res = cursor.rowcount()
+                    res = cursor.rowcount
             if res:
                 created = True
 
