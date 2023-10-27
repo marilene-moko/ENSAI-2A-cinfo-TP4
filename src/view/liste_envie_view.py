@@ -37,8 +37,8 @@ class ListeEnvieView(AbstractView):
             liste_envie = ListeEnvieDAO.afficher_listeEnvie_utilisateur(
                 self, adresse_mail=Session().email
             )
-            print(liste_envie)
             Statut.def_statut(Session().email)
+            print(liste_envie)
 
         elif reponse["choix"] == "Sauvegarder une offre dans sa liste":
             choix = input(
