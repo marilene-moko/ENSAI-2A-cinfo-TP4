@@ -112,74 +112,83 @@ class ListeEnvieDAO(metaclass=Singleton):
         Importe une liste d'envies aux entêtes URL_voeu,Categorie,Intitule,Ville,Poste,Entreprise,identifiant_personne
 
         L'importation se fait nécessairement d'un fichier nommé "importerVoeux" situé
-        dans le dosser data.
+        dans le dossier data.
         L'utilisateur qui importe ne peut importer des voeux que dans sa propre liste d'envies
         """
-
-        with open("data/importerVoeux.txt", "r") as f:
-            next(f)  # Ignorer la première ligne si elle contient les en-têtes
-            with DBConnection().connection as connection:
-                with connection.cursor() as cursor:
-                    for line in f:
-                        data = line.strip().split(
-                            ","
-                        )  # Supposer que le CSV est délimité par des virgules
-                        # Assurez-vous que l'identifiant de l'utilisateur est utilisé pour l'insertion
-                        sql = """INSERT INTO "Projet_Info".voeu (URL_voeu, Categorie, Intitule, Ville, Poste, Entreprise, adresse_mail)
-                                VALUES (%s, %s, %s, %s, %s, %s, %s);"""
-                        cursor.execute(
-                            sql,
-                            (
-                                data[0],
-                                data[1],
-                                data[2],
-                                data[3],
-                                data[4],
-                                data[5],
-                                adresse_mail,
-                            ),
-                        )
+        try:
+            with open("data/importerVoeux.txt", "r") as f:
+                next(f)  # Ignorer la première ligne si elle contient les en-têtes
+                with DBConnection().connection as connection:
+                    with connection.cursor() as cursor:
+                        for line in f:
+                            data = line.strip().split(
+                                ","
+                            )  # Supposer que le CSV est délimité par des virgules
+                            # Assurez-vous que l'identifiant de l'utilisateur est utilisé pour l'insertion
+                            sql = """INSERT INTO "Projet_Info".voeu (URL_voeu, Categorie, Intitule, Ville, Poste, Entreprise, adresse_mail)
+                                    VALUES (%s, %s, %s, %s, %s, %s, %s);"""
+                            cursor.execute(
+                                sql,
+                                (
+                                    data[0],
+                                    data[1],
+                                    data[2],
+                                    data[3],
+                                    data[4],
+                                    data[5],
+                                    adresse_mail,
+                                ),
+                            )
+            return True  # L'importation a réussi
+        except Exception as e:
+            print(f"Erreur lors de l'importation : {str(e)}")
+            return False  # L'importation a échoué
 
     def exporter_voeux(self, adresse_mail):
         """
         Exporter un historique
 
-        L'exportation se fait en envoyés dans un ficher "exporterVoeux" dans le dossier data
+        L'exportation se fait dans un fichier "exporterVoeux" dans le dossier data
         L'utilisateur qui exporte ne peut exporter que SON historique
         """
-        with DBConnection().connection as connection:
-            with connection.cursor() as cursor:
-                cursor.execute(
-                    """SELECT *
-                    FROM "Projet_Info".voeu
-                    WHERE adresse_mail = %(adresse_mail)s""",
-                    {"adresse_mail": adresse_mail},
-                )
-                res = cursor.fetchall()
-                with open("data/exporterVoeux.txt", "w", newline="") as f:
-                    if f.tell() == 0:
-                        # Écrire le header seulement si le fichier est vide
-                        header = [
-                            "identifiant_voeu",
-                            "URL_voeu",
-                            "Categorie",
-                            "Intitule",
-                            "Ville",
-                            "Poste",
-                            "Entreprise",
-                            "adresse_mail",
-                        ]
-                        f.write(",".join(header) + "\n")
-                    # Écrire les données
-                    for row in res:
-                        row_data = [
-                            str(row["identifiant_voeu"]),
-                            row["URL_voeu"],
-                            row["Categorie"],
-                            row["Intitule"],
-                            row["Ville"],
-                            row["Poste"],
-                            row["Entreprise"],
-                            str(row["adresse_mail"]),
-                        ]
-                        f.write(",".join(row_data) + "\n")
+        try:
+            with DBConnection().connection as connection:
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        """SELECT *
+                        FROM "Projet_Info".voeu
+                        WHERE adresse_mail = %(adresse_mail)s""",
+                        {"adresse_mail": adresse_mail},
+                    )
+                    res = cursor.fetchall()
+                    with open("data/exporterVoeux.txt", "w", newline="") as f:
+                        if f.tell() == 0:
+                            # Écrire le header seulement si le fichier est vide
+                            header = [
+                                "identifiant_voeu",
+                                "URL_voeu",
+                                "Categorie",
+                                "Intitule",
+                                "Ville",
+                                "Poste",
+                                "Entreprise",
+                                "adresse_mail",
+                            ]
+                            f.write(",".join(header) + "\n")
+                        # Écrire les données
+                        for row in res:
+                            row_data = [
+                                str(row["identifiant_voeu"]),
+                                row["URL_voeu"],
+                                row["Categorie"],
+                                row["Intitule"],
+                                row["Ville"],
+                                row["Poste"],
+                                row["Entreprise"],
+                                str(row["adresse_mail"]),
+                            ]
+                            f.write(",".join(row_data) + "\n")
+            return True  # L'exportation a réussi
+        except Exception as e:
+            print(f"Erreur lors de l'exportation : {str(e)}")
+            return False  # L'exportation a échoué

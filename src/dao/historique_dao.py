@@ -25,60 +25,67 @@ class HistoriqueDAO(metaclass=Singleton):
         Importe un historique aux entêtes date_visite,URL_page,identifiant_personne
 
         L'importation se fait nécessairement d'un fichier nommé "importHistorique" situé
-        dans le dosser data.
+        dans le dossier data.
         L'utilisateur qui importe ne peut importer des lignes d'historiques que pour son id
         """
-
-        with open("data/importerHistorique.txt", "r") as f:
-            next(f)  # Ignorer la première ligne si elle contient les en-têtes
-            with DBConnection().connection as connection:
-                with connection.cursor() as cursor:
-                    for line in f:
-                        data = line.strip().split(
-                            ","
-                        )  # Supposer que le CSV est délimité par des virgules
-                        # Assurez-vous que l'identifiant de l'utilisateur est utilisé pour l'insertion
-                        sql = """INSERT INTO "Projet_Info".page_visitee (date_visite, URL_page, adresse_mail)
-                                VALUES (%s, %s, %s);"""
-                        cursor.execute(sql, (data[0], data[1], adresse_mail))
+        try:
+            with open("data/importerHistorique.txt", "r") as f:
+                next(f)  # Ignorer la première ligne si elle contient les en-têtes
+                with DBConnection().connection as connection:
+                    with connection.cursor() as cursor:
+                        for line in f:
+                            data = line.strip().split(
+                                ","
+                            )  # Supposer que le CSV est délimité par des virgules
+                            # Assurez-vous que l'identifiant de l'utilisateur est utilisé pour l'insertion
+                            sql = """INSERT INTO "Projet_Info".page_visitee (date_visite, URL_page, adresse_mail)
+                                    VALUES (%s, %s, %s);"""
+                            cursor.execute(sql, (data[0], data[1], adresse_mail))
+            return True  # L'importation a réussi
+        except Exception as e:
+            print(f"Erreur lors de l'importation : {str(e)}")
+            return False  # L'importation a échoué
 
     def exporter_historique(self, adresse_mail):
         """
         Exporter un historique
 
-        L'exportation se fait en envoyés dans un ficher "exporterHistorique"
+        L'exportation se fait en envoyés dans un fichier "exporterHistorique"
         L'utilisateur qui exporte ne peut exporter que SON historique
         """
-
-        with DBConnection().connection as connection:
-            with connection.cursor() as cursor:
-                cursor.execute(
-                    """SELECT *
-                    FROM "Projet_Info".page_visitee
-                    WHERE adresse_mail = %(adresse_mail)s""",
-                    {"adresse_mail": adresse_mail},
-                )
-                res = cursor.fetchall()
-                with open("data/exporterHistorique.txt", "w", newline="") as f:
-                    if f.tell() == 0:
-                        # Écrire le header seulement si le fichier est vide
-                        header = [
-                            "Identifiant_page",
-                            "date_visite",
-                            "URL_page",
-                            "adresse_mail",
-                        ]
-                        f.write(",".join(header) + "\n")
-                    # Écrire les données
-                    for row in res:
-                        # Extraire les données de chaque ligne sous forme de dictionnaire
-                        row_data = [
-                            str(row["identifiant_page"]),
-                            str(row["date_visite"]),
-                            row["url_page"],
-                            str(row["adresse_mail"]),
-                        ]
-                        f.write(",".join(row_data) + "\n")
+        try:
+            with DBConnection().connection as connection:
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        """SELECT *
+                        FROM "Projet_Info".page_visitee
+                        WHERE adresse_mail = %(adresse_mail)s""",
+                        {"adresse_mail": adresse_mail},
+                    )
+                    res = cursor.fetchall()
+                    with open("data/exporterHistorique.txt", "w", newline="") as f:
+                        if f.tell() == 0:
+                            # Écrire le header seulement si le fichier est vide
+                            header = [
+                                "Identifiant_page",
+                                "date_visite",
+                                "URL_page",
+                                "adresse_mail",
+                            ]
+                            f.write(",".join(header) + "\n")
+                        # Écrire les données
+                        for row in res:
+                            row_data = [
+                                str(row["identifiant_page"]),
+                                str(row["date_visite"]),
+                                row["url_page"],
+                                str(row["adresse_mail"]),
+                            ]
+                            f.write(",".join(row_data) + "\n")
+            return True  # L'exportation a réussi
+        except Exception as e:
+            print(f"Erreur lors de l'exportation : {str(e)}")
+            return False  # L'exportation a échoué
 
     def supprimer_historique_utilisateur(self, adresse_mail):
         """
@@ -92,3 +99,6 @@ class HistoriqueDAO(metaclass=Singleton):
                     "WHERE adresse_mail = %(adresse_mail)s;",
                     {"adresse_mail": adresse_mail},
                 )
+    
+    def ajouter_historique(self, adresse_mail):
+        
