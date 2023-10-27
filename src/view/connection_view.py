@@ -2,7 +2,7 @@ from InquirerPy import prompt
 
 from view.abstract_view import AbstractView
 
-from services.utilisateur_service import UtilisateurService
+from client.utilisateur_service import UtilisateurService
 from view.session import Session
 
 
