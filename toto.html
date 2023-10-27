@@ -35,3 +35,36 @@ while compteur < 10:
             compteur = compteur + 5
         if rep == "N":
             break
+
+
+
+
+# ce que je viens de couper dans la fonction get_stage
+
+            i = 0
+            for stage in stages:
+                i += 1
+                print(
+                    "******************* Informations relatives au stage "
+                    + str(i)
+                    + " *************************"
+                )
+                print("Titre  :")
+                print(stage.titre)
+                print("\n")
+                print("Specialite : " + stage.specialite)
+                print("\n")
+                print("localisation :  " + stage.localisation)
+                print("\n")
+                print("site source :  " + stage.siteSource)
+                print("\n")
+                print("Lien vers le stage :")
+                print(stage.URL_stage)
+                print("\n")
+                print("employeur :  " + stage.employeur)
+                print("\n")
+                print("date de publication : " + stage.date_publication)
+                print("\n")
+                print("Description : ")
+                print(stage.description)
+                print("\n\n")
