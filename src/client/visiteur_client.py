@@ -20,7 +20,7 @@ class VisiteurClient:
         return VisiteurDao.hash_mdp(mot_de_passe)
 
     @staticmethod
-    def inscription(adresse_mail, nom, prenom, mot_de_passe, statut):
+    def inscription(adresse_mail, nom, prenom, mot_de_passe, statut="eleve"):
         """
         Méthode qui permet de hasher un mot de passe.
 

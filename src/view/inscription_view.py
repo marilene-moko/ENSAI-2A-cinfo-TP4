@@ -1,4 +1,5 @@
-from InquirerPy import prompt
+from InquirerPy import prompt, inquirer
+from InquirerPy.validator import PasswordValidator
 
 from view.abstract_view import AbstractView
 
@@ -11,7 +12,17 @@ class InscriptionView(AbstractView):
             {"type": "input", "message": "Email:"},
             {"type": "input", "message": "Nom: "},
             {"type": "input", "message": "Prénom: "},
-            {"type": "input", "message": "Mot de passe: "},
+            {
+                "type": "input",
+                "message": "Mot de passe (au moins 8 caractères): ",
+                "validate": PasswordValidator(
+                    length=8,
+                    cap=True,
+                    special=True,
+                    number=True,
+                    message="Le mot de passe fournit ne satisfait pas aux conditions demandées",
+                ),
+            },
         ]
 
     def display_info(self):
