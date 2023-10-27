@@ -1,6 +1,7 @@
 from typing import List, Optional
 from utils.singleton import Singleton
 from dao.db_connection import DBConnection
+import datetime
 
 
 class HistoriqueDAO(metaclass=Singleton):
@@ -43,7 +44,6 @@ class HistoriqueDAO(metaclass=Singleton):
                             cursor.execute(sql, (data[0], data[1], adresse_mail))
             return True  # L'importation a réussi
         except Exception as e:
-            print(f"Erreur lors de l'importation : {str(e)}")
             return False  # L'importation a échoué
 
     def exporter_historique(self, adresse_mail):
@@ -84,21 +84,45 @@ class HistoriqueDAO(metaclass=Singleton):
                             f.write(",".join(row_data) + "\n")
             return True  # L'exportation a réussi
         except Exception as e:
-            print(f"Erreur lors de l'exportation : {str(e)}")
             return False  # L'exportation a échoué
 
     def supprimer_historique_utilisateur(self, adresse_mail):
         """
         Supprime l'historique d'un utilisateur
         """
+        try:
+            with DBConnection().connection as connection:
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        'DELETE FROM "Projet_Info".page_visitee '
+                        "WHERE adresse_mail = %(adresse_mail)s;",
+                        {"adresse_mail": adresse_mail},
+                    )
+                    return True  # La suppression de l'historique a réussi
+        except Exception as e:
+            print(f"Erreur lors de la suppression de l'historique : {str(e)}")
+            return False  # La suppression de l'historique a échoué
 
-        with DBConnection().connection as connection:
-            with connection.cursor() as cursor:
-                cursor.execute(
-                    'DELETE FROM "Projet_Info".page_visitee '
-                    "WHERE adresse_mail = %(adresse_mail)s;",
-                    {"adresse_mail": adresse_mail},
-                )
-    
-    def ajouter_historique(self, adresse_mail):
-        
+    def ajouter_historique(self, adresse_mail, URL_page):
+        """
+        Ajoute les informations de la recherche dans la table page_visitee avec l'adresse_mail de la personne ayant fait la recherche
+        """
+        try:
+            current_date = datetime.date.today()
+
+            with DBConnection().connection as connection:
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        'INSERT INTO "Projet_Info".page_visitee (date_visite, URL_page, adresse_mail) '
+                        "VALUES (%(current_date)s, %(URL_page)s, %(adresse_mail)s);",
+                        {
+                            "current_date": current_date,
+                            "URL_page": URL_page,
+                            "adresse_mail": adresse_mail,
+                        },
+                    )
+                    connection.commit()  # N'oubliez pas de commettre la transaction
+            return True  # L'ajout d'historique a réussi
+        except Exception as e:
+            print(f"Erreur lors de l'ajout d'historique : {str(e)}")
+            return False  # L'ajout d'historique a échoué

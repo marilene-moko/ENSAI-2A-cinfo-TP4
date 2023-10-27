@@ -61,7 +61,7 @@ class ListeEnvieDAO(metaclass=Singleton):
                     {"identifiant_voeu": identifiant_voeu},
                 )
 
-        return "Le voeu a été supprimé avec succès."
+        return True
 
     def ajouter_stage_listeEnvie_utilisateur(self, adresse_mail, identifiant_stage):
         """
@@ -105,7 +105,7 @@ class ListeEnvieDAO(metaclass=Singleton):
                     },
                 )
 
-        return "Le stage a été ajouté à la liste d'envies de l'utilisateur."
+        return True
 
     def importer_voeux(self, adresse_mail):
         """
@@ -141,7 +141,6 @@ class ListeEnvieDAO(metaclass=Singleton):
                             )
             return True  # L'importation a réussi
         except Exception as e:
-            print(f"Erreur lors de l'importation : {str(e)}")
             return False  # L'importation a échoué
 
     def exporter_voeux(self, adresse_mail):
@@ -190,5 +189,4 @@ class ListeEnvieDAO(metaclass=Singleton):
                             f.write(",".join(row_data) + "\n")
             return True  # L'exportation a réussi
         except Exception as e:
-            print(f"Erreur lors de l'exportation : {str(e)}")
             return False  # L'exportation a échoué
