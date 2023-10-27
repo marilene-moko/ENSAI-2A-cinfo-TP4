@@ -5,7 +5,8 @@ import datetime
 
 
 class HistoriqueDAO(metaclass=Singleton):
-    def afficher_historique_utilisateur(self, adresse_mail):
+    @staticmethod
+    def afficher_historique_utilisateur(adresse_mail):
         """
         Affiche l'historique d'un utilisateur
         """
@@ -20,7 +21,8 @@ class HistoriqueDAO(metaclass=Singleton):
                 res = cursor.fetchall()
             return res
 
-    def importer_historique(self, adresse_mail):
+    @staticmethod
+    def importer_historique(adresse_mail):
         """
         Importe un historique aux entêtes date_visite,URL_page,identifiant_personne
 
@@ -45,7 +47,8 @@ class HistoriqueDAO(metaclass=Singleton):
         except Exception as e:
             return False  # L'importation a échoué
 
-    def exporter_historique(self, adresse_mail):
+    @staticmethod
+    def exporter_historique(adresse_mail):
         """
         Exporter un historique
 
@@ -85,7 +88,8 @@ class HistoriqueDAO(metaclass=Singleton):
         except Exception as e:
             return False  # L'exportation a échoué
 
-    def supprimer_historique_utilisateur(self, adresse_mail):
+    @staticmethod
+    def supprimer_historique_utilisateur(adresse_mail):
         """
         Supprime l'historique d'un utilisateur
         """
@@ -102,7 +106,8 @@ class HistoriqueDAO(metaclass=Singleton):
             print(f"Erreur lors de la suppression de l'historique : {str(e)}")
             return False  # La suppression de l'historique a échoué
 
-    def ajouter_historique(self, adresse_mail, URL_page):
+    @staticmethod
+    def ajouter_historique(adresse_mail, URL_page):
         """
         Ajoute les informations de la recherche dans la table page_visitee avec l'adresse_mail de la personne ayant fait la recherche
         """

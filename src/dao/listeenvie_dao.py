@@ -11,7 +11,8 @@ class ListeEnvieDAO(metaclass=Singleton):
     # res = cursor.fetcall()
     # return res
 
-    def afficher_listeEnvie_utilisateur(self, adresse_mail):
+    @staticmethod
+    def afficher_listeEnvie_utilisateur(adresse_mail):
         """
         Affiche la liste d'envie d'une personne en fonction de so identifiant
         """
@@ -27,7 +28,8 @@ class ListeEnvieDAO(metaclass=Singleton):
                 res = cursor.fetchall()
             return res
 
-    def supprimer_listeEnvie_utilisateur(self, adresse_mail, identifiant_voeu):
+    @staticmethod
+    def supprimer_listeEnvie_utilisateur(adresse_mail, identifiant_voeu):
         """
         Supprime un voeu de la liste d'envie d'un utilisateur.
         Plusieurs tests pour savoir si le voeu existe et s'il appartient
@@ -63,7 +65,8 @@ class ListeEnvieDAO(metaclass=Singleton):
 
         return True
 
-    def ajouter_stage_listeEnvie_utilisateur(self, adresse_mail, identifiant_stage):
+    @staticmethod
+    def ajouter_stage_listeEnvie_utilisateur(adresse_mail, identifiant_stage):
         """
         Permet d'ajouter un stage a la liste d'envie d'un utilisateur en utilisant son id.
         On vérifie en amont si le voeu est déjà présent ou non et si le stage existe bien
@@ -107,7 +110,8 @@ class ListeEnvieDAO(metaclass=Singleton):
 
         return True
 
-    def importer_voeux(self, adresse_mail):
+    @staticmethod
+    def importer_voeux(adresse_mail):
         """
         Importe une liste d'envies aux entêtes URL_voeu,Categorie,Intitule,Ville,Poste,Entreprise,identifiant_personne
 
@@ -143,7 +147,8 @@ class ListeEnvieDAO(metaclass=Singleton):
         except Exception as e:
             return False  # L'importation a échoué
 
-    def exporter_voeux(self, adresse_mail):
+    @staticmethod
+    def exporter_voeux(adresse_mail):
         """
         Exporter un historique
 
