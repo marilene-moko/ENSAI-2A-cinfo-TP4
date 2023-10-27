@@ -6,7 +6,8 @@ from dao.professeur_dao import ProfesseurDao
 
 
 class AdministrateurDao(ProfesseurDao):
-    def modifierDroitsUtilisateur(self, email_utilisateur, nv_statut):
+    @staticmethod
+    def modifierDroitsUtilisateur(email_utilisateur, nv_statut):
         """
         Modifier les droits d'un utilisateur : utilisateur ou professeur ou administrateur
         """

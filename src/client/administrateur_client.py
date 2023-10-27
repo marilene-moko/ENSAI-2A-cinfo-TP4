@@ -1,18 +1,19 @@
-from professeur import Professeur
-from dao.administrateur_dao import *
+from client.professeur_client import ProfesseurClient
+from dao.administrateur_dao import AdministrateurDao
 
 
-class Administrateur(Professeur):
+class AdministrateurClient(ProfesseurClient):
     def __init__(self):
         super().__init__()
 
-    def modifierDroitsUtilisateur(self, email_utilisateur, nv_statut):
+    @staticmethod
+    def modifierDroitsUtilisateur(adresse_mail, nv_statut):
         """
         Méthode qui permet à un administrateur de modifier le statut d'un utilisateur (utilisateur, professeur, administrateur).
 
         paramètres :
-        email_utilisateur : str : l'adresse mail de l'utilisateur dont l'administrateur veut changer le statut
+        adresse_mail : str : l'adresse mail de l'utilisateur dont l'administrateur veut changer le statut
         nv_statut : str : le statut que l'administrateur veut attribuer à l'utilisateur
                            ce statut ne peut qu'être : 'utilisateur', 'professeur', 'administrateur'
         """
-        return modifierDroitsUtilisateur(self, email_utilisateur, nv_statut)
+        return AdministrateurDao.modifierDroitsUtilisateur(adresse_mail, nv_statut)

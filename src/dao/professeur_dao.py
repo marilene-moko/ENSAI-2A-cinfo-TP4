@@ -6,7 +6,8 @@ from dao.utilisateur_dao import UtilisateurDao
 
 
 class ProfesseurDao(UtilisateurDao):
-    def ajouterStage(self, email, titre_stage, URL, categorie_stage, ville_stage, poste_stage):
+    @staticmethod
+    def ajouterStage(email, titre_stage, URL, categorie_stage, ville_stage, poste_stage):
 
         # Vérifier que le stage n'existe pas
         with DBConnection().connection as connection:
@@ -37,7 +38,8 @@ class ProfesseurDao(UtilisateurDao):
 
 
 
-    def retirerStage(self, email, URL):
+    @staticmethod
+    def retirerStage(email, URL):
 
         # Vérifier que le stage existe
         with DBConnection().connection as connection:

@@ -2,8 +2,8 @@ from InquirerPy import prompt
 
 from view.abstract_view import AbstractView
 from view.session import Session
-from dao.utilisateur_dao import UtilisateurDao
-from dao.stage_dao import StageDao
+from client.utilisateur_client import UtilisateurClient
+from services.stage_service import StageService
 
 
 class SiteView(AbstractView):
@@ -33,30 +33,33 @@ class SiteView(AbstractView):
             pass
 
         elif reponse["choix"] == "Modifier des offres":
-            
+            from view.ap_connexion_view_admin import ApConnexionViewAdmin
+
+            return ApConnexionViewAdmin()
 
         elif reponse["choix"] == "Modifier des profils":
-            
+            from view.ap_connexion_view_admin import ApConnexionViewAdmin
+
+            return ApConnexionViewAdmin()
 
         elif reponse["choix"] == "Supprimer des offres":
-            supp_offre = input("Veuillez entrer l'identifiant de l'offre que vous voulez supprimer: ")
-            if StageDao().supprimer_stage(supp_profil) is True:
+            supp_offre = input(
+                "Veuillez entrer l'identifiant de l'offre que vous voulez supprimer: "
+            )
+            if StageService().supprimer_stage(supp_offre) is True:
                 print("Le compte a bien été supprimé")
-                from view.ap_connexion_view_admin import ApConnexionViewAdmin
-                return ApConnexionViewAdmin()
             else:
                 print("Une erreur est survenue. Veuillez essayer ultérieurement.")
-                    from view.ap_connexion_view_admin import ApConnexionViewAdmin
-                    return ApConnexionViewAdmin()
+            from view.ap_connexion_view_admin import ApConnexionViewAdmin
+
+            return ApConnexionViewAdmin()
 
         elif reponse["choix"] == "Supprimer des profils":
             supp_profil = input("Veuillez entrer l'email que vous voulez supprimer: ")
-            if UtilisateurDao().supprimer_profil(supp_profil) is True:
+            if UtilisateurClient.supprimer_profil(supp_profil) is True:
                 print("Le compte a bien été supprimé")
-                from view.ap_connexion_view_admin import ApConnexionViewAdmin
-                return ApConnexionViewAdmin()
             else:
                 print("Une erreur est survenue. Veuillez essayer ultérieurement.")
-                    from view.ap_connexion_view_admin import ApConnexionViewAdmin
-                    return ApConnexionViewAdmin()
-            
+            from view.ap_connexion_view_admin import ApConnexionViewAdmin
+
+            return ApConnexionViewAdmin()

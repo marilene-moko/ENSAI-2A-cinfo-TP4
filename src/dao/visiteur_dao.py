@@ -9,7 +9,8 @@ import hashlib
 
 
 class VisiteurDao(metaclass=Singleton):
-    def hash_mdp(self, mdp):
+    @staticmethod
+    def hash_mdp(mdp):
         # Créez un objet de hachage SHA-256
         hasher = hashlib.sha256()
 
@@ -21,9 +22,8 @@ class VisiteurDao(metaclass=Singleton):
 
         return hashed_mdp
 
-    def inscription(
-        self, adresse_mail, nom, prenom, mot_de_passe, statut="eleve"
-    ) -> bool:
+    @staticmethod
+    def inscription(adresse_mail, nom, prenom, mot_de_passe, statut="eleve") -> bool:
         """
         Add an utilisateur to the database
         """
@@ -61,12 +61,6 @@ class VisiteurDao(metaclass=Singleton):
                 created = True
 
             return created
-
-    def voir_historique(self):
-        return HistoriqueDAO().voir_historique()
-
-    def exporter_historique(self):
-        return HistoriqueDAO().exporter_historique()
 
 
 """ 

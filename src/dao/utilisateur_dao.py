@@ -7,7 +7,8 @@ from dao.historique_dao import HistoriqueDAO
 
 
 class UtilisateurDao(VisiteurDao):
-    def utilisateur_exists(self, adresse_mail: str, mot_de_passe: str):
+    @staticmethod
+    def utilisateur_exists(adresse_mail: str, mot_de_passe: str):
         """
         Regarder si l'utilisateur existe bien
         """
@@ -33,10 +34,12 @@ class UtilisateurDao(VisiteurDao):
 
         return utilisateur
 
-    def afficher_profil(self, adresse_mail, pseudo, nom, prenom, mot_de_passe):
+    @staticmethod
+    def afficher_profil(adresse_mail, pseudo, nom, prenom, mot_de_passe):
         print(f"Voici les informations de votre profil: {adresse_mail}")
 
-    def modifier_nom(self, adresse_mail, modification) -> bool:
+    @staticmethod
+    def modifier_nom(adresse_mail, modification) -> bool:
         updated = False
 
         # Get the email
@@ -55,7 +58,8 @@ class UtilisateurDao(VisiteurDao):
                     updated = True
         return updated
 
-    def modifier_prenom(self, adresse_mail, modification) -> bool:
+    @staticmethod
+    def modifier_prenom(adresse_mail, modification) -> bool:
         updated = False
 
         # Get the email
@@ -74,7 +78,8 @@ class UtilisateurDao(VisiteurDao):
                     updated = True
         return updated
 
-    def modifier_mdp(self, adresse_mail, modification) -> bool:
+    @staticmethod
+    def modifier_mdp(adresse_mail, modification) -> bool:
         updated = False
 
         # Get the email
@@ -93,10 +98,8 @@ class UtilisateurDao(VisiteurDao):
                     updated = True
         return updated
 
-    def modifier_historique(self):
-        return HistoriqueDAO().modifier_historique()
-
-    def supprimer_profil(self, adresse_mail):
+    @staticmethod
+    def supprimer_profil(adresse_mail):
         supp = False
 
         if adresse_mail is None:

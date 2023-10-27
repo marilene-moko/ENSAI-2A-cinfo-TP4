@@ -4,7 +4,6 @@ from view.abstract_view import AbstractView
 from view.session import Session
 from view.fct_statut import Statut
 
-from dao.visiteur_dao import VisiteurDao
 from client.utilisateur.visiteur.stage_client_visiteur import Stageclientvisiteur
 
 
@@ -27,19 +26,26 @@ class RechercheView(AbstractView):
                 specialite, localisation
             )
             affichage = Stageclientvisiteur().afficher_stage(liste_stage)
-        elif (answers[0] == "Y") | (answers[1] == "Y"):
-            localisation = input("Localisation: ")
+        elif (answers[0] == "Y") & (answers[1] == "N"):
+            localisation = "0"
             specialite = input("Spécialité: ")
             liste_stage = Stageclientvisiteur().get_stage_spe_loc(
                 specialite, localisation
             )
             affichage = Stageclientvisiteur().afficher_stage(liste_stage)
-        elif (answers[0] == "N") | (answers[1] == "N"):
+        elif (answers[0] == "N") & (answers[1] == "Y"):
             localisation = input("Localisation: ")
-            specialite = input("Spécialité: ")
+            specialite = "0"
+            liste_stage = Stageclientvisiteur().get_stage_spe_loc(
+                specialite, localisation
+            )
+            affichage = Stageclientvisiteur().afficher_stage(liste_stage)
+        else:
+            localisation = "0"
+            specialite = "0"
             liste_stage = Stageclientvisiteur().get_stage_spe_loc(
                 specialite, localisation
             )
             affichage = Stageclientvisiteur().afficher_stage(liste_stage)
 
-        Statut.def_statut(self, Session().statut)
+        Statut.def_statut(Session().statut)

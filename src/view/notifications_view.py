@@ -30,7 +30,7 @@ class NotificationsView(AbstractView):
             pass
 
         elif reponse["choix"] == "Afficher ses notifications":
-            Statut.def_statut(self, Session().statut)
+            Statut.def_statut(Session().statut)
 
         elif reponse["choix"] == "Envoyer des notifications":
-            Statut.def_statut(self, Session().statut)
+            Statut.def_statut(Session().statut)

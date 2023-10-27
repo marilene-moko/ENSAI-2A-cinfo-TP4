@@ -33,7 +33,9 @@ class ApConnexionViewProf(AbstractView):
             pass
 
         elif reponse["choix"] == "Rechercher":
-            
+            from view.recherche_view import RechercheView
+
+            return RechercheView()
 
         elif reponse["choix"] == "Historique":
             from view.historique_view import HistoriqueView

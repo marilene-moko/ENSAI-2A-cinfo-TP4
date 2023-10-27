@@ -1,8 +1,9 @@
-from client.visiteur import Visiteur
+from client.visiteur_client import VisiteurClient
 import datetime as dt
+from dao.utilisateur_dao import UtilisateurDao
 
 
-class Utilisateur(Visiteur):
+class UtilisateurClient(VisiteurClient):
     def __init__(
         self,
         identifiant_personne,
@@ -16,82 +17,94 @@ class Utilisateur(Visiteur):
         self.identifiant_personne = identifiant_personne
         self.nom = nom
         self.prenom = prenom
-        self.email = adresse_mail
-        self.motDePasse = mot_de_passe
+        self.adresse_mail = adresse_mail
+        self.mot_de_passe = mot_de_passe
         self.dateDerniereConnection = dt.date.today()
 
-    def existence(self, email, mdp):
+    @staticmethod
+    def utilisateur_exists(adresse_mail, mot_de_passe):
         """
         Méthode qui permet de vérifier l'existence d'un utilisateur.
 
         Paramètres :
-            email : str : l'adresse mail de l'utilisateur
-            mdp : str : le mot de passe de l'utilisateur
+            adresse_mail : str : l'adresse mail de l'utilisateur
+            mot_de_passe : str : le mot de passe de l'utilisateur
 
         Retour :
             None si l'utilisateur n'existe pas et les caractéristiques de l'utilisateur s'il existe
         """
-        return utilisateur_exists(self, email, mdp)
+        return UtilisateurDao.utilisateur_exists(adresse_mail, mot_de_passe)
 
-    def afficher(self, email, pseudo, nom, prenom, mdp):
+    @staticmethod
+    def afficher_profil(adresse_mail, pseudo, nom, prenom, mot_de_passe):
         """
         Méthode qui permet d'afficher les caractéristiques d'un profil utilisateur.
 
         Paramètres :
-            email : str : adresse mail de l'utilisateur
+            adresse_mail : str : adresse mail de l'utilisateur
             pseudo : str : pseudo de l'utilisateur
             nom : str : nom de l'utilisateur
             prenom : str : prénom de l'utilisateur
-            mdp : str : mot de passe de l'utilisateur
+            mot_de_passe : str : mot de passe de l'utilisateur
 
         Retour :
             un str qui indique les caractéristiques du profil utilisateur
         """
-        return afficher_profil(self, email, pseudo, nom, prenom, mdp)
+        return UtilisateurDao.afficher_profil(
+            adresse_mail, pseudo, nom, prenom, mot_de_passe
+        )
 
-    def modifnom(self, email, modification):
+    @staticmethod
+    def modifier_nom(adresse_mail, modification):
         """
         Méthode qui permet à un utilisateur de changer son nom sur son profil.
 
         Paramètres :
-            email : str : adresse mail de l'utilisateur
+            adresse_mail : str : adresse mail de l'utilisateur
             modification : str : le nouveau nom
 
         Retour :
             un booléen qui indique si la tâche a été effectuée
         """
-        return modifier_nom(self, email, modification)
+        return UtilisateurDao.modifier_nom(adresse_mail, modification)
 
-    def modifprenom(self, email, modification):
+    @staticmethod
+    def modifier_prenom(adresse_mail, modification):
         """
         Méthode qui permet à un utilisateur de changer son prénom sur son profil.
 
         Paramètres :
-            email : str : adresse mail de l'utilisateur
+            adresse_mail : str : adresse mail de l'utilisateur
             modification : str : le nouveau prénom
 
         Retour :
             un booléen qui indique si la tâche a été effectuée
         """
-        return modifier_prenom(self, email, modification)
+        return UtilisateurDao.modifier_prenom(adresse_mail, modification)
 
-    def modifmdp(self, email, modification):
+    @staticmethod
+    def modifier_mdp(adresse_mail, modification):
         """
         Méthode qui permet à un utilisateur de changer son mot de passe.
 
         Paramètres :
-            email : str : adresse mail de l'utilisateur
+            adresse_mail : str : adresse mail de l'utilisateur
             modification : str : le nouveau mot de passe
 
         Retour :
             un booléen qui indique si la tâche a été effectuée
         """
-        return modifier_mdp(self, email, modification)
+        return UtilisateurDao.modifier_mdp(adresse_mail, modification)
 
-    def modifhisto(self):
+    @staticmethod
+    def supprimer_profil(adresse_mail):
         """
-                Méthode qui permet à un utilisateur de modifier son historique.
+        Méthode qui permet à un utilisateur de supprimer son historique.
 
-                Retour :
-        ###########pas fini###################"
+        Paramètres :
+            adresse_mail : str : adresse mail de l'utilisateur
+
+        Retour :
+            un booléen qui indique si la tâche a été effectuée
         """
+        return UtilisateurDao.supprimer_profil(adresse_mail)
