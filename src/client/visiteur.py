@@ -1,8 +1,11 @@
+from dao.visiteur_dao import VisiteurDao
+
 class VisiteurClient:
     def __init__(self):
         self.authenticated = False
         self.search_history = []
 
+"""
     def authenticate(self, username, password):
         # Vérification de l'authentification sécurisée ici
         if not self.authenticated:
@@ -19,31 +22,32 @@ class VisiteurClient:
                 self.authenticated = True
                 return True
         return False
-
-
 """
-    def search_stage(self, query):
-        # Recherche de stage
-        # ...
 
-    def export_search_history(self):
-        # Export de l'historique de recherche
-        # ...
+    def hash_mdp(mdp):
+        """ 
+        Méthode qui permet de hasher un mot de passe.
 
-    def import_search_history(self, history_data):
-        # Import de l'historique de recherche
-        # ...
+        Paramètres :
+            mdp : str : mot de passe à hasher
 
-    def _validate_credentials(self, username, password):
-        # Validation sécurisée des identifiants
-        # ...
+        Retour :
+            str : le mot de passe hasher
+        """ 
+        return VisiteurDao.hash_mdp(self, mdp)
 
-    def _validate_registration_data(self, username, password, email):
-        # Validation sécurisée des données d'inscription
-        # ...
+    def inscription(email, nom, prenom, mdp, statut):
+        """ 
+        Méthode qui permet de hasher un mot de passe.
 
-    def _create_user_account(self, username, password, email):
-        # Création sécurisée du compte utilisateur
-        # ...
+        Paramètres :
+            email : str : adresse mail du visiteur
+            nom : str : nom du visiteur
+            prenom : str : prénom du visiteur
+            mdp : str : mot de passe que le visiteur souhaite
+            statut : str : statut du visiteur (automatiquement "eleve") 
 
-    # Autres méthodes de la classe Visiteur """
+        Retour :
+            un booléen qui indique si l'inscription a bien été faite
+        """
+        return VisiteurDao.inscription(email, nom, prenom, mdp, statut)

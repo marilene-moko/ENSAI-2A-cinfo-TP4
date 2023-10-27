@@ -89,14 +89,6 @@ class UtilisateurClient(VisiteurClient):
         """
         return UtilisateurDao.modifier_mdp(self, email, modification)
 
-    def modifhisto(self):
-        """
-                Méthode qui permet à un utilisateur de modifier son historique.
-
-                Retour :
-        ###########pas fini###################"
-        """
-
     def supprimer_profil(self, email):
         """
         Méthode qui permet à un utilisateur de supprimer son historique.
