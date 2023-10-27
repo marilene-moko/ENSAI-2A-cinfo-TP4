@@ -12,7 +12,7 @@ class AdministrateurClient(ProfesseurClient):
         Méthode qui permet à un administrateur de modifier le statut d'un utilisateur (utilisateur, professeur, administrateur).
 
         paramètres :
-        email_utilisateur : str : l'adresse mail de l'utilisateur dont l'administrateur veut changer le statut
+        adresse_mail : str : l'adresse mail de l'utilisateur dont l'administrateur veut changer le statut
         nv_statut : str : le statut que l'administrateur veut attribuer à l'utilisateur
                            ce statut ne peut qu'être : 'utilisateur', 'professeur', 'administrateur'
         """

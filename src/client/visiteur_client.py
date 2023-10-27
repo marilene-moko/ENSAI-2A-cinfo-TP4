@@ -12,7 +12,7 @@ class VisiteurClient:
         Méthode qui permet de hasher un mot de passe.
 
         Paramètres :
-            mdp : str : mot de passe à hasher
+            mot_de_passe : str : mot de passe à hasher
 
         Retour :
             str : le mot de passe hasher
@@ -25,10 +25,10 @@ class VisiteurClient:
         Méthode qui permet de hasher un mot de passe.
 
         Paramètres :
-            email : str : adresse mail du visiteur
+            adresse_mail : str : adresse mail du visiteur
             nom : str : nom du visiteur
             prenom : str : prénom du visiteur
-            mdp : str : mot de passe que le visiteur souhaite
+            mot_de_passe : str : mot de passe que le visiteur souhaite
             statut : str : statut du visiteur (automatiquement "eleve")
 
         Retour :

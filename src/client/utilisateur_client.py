@@ -27,8 +27,8 @@ class UtilisateurClient(VisiteurClient):
         Méthode qui permet de vérifier l'existence d'un utilisateur.
 
         Paramètres :
-            email : str : l'adresse mail de l'utilisateur
-            mdp : str : le mot de passe de l'utilisateur
+            adresse_mail : str : l'adresse mail de l'utilisateur
+            mot_de_passe : str : le mot de passe de l'utilisateur
 
         Retour :
             None si l'utilisateur n'existe pas et les caractéristiques de l'utilisateur s'il existe
@@ -41,11 +41,11 @@ class UtilisateurClient(VisiteurClient):
         Méthode qui permet d'afficher les caractéristiques d'un profil utilisateur.
 
         Paramètres :
-            email : str : adresse mail de l'utilisateur
+            adresse_mail : str : adresse mail de l'utilisateur
             pseudo : str : pseudo de l'utilisateur
             nom : str : nom de l'utilisateur
             prenom : str : prénom de l'utilisateur
-            mdp : str : mot de passe de l'utilisateur
+            mot_de_passe : str : mot de passe de l'utilisateur
 
         Retour :
             un str qui indique les caractéristiques du profil utilisateur
@@ -60,7 +60,7 @@ class UtilisateurClient(VisiteurClient):
         Méthode qui permet à un utilisateur de changer son nom sur son profil.
 
         Paramètres :
-            email : str : adresse mail de l'utilisateur
+            adresse_mail : str : adresse mail de l'utilisateur
             modification : str : le nouveau nom
 
         Retour :
@@ -74,7 +74,7 @@ class UtilisateurClient(VisiteurClient):
         Méthode qui permet à un utilisateur de changer son prénom sur son profil.
 
         Paramètres :
-            email : str : adresse mail de l'utilisateur
+            adresse_mail : str : adresse mail de l'utilisateur
             modification : str : le nouveau prénom
 
         Retour :
@@ -88,7 +88,7 @@ class UtilisateurClient(VisiteurClient):
         Méthode qui permet à un utilisateur de changer son mot de passe.
 
         Paramètres :
-            email : str : adresse mail de l'utilisateur
+            adresse_mail : str : adresse mail de l'utilisateur
             modification : str : le nouveau mot de passe
 
         Retour :
@@ -102,7 +102,7 @@ class UtilisateurClient(VisiteurClient):
         Méthode qui permet à un utilisateur de supprimer son historique.
 
         Paramètres :
-            email : str : adresse mail de l'utilisateur
+            adresse_mail : str : adresse mail de l'utilisateur
 
         Retour :
             un booléen qui indique si la tâche a été effectuée
