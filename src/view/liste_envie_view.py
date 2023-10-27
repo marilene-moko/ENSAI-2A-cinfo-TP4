@@ -10,7 +10,7 @@ class ListeEnvieView(AbstractView):
             {
                 "type": "list",
                 "name": "choix",
-                "message": f" {Session().user_name}",
+                "message": f" {Session().pseudo}",
                 "choices": [
                     "Afficher sa liste d'envie",
                     "Sauvegarder une offre dans sa liste",

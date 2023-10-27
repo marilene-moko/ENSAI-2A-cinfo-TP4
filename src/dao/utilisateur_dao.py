@@ -24,7 +24,7 @@ class UtilisateurDao(VisiteurDao):
         utilisateur = None
 
         if res:
-            utilisateur = UtilisateurFactory().instantiate_utilisateur(
+            utilisateur = UtilisateurFactory.instantiate_utilisateur(
                 email=res["adresse_mail"],
                 nom=res["nom"],
                 prenom=res["prenom"],

@@ -10,7 +10,7 @@ class ApConnexionViewProf(AbstractView):
             {
                 "type": "list",
                 "name": "choix",
-                "message": f" {Session().user_name}",
+                "message": f" {Session().pseudo}",
                 "choices": [
                     "Rechercher",
                     "Historique",

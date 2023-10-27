@@ -23,8 +23,8 @@ class ConnectionView(AbstractView):
         )
         if utilisateur is not None:
             if utilisateur.statut == "eleve":
-                Session().nom = utilisateur["nom"]
-                Session().prenom = utilisateur["prenom"]
+                Session().nom = utilisateur.nom
+                Session().prenom = utilisateur.prenom
                 Session().pseudo = Session().nom + " " + Session().prenom
                 Session().email = answers[0]
                 Session().mot_de_passe = answers[1]
@@ -35,8 +35,8 @@ class ConnectionView(AbstractView):
                 return ApConnexionViewEleve()
 
             elif utilisateur.statut == "professeur":
-                Session().nom = utilisateur["nom"]
-                Session().prenom = utilisateur["prenom"]
+                Session().nom = utilisateur.nom
+                Session().prenom = utilisateur.prenom
                 Session().pseudo = Session().nom + " " + Session().prenom
                 Session().email = answers[0]
                 Session().mot_de_passe = answers[1]
@@ -47,8 +47,8 @@ class ConnectionView(AbstractView):
                 return ApConnexionViewProf()
 
             elif utilisateur.statut == "administrateur":
-                Session().nom = utilisateur["nom"]
-                Session().prenom = utilisateur["prenom"]
+                Session().nom = utilisateur.nom
+                Session().prenom = utilisateur.prenom
                 Session().pseudo = Session().nom + " " + Session().prenom
                 Session().email = answers[0]
                 Session().mot_de_passe = answers[1]
