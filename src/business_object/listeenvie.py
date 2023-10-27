@@ -6,47 +6,68 @@ class ListeEnvie:
         self.id_list = id_list
         self.envies = envies  # liste des id de stages
 
-    def afficher_listeEnvie_utilisateur(email):
+    def afficher_listeEnvie_utilisateur(adresse_mail):
         """
-        Méthode qui permet d'afficher la liste d'envie
+        Méthode qui permet à un utilisateur d'afficher sa liste d'envie.
 
-        retourne : la liste d'envie de l'utilisateur
-        """
+        Paramètre :
+            adresse_mail : str : l'adresse mail de l'utilisateur qui veut afficher sa liste d'envie
 
-        return ListeEnvieDAO.afficher_listeEnvie_utilisateur(email)
-
-    def supprimer_listeEnvie_utilisateur(email, id_stage):
-        """
-        Méthode qui permet de retirer un stage à la liste envies
-
-        prend en paramètre : stage_id : l'id du stage à retirer de la liste d'envie
-
-        retourne : retourne un str qui indique si la tâche a été affectuée
-        """
-        return ListeEnvieDAO.supprimer_listeEnvie_utilisateur(email, id_stage)
-
-    def ajouter_stage_listeEnvie_utilisateur(email, id_stage):
-        """
-        Méthode qui permet d'ajouter un stage à la liste envies
-
-        prend en paramètre : stage_id : l'id du stage à rajouter dans la liste d'envie
-
-        retourne : retourne rien met à mis à jour la liste envies
-        """
-        return ListeEnvieDAO.ajouter_stage_listeEnvie_utilisateur(email, id_stage)
-
-    def importer_voeux(email):
-        """
-        Méthode qui permet d'importer des voeux à la liste d'envie
-
+        Retour :
+            la liste d'envie de l'utilisateur
         """
 
-        return ListeEnvieDAO.importer_voeux(email)
+        return ListeEnvieDAO.afficher_listeEnvie_utilisateur(adresse_mail)
 
-    def exporter_voeux(email):
+    def supprimer_listeEnvie_utilisateur(adresse_mail, id_stage):
         """
-        Méthode qui permet d'exporter des voeux à la liste d'envie
+        Méthode qui permet à un utilisateur de retirer un stage à sa liste d'envie.
 
+        Paramètres :
+            adresse_mail : str : l'adresse mail de l'utiliseur qui veut retirer un stage de sa liste d'envie
+            id_stage : l'identifiant du stage à retirer de la liste d'envie
+
+        Retour :
+            un booléen qui indique si la tâche a été affectuée
+        """
+        return ListeEnvieDAO.supprimer_listeEnvie_utilisateur(adresse_mail, id_stage)
+
+    def ajouter_stage_listeEnvie_utilisateur(adresse_mail, id_stage):
+        """
+        Méthode qui permet à un utilisateur d'ajouter un stage à sa liste d'envie.
+
+        Paramètres :
+            adresse_mail : str : l'adresse mail de l'utiliseur qui veut ajouter un stage de sa liste d'envie
+            id_stage : l'identifiant du stage à ajouter dans la liste d'envie
+
+
+        Retour :
+            un booléen qui indique si la tâche a été affectuée
+        """
+        return ListeEnvieDAO.ajouter_stage_listeEnvie_utilisateur(
+            adresse_mail, id_stage
+        )
+
+    def importer_voeux(adresse_mail):
+        """
+        Méthode qui permet à un utilisateur d'importer des voeux dans sa liste d'envie.
+
+        Paramètre :
+            adresse_mail : str : l'adresse mail de l'utilisateur qui souhaite faire l'import
+
+        Retour :
+            un booléen qui indique si la tâche a été effectuée
         """
 
-        return ListeEnvie.exporter_voeux(email)
+        return ListeEnvieDAO.importer_voeux(adresse_mail)
+
+    def exporter_voeux(adresse_mail):
+        """
+        Méthode qui permet à un utilisateur d'exporter sa liste d'envie.
+        Paramètre :
+            adresse_mail : str : l'adresse mail de l'utilisateur qui souhaite faire l'export
+
+        Retour :
+            un booléen qui indique si la tâche a été effectuée
+        """
+        return ListeEnvie.exporter_voeux(adresse_mail)
