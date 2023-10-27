@@ -2,7 +2,7 @@ from InquirerPy import prompt
 
 from view.abstract_view import AbstractView
 
-from dao.utilisateur_dao import UtilisateurDao
+from serive.utilisateur_service import UtilisateurService
 from view.session import Session
 
 
@@ -18,8 +18,8 @@ class ConnectionView(AbstractView):
 
     def make_choice(self):
         answers = prompt(self.__questions)
-        mdp = UtilisateurDao.hash_mdp(self, answers[1])
-        utilisateur = UtilisateurDao.utilisateur_exists(
+        mdp = UtilisateurService.hash_mdp(self, answers[1])
+        utilisateur = UtilisateurService.utilisateur_exists(
             self=self, adresse_mail=answers[0], mot_de_passe=mdp
         )
         if utilisateur is not None:

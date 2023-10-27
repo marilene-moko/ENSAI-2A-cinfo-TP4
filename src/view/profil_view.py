@@ -3,7 +3,7 @@ from InquirerPy import prompt
 from view.abstract_view import AbstractView
 from view.session import Session
 from view.fct_statut import Statut
-from dao.utilisateur_dao import UtilisateurDao
+from client.utilisateur_client import UtilisateurClient
 
 
 class ProfilView(AbstractView):
@@ -40,7 +40,7 @@ class ProfilView(AbstractView):
             return ModifProfilView()
 
         elif reponse["choix"] == "Supprimer son profil":
-            if UtilisateurDao().supprimer_profil(Session().email) is True:
+            if UtilisateurClient().supprimer_profil(Session().email) is True:
                 print("Votre compte a bien été supprimé")
                 from view.start_view import StartView
 

@@ -1,4 +1,4 @@
-class Visiteur:
+class VisiteurClient:
     def __init__(self):
         self.authenticated = False
         self.search_history = []

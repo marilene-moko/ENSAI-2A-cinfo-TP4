@@ -2,7 +2,7 @@ from InquirerPy import prompt
 
 from view.abstract_view import AbstractView
 from view.session import Session
-from dao.listeenvie_dao import ListeEnvieDAO
+from service.listeenvie_service import ListeEnvieService
 from view.fct_statut import Statut
 
 
@@ -34,7 +34,7 @@ class ListeEnvieView(AbstractView):
             pass
 
         elif reponse["choix"] == "Afficher sa liste d'envie":
-            liste_envie = ListeEnvieDAO.afficher_listeEnvie_utilisateur(
+            liste_envie = ListeEnvieService.afficher_listeEnvie_utilisateur(
                 self, adresse_mail=Session().email
             )
             Statut.def_statut(self, Session().statut)
@@ -44,7 +44,7 @@ class ListeEnvieView(AbstractView):
             choix = input(
                 "Choississez l'identifiant du voeux que vous voulez sauvegarder: "
             )
-            sauvegarder = ListeEnvieDAO.ajouter_stage_listeEnvie_utilisateur(
+            sauvegarder = ListeEnvieService.ajouter_stage_listeEnvie_utilisateur(
                 self, adresse_mail=Session().email, identifiant_stage=choix
             )
             Statut.def_statut(self, Session().statut)
@@ -57,7 +57,7 @@ class ListeEnvieView(AbstractView):
             choix = input(
                 "Choississez l'identifiant du voeux que vous voulez supprimer: "
             )
-            modif = ListeEnvieDAO.supprimer_listeEnvie_utilisateur(
+            modif = ListeEnvieService.supprimer_listeEnvie_utilisateur(
                 self, adresse_mail=Session().email, identifiant_voeu=choix
             )
             Statut.def_statut(self, Session().statut)
@@ -67,7 +67,9 @@ class ListeEnvieView(AbstractView):
                 print(modif)
 
         elif reponse["choix"] == "Importer sa liste d'envie":
-            importer = ListeEnvieDAO.importer_voeux(self, adresse_mail=Session().email)
+            importer = ListeEnvieService.importer_voeux(
+                self, adresse_mail=Session().email
+            )
             Statut.def_statut(self, Session().statut)
             if importer is True:
                 print("Votre liste a bien été importée")
@@ -75,7 +77,9 @@ class ListeEnvieView(AbstractView):
                 print("Une erreur s'est produite. Veuillez essayer ultérieurement.")
 
         elif reponse["choix"] == "Exporter sa liste d'envie":
-            exporter = ListeEnvieDAO.exporter_voeux(self, adresse_mail=Session().email)
+            exporter = ListeEnvieService.exporter_voeux(
+                self, adresse_mail=Session().email
+            )
             Statut.def_statut(self, Session().statut)
             if exporter is True:
                 print("Votre liste a bien été exportée")

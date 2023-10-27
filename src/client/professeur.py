@@ -1,11 +1,11 @@
 from utilisateur import Utilisateur
-from dao.professeur_dao import *
+from dao.professeur_dao import ProfesseurDao
 
-class Professeur(Utilisateur):
+class ProfesseurClient(Utilisateur):
     def __init__(self):
         super().__init__()
 
-    def add_stage(self, email, titre, URL, categorie, ville, poste):
+    def ajouterStage(self, email, titre, URL, categorie, ville, poste):
         """ 
         Méthode qui permet à un professeur d'ajouter un stage
 
@@ -19,9 +19,9 @@ class Professeur(Utilisateur):
         
         retourne : un str qui indique si la tâche a été effectuée
         """ 
-        return ajouterStage(self, email, titre, URL, categorie, ville, poste)
+        return ProfesseurDao.ajouterStage(self, email, titre, URL, categorie, ville, poste)
 
-    def remove_stage(self, stage_id):
+    def retirerStage(self, stage_id):
         """ 
         Méthode qui permet à un professeur d'ajouter un stage
 
@@ -31,7 +31,7 @@ class Professeur(Utilisateur):
         
         retourne : un str qui indique si la tâche a été effectuée
         """ 
-        return retirerStage(self, email, URL)
+        return ProfesseurDao.retirerStage(self, email, URL)
         
  ################ à faire  ##############################     
     def notify_user(self, user, stage_id):
