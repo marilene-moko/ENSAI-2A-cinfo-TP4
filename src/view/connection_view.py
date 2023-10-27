@@ -18,8 +18,9 @@ class ConnectionView(AbstractView):
 
     def make_choice(self):
         answers = prompt(self.__questions)
+        mdp = UtilisateurDao.hash_mdp(self, answers[1])
         utilisateur = UtilisateurDao.utilisateur_exists(
-            self=self, adresse_mail=answers[0], mot_de_passe=answers[1]
+            self=self, adresse_mail=answers[0], mot_de_passe=mdp
         )
         if utilisateur is not None:
             if utilisateur.statut == "eleve":
