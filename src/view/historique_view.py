@@ -2,6 +2,7 @@ from InquirerPy import prompt
 
 from view.abstract_view import AbstractView
 from view.session import Session
+from view.fct_statut import Statut
 
 
 class HistoriqueView(AbstractView):
@@ -30,10 +31,10 @@ class HistoriqueView(AbstractView):
             pass
 
         elif reponse["choix"] == "Afficher l'historique":
-            
+            Statut.def_statut(Session().email)
 
         elif reponse["choix"] == "Modifier l'historique":
-            
+            Statut.def_statut(Session().email)
 
         elif reponse["choix"] == "Exporter l'historique":
-            
+            Statut.def_statut(Session().email)

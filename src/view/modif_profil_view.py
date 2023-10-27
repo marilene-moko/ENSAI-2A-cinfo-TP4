@@ -4,6 +4,7 @@ from view.abstract_view import AbstractView
 
 from dao.utilisateur_dao import UtilisateurDao
 from view.session import Session
+from view.fct_statut import Statut
 
 
 class ModifProfilView(AbstractView):
@@ -35,7 +36,7 @@ class ModifProfilView(AbstractView):
         elif answers[0] == "N":
             Session().nom = Session().nom
         else:
-            raise ValueError("Vous devez répondre par Y ou N")
+            print("Vous devez répondre par Y ou N")
 
         if answers[1] == "Y":
             modif_prenom = input("Choisissez un nouveau prénom")
@@ -64,15 +65,4 @@ class ModifProfilView(AbstractView):
         else:
             raise ValueError("Vous devez répondre par Y ou N")
 
-        if Session().statut == "eleve":
-            from view.ap_connexion_view_eleve import ApConnexionViewEleve
-
-            return ApConnexionViewEleve()
-        elif Session().statut == "prof":
-            from view.ap_connexion_view_prof import ApConnexionViewProf
-
-            return ApConnexionViewProf()
-        else:
-            from view.ap_connexion_view_admin import ApConnexionViewAdmin
-
-            return ApConnexionViewAdmin()
+        Statut.def_statut(Session().email)

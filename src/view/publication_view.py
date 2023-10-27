@@ -2,6 +2,7 @@ from InquirerPy import prompt
 
 from view.abstract_view import AbstractView
 from view.session import Session
+from view.fct_statut import Statut
 
 
 class PublicationView(AbstractView):
@@ -29,7 +30,7 @@ class PublicationView(AbstractView):
             pass
 
         elif reponse["choix"] == "Afficher ses publications":
-            
+            Statut.def_statut(Session().email)
 
         elif reponse["choix"] == "Publier des offres":
-            
+            Statut.def_statut(Session().email)
