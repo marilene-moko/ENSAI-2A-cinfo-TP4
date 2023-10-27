@@ -1,7 +1,7 @@
 from utilisateur import Utilisateur
-from dao.professeur_dao import *
+from dao.professeur_dao import ProfesseurDao
 
-class Professeur(Utilisateur):
+class ProfesseurClient(Utilisateur):
     def __init__(self):
         super().__init__()
 
@@ -19,7 +19,7 @@ class Professeur(Utilisateur):
         
         retourne : un str qui indique si la tâche a été effectuée
         """ 
-        return ajouterStage(self, email, titre, URL, categorie, ville, poste)
+        return ProfesseurDao.ajouterStage(self, email, titre, URL, categorie, ville, poste)
 
     def remove_stage(self, stage_id):
         """ 

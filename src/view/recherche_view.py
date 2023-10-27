@@ -4,7 +4,6 @@ from view.abstract_view import AbstractView
 from view.session import Session
 from view.fct_statut import Statut
 
-from dao.visiteur_dao import VisiteurDao
 from client.utilisateur.visiteur.stage_client_visiteur import Stageclientvisiteur
 
 
