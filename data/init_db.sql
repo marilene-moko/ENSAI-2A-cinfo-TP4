@@ -8,10 +8,10 @@ DROP SCHEMA "Projet_Info";
 CREATE SCHEMA "Projet_Info" AUTHORIZATION id2241;
 
 CREATE TABLE "Projet_Info".personne (
-    identifiant_personne SERIAL4 PRIMARY KEY,
+    identifiant_personne SERIAL4 NOT NULL,
     nom text NOT NULL,
     prenom text NOT NULL,
-    adresse_mail VARCHAR(255) NOT NULL,
+    adresse_mail VARCHAR(255) PRIMARY KEY,
     mot_de_passe VARCHAR(255) NOT NULL,
     statut text NOT NULL
 );
@@ -56,7 +56,7 @@ CREATE TABLE "Projet_Info".stage (
     Intitule text,
     Ville text,
     Poste text,
-    Entreprise VARCHAR(255),
+    Entreprise VARCHAR(255),²
     Date_publication date,
     Description_stage text,
     adresse_mail_sauvegardee VARCHAR(255),
@@ -65,4 +65,3 @@ CREATE TABLE "Projet_Info".stage (
     FOREIGN KEY (adresse_mail_sauvegardee) REFERENCES "Projet_Info".personne(adresse_mail),
     FOREIGN KEY (adresse_mail_ajout) REFERENCES "Projet_Info".personne(adresse_mail),
     FOREIGN KEY (adresse_mail_modif) REFERENCES "Projet_Info".personne(adresse_mail)
-);
