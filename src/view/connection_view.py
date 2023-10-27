@@ -59,7 +59,7 @@ class ConnectionView(AbstractView):
 
                 return ApConnexionViewAdmin()
         else:
-            print("L'email et/ou le mot de passe est incorrect")
             from view.start_view import StartView
 
             return StartView()
+            print("L'email et/ou le mot de passe est incorrect")
