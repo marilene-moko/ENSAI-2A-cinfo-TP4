@@ -93,9 +93,6 @@ class UtilisateurDao(VisiteurDao):
                     updated = True
         return updated
 
-    def modifier_historique(self):
-        return HistoriqueDAO().modifier_historique()
-
     def supprimer_profil(self, adresse_mail):
         supp = False
 

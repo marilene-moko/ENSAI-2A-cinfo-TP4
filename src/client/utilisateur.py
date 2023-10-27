@@ -96,3 +96,15 @@ class UtilisateurClient(VisiteurClient):
                 Retour :
         ###########pas fini###################"
         """
+
+    def supprimer_profil(self, email):
+        """
+        Méthode qui permet à un utilisateur de supprimer son historique.
+
+        Paramètres :
+            email : str : adresse mail de l'utilisateur
+
+        Retour :
+            un booléen qui indique si la tâche a été effectuée
+        """
+        return UtilisateurDao.supprimer_profil(self, email)
