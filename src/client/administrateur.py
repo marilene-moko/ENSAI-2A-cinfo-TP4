@@ -1,8 +1,8 @@
-from professeur import Professeur
-from dao.administrateur_dao import *
+from professeur import ProfesseurClient
+from dao.administrateur_dao import AdministrateurDao
 
 
-class Administrateur(Professeur):
+class AdministrateurClient(ProfesseurClient):
     def __init__(self):
         super().__init__()
 
@@ -15,4 +15,6 @@ class Administrateur(Professeur):
         nv_statut : str : le statut que l'administrateur veut attribuer à l'utilisateur
                            ce statut ne peut qu'être : 'utilisateur', 'professeur', 'administrateur'
         """
-        return modifierDroitsUtilisateur(self, email_utilisateur, nv_statut)
+        return AdministrateurDao.modifierDroitsUtilisateur(
+            self, email_utilisateur, nv_statut
+        )
