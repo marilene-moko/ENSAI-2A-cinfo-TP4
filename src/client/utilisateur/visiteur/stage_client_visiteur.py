@@ -138,78 +138,79 @@ class Stageclientvisiteur:
 
         return stages
 
+    def afficher_stage(self, stages, compteur=1):
+        if stages is not None:
+            i = 0
+            localisation = stages[0].localisation
+            specialite = stages[0].specialite
+            n = len(stages)
+            print(n)
 
-def afficher_stage(stages, compteur=1):
-    if stages is not None:
-        i = 0
-        localisation = stages[0].localisation
-        specialite = stages[0].specialite
-        n = len(stages)
-        print(n)
+            while i < n:
+                print(
+                    "******************* Informations relatives au stage "
+                    + str((compteur - 1) * 20 + i + 1)
+                    + " *************************"
+                )
+                print("Titre  :")
+                print(stages[(compteur - 1) * 20 + i].titre)
+                print("\n")
+                print("Specialite : " + stages[(compteur - 1) * 20 + i].specialite)
+                print("\n")
+                print("localisation :  " + stages[(compteur - 1) * 20 + i].localisation)
+                print("\n")
+                print("site source :  " + stages[(compteur - 1) * 20 + i].siteSource)
+                print("\n")
+                print("Lien vers le stage :")
+                print(stages[(compteur - 1) * 20 + i].URL_stage)
+                print("\n")
+                print("employeur :  " + stages[(compteur - 1) * 20 + i].employeur)
+                print("\n")
+                print(
+                    "date de publication : "
+                    + stages[(compteur - 1) * 20 + i].date_publication
+                )
+                print("\n")
+                print("Description : ")
+                print(stages[(compteur - 1) * 20 + i].description)
+                print("\n\n")
 
-        while i < n:
-            print(
-                "******************* Informations relatives au stage "
-                + str((compteur - 1) * 20 + i + 1)
-                + " *************************"
-            )
-            print("Titre  :")
-            print(stages[(compteur - 1) * 20 + i].titre)
-            print("\n")
-            print("Specialite : " + stages[(compteur - 1) * 20 + i].specialite)
-            print("\n")
-            print("localisation :  " + stages[(compteur - 1) * 20 + i].localisation)
-            print("\n")
-            print("site source :  " + stages[(compteur - 1) * 20 + i].siteSource)
-            print("\n")
-            print("Lien vers le stage :")
-            print(stages[(compteur - 1) * 20 + i].URL_stage)
-            print("\n")
-            print("employeur :  " + stages[(compteur - 1) * 20 + i].employeur)
-            print("\n")
-            print(
-                "date de publication : "
-                + stages[(compteur - 1) * 20 + i].date_publication
-            )
-            print("\n")
-            print("Description : ")
-            print(stages[(compteur - 1) * 20 + i].description)
-            print("\n\n")
+                print("Choisissez l'action que vous souhaitez à présent executer:")
+                print("1-  Voir davantage d'offres de stages:")
+                print("2-  Ajouter ce stage à votre liste de voeux:")
+                print("3-  Retourner à la page précédente:")
+                print("4-  Retourner à la page d'accueil")
 
-            print("Choisissez l'action que vous souhaitez à présent executer:")
-            print("1-  Voir davantage d'offres de stages:")
-            print("2-  Ajouter ce stage à votre liste de voeux:")
-            print("3-  Retourner à la page précédente:")
-            print("4-  Retourner à la page d'accueil")
+                rep = input("Faites votre choix: ")
 
-            rep = input("Faites votre choix: ")
-
-            if rep == "1":
-                i = i + 1
-            if rep == "3":
-                if i >= 1:
-                    i = i - 1
-                if i == 0:
-                    print("on retourne à la page d'accueil so suzanne à toi de jouer")
+                if rep == "1":
+                    i = i + 1
+                if rep == "3":
+                    if i >= 1:
+                        i = i - 1
+                    if i == 0:
+                        print(
+                            "on retourne à la page d'accueil so suzanne à toi de jouer"
+                        )
+                        break
+                if rep == "2":
+                    # importer le voeu via le DAO
+                    print("clémént à toi de jouer")
                     break
-            if rep == "2":
-                # importer le voeu via le DAO
-                print("clémént à toi de jouer")
-                break
-            if rep == "4":
-                print("on retourne à la page d'accueil so, suzanne à toi de jouer")
-                break
-        if n >= 20:
-            compteur = compteur + 1
-            stagevisiteur = Stageclientvisiteur()
-            stages = stagevisiteur.get_stage_spe_loc(
-                localisation=localisation, specialite=specialite, num_page=compteur
-            )
-            afficher_stage(stages=stages, compteur=compteur)
-        else:
-            print(
-                "Vous avez parcouru toutes les offres de stage disponibles sur ce site et correspondant à votre recherche\n"
-            )
+                if rep == "4":
+                    print("on retourne à la page d'accueil so, suzanne à toi de jouer")
+                    break
+            if n >= 20:
+                compteur = compteur + 1
+                stagevisiteur = Stageclientvisiteur()
+                stages = stagevisiteur.get_stage_spe_loc(
+                    localisation=localisation, specialite=specialite, num_page=compteur
+                )
+                afficher_stage(stages=stages, compteur=compteur)
+            else:
+                print(
+                    "Vous avez parcouru toutes les offres de stage disponibles sur ce site et correspondant à votre recherche\n"
+                )
 
 
 if __name__ == "__main__":
@@ -217,4 +218,4 @@ if __name__ == "__main__":
     stages = stagevisiteur.get_stage_spe_loc(
         specialite="architecture", localisation="rennes"
     )
-    afficher_stage(stages=stages)
+    stagevisiteur.afficher_stage(stages=stages)
