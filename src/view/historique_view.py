@@ -3,7 +3,7 @@ from InquirerPy import prompt
 from view.abstract_view import AbstractView
 from view.session import Session
 from view.fct_statut import Statut
-from service.historique_service import HistoriqueService
+from services.historique_service import HistoriqueService
 
 
 class HistoriqueView(AbstractView):
