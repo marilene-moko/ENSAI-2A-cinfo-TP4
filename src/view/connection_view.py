@@ -2,11 +2,7 @@ from InquirerPy import prompt
 
 from view.abstract_view import AbstractView
 
-<<<<<<< HEAD
 from client.utilisateur_client import UtilisateurClient
-=======
-from client.utilisateur_service import UtilisateurService
->>>>>>> 60d496a25d3004ad300f8e1877a7bde0103f7a4f
 from view.session import Session
 
 
@@ -22,7 +18,7 @@ class ConnectionView(AbstractView):
 
     def make_choice(self):
         answers = prompt(self.__questions)
-        mdp = UtilisateurClient.hash_mdp(self, answers[1])
+        mdp = UtilisateurClient.hash_mdp(answers[1])
         utilisateur = UtilisateurClient.utilisateur_exists(
             adresse_mail=answers[0], mot_de_passe=mdp
         )
