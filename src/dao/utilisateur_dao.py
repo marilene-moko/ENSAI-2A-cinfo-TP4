@@ -98,12 +98,8 @@ class UtilisateurDao(VisiteurDao):
                     updated = True
         return updated
 
-<<<<<<< HEAD
     @staticmethod
     def supprimer_profil(adresse_mail):
-=======
-    def supprimer_profil(self, adresse_mail):
->>>>>>> c33b9ac583e681acb5890c728bd54a6a3e2532bb
         supp = False
 
         if adresse_mail is None:

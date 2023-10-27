@@ -2,7 +2,11 @@ from InquirerPy import prompt
 
 from view.abstract_view import AbstractView
 
+<<<<<<< HEAD
 from client.utilisateur_client import UtilisateurClient
+=======
+from client.utilisateur_service import UtilisateurService
+>>>>>>> 60d496a25d3004ad300f8e1877a7bde0103f7a4f
 from view.session import Session
 
 

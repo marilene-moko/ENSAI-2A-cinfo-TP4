@@ -34,7 +34,7 @@ class VisiteurClient:
         Retour :
             str : le mot de passe hasher
         """ 
-        return VisiteurDao.hash_mdp(self, mdp)
+        return VisiteurDao.hash_mdp(mdp)
 
     def inscription(email, nom, prenom, mdp, statut):
         """ 
