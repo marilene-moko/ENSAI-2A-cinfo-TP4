@@ -37,7 +37,7 @@ class ListeEnvieView(AbstractView):
             liste_envie = ListeEnvieDAO.afficher_listeEnvie_utilisateur(
                 self, adresse_mail=Session().email
             )
-            Statut.def_statut(Session().email)
+            Statut.def_statut(Session().email, Session().statut)
             print(liste_envie)
 
         elif reponse["choix"] == "Sauvegarder une offre dans sa liste":
@@ -47,7 +47,7 @@ class ListeEnvieView(AbstractView):
             sauvegarder = ListeEnvieDAO.ajouter_stage_listeEnvie_utilisateur(
                 self, adresse_mail=Session().email, identifiant_stage=choix
             )
-            Statut.def_statut(Session().email)
+            Statut.def_statut(Session().email, Session().statut)
             if sauvegarder is True:
                 print("Votre voeux a bien été sauvegardé")
             else:
@@ -60,7 +60,7 @@ class ListeEnvieView(AbstractView):
             modif = ListeEnvieDAO.supprimer_listeEnvie_utilisateur(
                 self, adresse_mail=Session().email, identifiant_voeu=choix
             )
-            Statut.def_statut(Session().email)
+            Statut.def_statut(Session().email, Session().statut)
             if modif is True:
                 print("Votre voeux a bien été supprimé")
             else:
@@ -68,7 +68,7 @@ class ListeEnvieView(AbstractView):
 
         elif reponse["choix"] == "Importer sa liste d'envie":
             importer = ListeEnvieDAO.importer_voeux(self, adresse_mail=Session().email)
-            Statut.def_statut(Session().email)
+            Statut.def_statut(Session().email, Session().statut)
             if importer is True:
                 print("Votre liste a bien été importée")
             else:
@@ -76,7 +76,7 @@ class ListeEnvieView(AbstractView):
 
         elif reponse["choix"] == "Exporter sa liste d'envie":
             exporter = ListeEnvieDAO.exporter_voeux(self, adresse_mail=Session().email)
-            Statut.def_statut(Session().email)
+            Statut.def_statut(Session().email, Session().statut)
             if exporter is True:
                 print("Votre liste a bien été exportée")
             else:
