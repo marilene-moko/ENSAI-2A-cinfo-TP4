@@ -13,8 +13,7 @@ class HistoriqueDAO(metaclass=Singleton):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    "Select *             "
-                    'FROM "Projet_Info".page_visitee'
+                    'SELECT * FROM "Projet_Info".page_visitee '
                     "WHERE adresse_mail = %(adresse_mail)s;",
                     {"adresse_mail": adresse_mail},
                 )

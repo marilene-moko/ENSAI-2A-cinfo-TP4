@@ -36,14 +36,14 @@ class HistoriqueView(AbstractView):
             historique = HistoriqueDAO.afficher_historique_utilisateur(
                 self, adresse_mail=Session().email
             )
-            Statut.def_statut(Session().email)
+            Statut.def_statut(self, Session().statut)
             print(historique)
 
         elif reponse["choix"] == "Supprimer l'historique":
             supp = HistoriqueDAO.supprimer_historique_utilisateur(
                 self, adresse_mail=Session().email
             )
-            Statut.def_statut(Session().email)
+            Statut.def_statut(self, Session().statut)
             if supp is True:
                 print("La suppression de votre historique a bien eu lieu")
             else:
@@ -53,7 +53,7 @@ class HistoriqueView(AbstractView):
             exporter = HistoriqueDAO.exporter_historique(
                 self, adresse_mail=Session().email
             )
-            Statut.def_statut(Session().email)
+            Statut.def_statut(self, Session().statut)
             if exporter is True:
                 print("Votre historique a bien été exporté")
             else:
@@ -63,7 +63,7 @@ class HistoriqueView(AbstractView):
             importer = HistoriqueDAO.importer_historique(
                 self, adresse_mail=Session().email
             )
-            Statut.def_statut(Session().email)
+            Statut.def_statut(self, Session().statut)
             if importer is True:
                 print("Votre historique a bien été exporté")
             else:
