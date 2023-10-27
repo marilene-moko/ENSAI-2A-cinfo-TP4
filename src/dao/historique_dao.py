@@ -24,7 +24,7 @@ class HistoriqueDAO(metaclass=Singleton):
     @staticmethod
     def importer_historique(adresse_mail):
         """
-        Importe un historique aux entêtes date_visite,URL_page,identifiant_personne
+        Importe un historique aux entêtes date_visite,URL_page,adresse_mail
 
         L'importation se fait nécessairement d'un fichier nommé "importHistorique" situé
         dans le dossier data.
