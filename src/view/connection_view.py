@@ -18,17 +18,14 @@ class ConnectionView(AbstractView):
 
     def make_choice(self):
         answers = prompt(self.__questions)
-        self.email = answers[0]
-        self.mot_de_passe = answers[1]
-        return self.email
-
-    def authentification_reussie(self):
-        answers = prompt(self.__questions)
-        utilisateur = UtilisateurDao.utilisateur_exists(answers[0], answers[1])
+        mdp = UtilisateurDao.hash_mdp(self, answers[1])
+        utilisateur = UtilisateurDao.utilisateur_exists(
+            self=self, adresse_mail=answers[0], mot_de_passe=mdp
+        )
         if utilisateur is not None:
             if utilisateur.statut == "eleve":
-                Session().nom = utilisateur["nom"]
-                Session().prenom = utilisateur["prenom"]
+                Session().nom = utilisateur.nom
+                Session().prenom = utilisateur.prenom
                 Session().pseudo = Session().nom + " " + Session().prenom
                 Session().email = answers[0]
                 Session().mot_de_passe = answers[1]
@@ -39,8 +36,8 @@ class ConnectionView(AbstractView):
                 return ApConnexionViewEleve()
 
             elif utilisateur.statut == "professeur":
-                Session().nom = utilisateur["nom"]
-                Session().prenom = utilisateur["prenom"]
+                Session().nom = utilisateur.nom
+                Session().prenom = utilisateur.prenom
                 Session().pseudo = Session().nom + " " + Session().prenom
                 Session().email = answers[0]
                 Session().mot_de_passe = answers[1]
@@ -51,8 +48,8 @@ class ConnectionView(AbstractView):
                 return ApConnexionViewProf()
 
             elif utilisateur.statut == "administrateur":
-                Session().nom = utilisateur["nom"]
-                Session().prenom = utilisateur["prenom"]
+                Session().nom = utilisateur.nom
+                Session().prenom = utilisateur.prenom
                 Session().pseudo = Session().nom + " " + Session().prenom
                 Session().email = answers[0]
                 Session().mot_de_passe = answers[1]
@@ -62,4 +59,7 @@ class ConnectionView(AbstractView):
 
                 return ApConnexionViewAdmin()
         else:
-            raise ValueError("L'email et/ou le mot de passe est incorrect")
+            print("L'email et/ou le mot de passe est incorrect")
+            from view.start_view import StartView
+
+            return StartView()

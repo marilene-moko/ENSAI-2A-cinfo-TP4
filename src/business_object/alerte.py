@@ -38,7 +38,3 @@ class Alerte:
             if nbr_stage == 1 :
                 return "Il y a un nouveau stage qui pourrait vous intéresser : {}".format(nvx_stages)
             return "Il y a {} nouveaux stages qui pourraient vous intéresser : {}".format(nbr_stage, nvx_stages)
-
-
-
-

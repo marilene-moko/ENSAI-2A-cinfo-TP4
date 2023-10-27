@@ -18,12 +18,12 @@ CREATE TABLE "Projet_Info".personne (
 
 -- Table Recommander
 CREATE TABLE "Projet_Info".recommander (
-    identifiant_personne_recommandant int4,
-    identifiant_personne_recommandee int4,
+    adresse_mail_recommandant VARCHAR(255) NOT NULL,
+    adresse_mail_recommandee VARCHAR(255) NOT NULL,
     date DATE,
-    PRIMARY KEY (identifiant_personne_recommandant, identifiant_personne_recommandee),
-    FOREIGN KEY (identifiant_personne_recommandant) REFERENCES "Projet_Info".personne(identifiant_personne),
-    FOREIGN KEY (identifiant_personne_recommandee) REFERENCES "Projet_Info".personne(identifiant_personne)
+    PRIMARY KEY (adresse_mail_recommandant, adresse_mail_recommandee),
+    FOREIGN KEY (adresse_mail_recommandant) REFERENCES "Projet_Info".personne(adresse_mail),
+    FOREIGN KEY (adresse_mail_recommandee) REFERENCES "Projet_Info".personne(adresse_mail)
 );
 
 -- Table Voeu
@@ -35,8 +35,8 @@ CREATE TABLE "Projet_Info".voeu (
     Ville text,
     Poste text,
     Entreprise VARCHAR(255),
-    identifiant_personne int4,
-    FOREIGN KEY (identifiant_personne) REFERENCES "Projet_Info".personne(identifiant_personne)
+    adresse_mail VARCHAR(255) NOT NULL,
+    FOREIGN KEY (adresse_mail) REFERENCES "Projet_Info".personne(adresse_mail)
 );
 
 -- Table Page_visitee
@@ -44,8 +44,8 @@ CREATE TABLE "Projet_Info".page_visitee (
     Identifiant_page SERIAL4 PRIMARY KEY,
     date_visite DATE,
     URL_page text,
-    identifiant_personne int4,
-    FOREIGN KEY (identifiant_personne) REFERENCES "Projet_Info".personne(identifiant_personne)
+    adresse_mail VARCHAR(255) NOT NULL,
+    FOREIGN KEY (adresse_mail) REFERENCES "Projet_Info".personne(adresse_mail)
 );
 
 -- Table Stage
@@ -57,10 +57,12 @@ CREATE TABLE "Projet_Info".stage (
     Ville text,
     Poste text,
     Entreprise VARCHAR(255),
-    identifiant_personne_sauvegarde int4,
-    identifiant_personne_ajout int4,
-    identifiant_modif int4,
-    FOREIGN KEY (identifiant_personne_sauvegarde) REFERENCES "Projet_Info".personne(identifiant_personne),
-    FOREIGN KEY (identifiant_personne_ajout) REFERENCES "Projet_Info".personne(identifiant_personne),
-    FOREIGN KEY (identifiant_modif) REFERENCES "Projet_Info".personne(identifiant_personne)
+    Date_publication date,
+    Description_stage text,
+    adresse_mail_sauvegardee VARCHAR(255),
+    adresse_mail_ajout VARCHAR(255),
+    adresse_mail_modif VARCHAR(255),
+    FOREIGN KEY (adresse_mail_sauvegardee) REFERENCES "Projet_Info".personne(adresse_mail),
+    FOREIGN KEY (adresse_mail_ajout) REFERENCES "Projet_Info".personne(adresse_mail),
+    FOREIGN KEY (adresse_mail_modif) REFERENCES "Projet_Info".personne(adresse_mail)
 );

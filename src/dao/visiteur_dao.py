@@ -5,7 +5,22 @@ from dao.db_connection import DBConnection
 from dao.historique_dao import HistoriqueDAO
 
 
+import hashlib
+
+
 class VisiteurDao(metaclass=Singleton):
+    def hash_mdp(self, mdp):
+        # Créez un objet de hachage SHA-256
+        hasher = hashlib.sha256()
+
+        # Mettez le mot de passe dans l'objet de hachage
+        hasher.update(mdp.encode("utf-8"))
+
+        # Récupérez la valeur de hachage (représentation hexadécimale)
+        hashed_mdp = hasher.hexdigest()
+
+        return hashed_mdp
+
     def inscription(
         self, adresse_mail, nom, prenom, mot_de_passe, statut="eleve"
     ) -> bool:
@@ -20,21 +35,19 @@ class VisiteurDao(metaclass=Singleton):
                 cursor.execute(
                     "SELECT *                                         "
                     'FROM "Projet_Info".Personne                      '
-                    "WHERE adresse_mail = %(adresse_mail)s;                  ",
+                    "WHERE adresse_mail = %(adresse_mail)s;           ",
                     {"adresse_mail": adresse_mail},
                 )
                 res = cursor.fetchone()
         if res:
-            raise ValueError(
-                "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
-            )
+            return created
         else:
             with DBConnection().connection as connection:
                 with connection.cursor() as cursor:
                     cursor.execute(
-                        'INSERT INTO "Projet_Info".Personne (adresse_mail, nom, prenom, mot_de_passe)'
-                        "VALUES                                                                      "
-                        "(%(adresse_mail)s, %(nom)s, %(prenom)s, %(mot_de_passe)s);                  ",
+                        'INSERT INTO "Projet_Info".Personne (adresse_mail, nom, prenom, mot_de_passe, statut)'
+                        "VALUES                                                                              "
+                        "(%(adresse_mail)s, %(nom)s, %(prenom)s, %(mot_de_passe)s, %(statut)s);                 ",
                         {
                             "adresse_mail": adresse_mail,
                             "nom": nom,
@@ -43,7 +56,7 @@ class VisiteurDao(metaclass=Singleton):
                             "statut": statut,
                         },
                     )
-                    res = cursor.fetchone()
+                    res = cursor.rowcount
             if res:
                 created = True
 
@@ -72,6 +85,7 @@ if __name__ == "__main__":
         mdp=
     )
 
+    mon_utilisateur.mdp = UtilisateurDao().hash_password(mon_utilisateur.mdp)
     succes = UtilisateurDao().add_utilisateur(mon_utilisateur)
     print("Utilisateur created in database : " + str(succes))
  """

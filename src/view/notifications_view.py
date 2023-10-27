@@ -2,6 +2,7 @@ from InquirerPy import prompt
 
 from view.abstract_view import AbstractView
 from view.session import Session
+from view.fct_statut import Statut
 
 
 class NotificationsView(AbstractView):
@@ -10,7 +11,7 @@ class NotificationsView(AbstractView):
             {
                 "type": "list",
                 "name": "choix",
-                "message": f" {Session().user_name}",
+                "message": f" {Session().pseudo}",
                 "choices": [
                     "Afficher ses notifications",
                     "Envoyer des notifications",
@@ -29,7 +30,7 @@ class NotificationsView(AbstractView):
             pass
 
         elif reponse["choix"] == "Afficher ses notifications":
-            
+            Statut.def_statut(Session().email)
 
         elif reponse["choix"] == "Envoyer des notifications":
-            
+            Statut.def_statut(Session().email)

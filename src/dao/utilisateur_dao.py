@@ -1,13 +1,13 @@
 from typing import List, Optional
 
-from client.utilisateur import Utilisateur
+from client.utilisateur.utilisateur.utilisateur_factory import UtilisateurFactory
 from dao.db_connection import DBConnection
 from dao.visiteur_dao import VisiteurDao
-from dao.historique_dao import HistoriqueDao
+from dao.historique_dao import HistoriqueDAO
 
 
 class UtilisateurDao(VisiteurDao):
-    def utilisateur_exists(self, email: str, mdp: str):
+    def utilisateur_exists(self, adresse_mail: str, mot_de_passe: str):
         """
         Regarder si l'utilisateur existe bien
         """
@@ -16,31 +16,31 @@ class UtilisateurDao(VisiteurDao):
                 cursor.execute(
                     "SELECT *                                       "
                     'FROM "Projet_Info".Personne                    '
-                    " WHERE email=%(email)s   AND mdp=%(mdp)s       ",
-                    {"email": email, "mdp": mdp},
+                    " WHERE adresse_mail=%(adresse_mail)s   AND mot_de_passe=%(mot_de_passe)s",
+                    {"adresse_mail": adresse_mail, "mot_de_passe": mot_de_passe},
                 )
                 res = cursor.fetchone()
 
         utilisateur = None
 
         if res:
-            utilisateur = Utilisateur().instantiate_utilisateur(
-                email=res["email"],
+            utilisateur = UtilisateurFactory.instantiate_utilisateur(
+                email=res["adresse_mail"],
                 nom=res["nom"],
                 prenom=res["prenom"],
-                mdp=res["mot de passe"],
+                mdp=res["mot_de_passe"],
             )
 
         return utilisateur
 
-    def afficher_profil(self, email, pseudo, nom, prenom, mdp):
-        print(f"Voici les informations de votre profil: {email}")
+    def afficher_profil(self, adresse_mail, pseudo, nom, prenom, mot_de_passe):
+        print(f"Voici les informations de votre profil: {adresse_mail}")
 
-    def modifier_nom(self, email, modification) -> bool:
+    def modifier_nom(self, adresse_mail, modification) -> bool:
         updated = False
 
         # Get the email
-        if email is None:
+        if adresse_mail is None:
             return updated
 
         with DBConnection().connection as connection:
@@ -48,18 +48,18 @@ class UtilisateurDao(VisiteurDao):
                 cursor.execute(
                     'UPDATE "Projet_Info".Personne                        '
                     "   SET    nom = %(modification)s                     "
-                    " WHERE email = %(email)s                             ",
-                    {"email": email, "nom": modification},
+                    " WHERE adresse_mail = %(adresse_mail)s                             ",
+                    {"adresse_mail": adresse_mail, "nom": modification},
                 )
                 if cursor.rowcount:
                     updated = True
         return updated
 
-    def modifier_prenom(self, email, modification) -> bool:
+    def modifier_prenom(self, adresse_mail, modification) -> bool:
         updated = False
 
         # Get the email
-        if email is None:
+        if adresse_mail is None:
             return updated
 
         with DBConnection().connection as connection:
@@ -67,18 +67,18 @@ class UtilisateurDao(VisiteurDao):
                 cursor.execute(
                     'UPDATE "Projet_Info".Personne                        '
                     "   SET    prenom = %(modification)s                     "
-                    " WHERE email = %(email)s                             ",
-                    {"email": email, "prenom": modification},
+                    " WHERE adresse_mail = %(adresse_mail)s                             ",
+                    {"adresse_mail": adresse_mail, "prenom": modification},
                 )
                 if cursor.rowcount:
                     updated = True
         return updated
 
-    def modifier_mdp(self, email, modification) -> bool:
+    def modifier_mdp(self, adresse_mail, modification) -> bool:
         updated = False
 
         # Get the email
-        if email is None:
+        if adresse_mail is None:
             return updated
 
         with DBConnection().connection as connection:
@@ -86,27 +86,27 @@ class UtilisateurDao(VisiteurDao):
                 cursor.execute(
                     'UPDATE "Projet_Info".Personne                        '
                     "   SET    mot_de_passe = %(modification)s                     "
-                    " WHERE email = %(email)s                             ",
-                    {"email": email, "mot_de_passe": modification},
+                    " WHERE adresse_mail = %(adresse_mail)s                             ",
+                    {"adresse_mail": adresse_mail, "mot_de_passe": modification},
                 )
                 if cursor.rowcount:
                     updated = True
         return updated
 
     def modifier_historique(self):
-        return HistoriqueDao().modifier_historique()
+        return HistoriqueDAO().modifier_historique()
 
-    def supprimer_profil(self, email):
+    def supprimer_profil(self, adresse_mail):
         supp = False
 
-        if email is None:
+        if adresse_mail is None:
             return supp
 
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
                     'DELETE FROM "Projet_Info".Personne                  '
-                    "WHERE email = %(email)s;                            ",
+                    "WHERE adresse_mail = %(adresse_mail)s;                            ",
                 )
                 if cursor.rowcount:
                     supp = True

@@ -12,7 +12,7 @@ class SiteView(AbstractView):
             {
                 "type": "list",
                 "name": "choix",
-                "message": f" {Session().user_name}",
+                "message": f" {Session().pseudo}",
                 "choices": [
                     "Modifier des offres",
                     "Modifier des profils",

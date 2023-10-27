@@ -2,6 +2,8 @@ from InquirerPy import prompt
 
 from view.abstract_view import AbstractView
 from view.session import Session
+from view.fct_statut import Statut
+from dao.historique_dao import HistoriqueDAO
 
 
 class HistoriqueView(AbstractView):
@@ -10,11 +12,12 @@ class HistoriqueView(AbstractView):
             {
                 "type": "list",
                 "name": "choix",
-                "message": f" {Session().user_name}",
+                "message": f" {Session().pseudo}",
                 "choices": [
                     "Afficher l'historique",
-                    "Modifier l'historique",
+                    "Supprimer l'historique",
                     "Exporter l'historique",
+                    "Importer l'historique",
                     "Quitter",
                 ],
             }
@@ -30,10 +33,38 @@ class HistoriqueView(AbstractView):
             pass
 
         elif reponse["choix"] == "Afficher l'historique":
-            
+            historique = HistoriqueDAO.afficher_historique_utilisateur(
+                self, adresse_mail=Session().email
+            )
+            Statut.def_statut(Session().email)
+            print(historique)
 
-        elif reponse["choix"] == "Modifier l'historique":
-            
+        elif reponse["choix"] == "Supprimer l'historique":
+            supp = HistoriqueDAO.supprimer_historique_utilisateur(
+                self, adresse_mail=Session().email
+            )
+            Statut.def_statut(Session().email)
+            if supp is True:
+                print("La suppression de votre historique a bien eu lieu")
+            else:
+                print(supp)
 
         elif reponse["choix"] == "Exporter l'historique":
-            
+            exporter = HistoriqueDAO.exporter_historique(
+                self, adresse_mail=Session().email
+            )
+            Statut.def_statut(Session().email)
+            if exporter is True:
+                print("Votre historique a bien été exporté")
+            else:
+                print("Une erreur s'est produite. Veuillez essayer ultérieurement.")
+
+        elif reponse["choix"] == "Importer l'historique":
+            importer = HistoriqueDAO.importer_historique(
+                self, adresse_mail=Session().email
+            )
+            Statut.def_statut(Session().email)
+            if importer is True:
+                print("Votre historique a bien été exporté")
+            else:
+                print("Une erreur s'est produite. Veuillez essayer ultérieurement.")

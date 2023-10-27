@@ -10,7 +10,7 @@ class ApConnexionViewEleve(AbstractView):
             {
                 "type": "list",
                 "name": "choix",
-                "message": f" {Session().user_name}",
+                "message": f" {Session().pseudo}",
                 "choices": [
                     "Rechercher",
                     "Historique",
@@ -32,7 +32,7 @@ class ApConnexionViewEleve(AbstractView):
             pass
 
         elif reponse["choix"] == "Rechercher":
-            
+            pass
 
         elif reponse["choix"] == "Historique":
             from view.historique_view import HistoriqueView

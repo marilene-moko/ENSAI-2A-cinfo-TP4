@@ -67,8 +67,7 @@ class ProfesseurDao(UtilisateurDao):
         return "Ce stage n'existe pas."
 
 
-
-        def conseillerStageAEleve(self,):
-        
+ ################ à faire  ##############################     
+    def conseillerStageAEleve(self,):
 
             

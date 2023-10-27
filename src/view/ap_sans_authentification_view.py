@@ -29,9 +29,9 @@ class ApSansAuthentificationView(AbstractView):
             pass
 
         elif reponse["choix"] == "Rechercher":
-            from view.connection_view import ConnectionView
+            from view.recherche_view import RechercheView
 
-            return ConnectionView()
+            return RechercheView()
 
         elif reponse["choix"] == "Historique":
             from view.inscription_view import InscriptionView
