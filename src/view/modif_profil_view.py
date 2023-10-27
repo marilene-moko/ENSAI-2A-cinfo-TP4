@@ -65,4 +65,4 @@ class ModifProfilView(AbstractView):
         else:
             raise ValueError("Vous devez répondre par Y ou N")
 
-        Statut.def_statut(Session().email)
+        Statut.def_statut(self, Session().statut)
