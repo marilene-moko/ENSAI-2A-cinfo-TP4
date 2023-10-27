@@ -21,7 +21,7 @@ class UtilisateurClient(VisiteurClient):
         self.motDePasse = mot_de_passe
         self.dateDerniereConnection = dt.date.today()
 
-    def utilisateur_exists(self, email, mdp):
+    def utilisateur_exists(email, mdp):
         """
         Méthode qui permet de vérifier l'existence d'un utilisateur.
 
@@ -32,9 +32,9 @@ class UtilisateurClient(VisiteurClient):
         Retour :
             None si l'utilisateur n'existe pas et les caractéristiques de l'utilisateur s'il existe
         """
-        return UtilisateurDao.utilisateur_exists(self, email, mdp)
+        return UtilisateurDao.utilisateur_exists(email, mdp)
 
-    def afficher_profil(self, email, pseudo, nom, prenom, mdp):
+    def afficher_profil(email, pseudo, nom, prenom, mdp):
         """
         Méthode qui permet d'afficher les caractéristiques d'un profil utilisateur.
 
@@ -48,9 +48,9 @@ class UtilisateurClient(VisiteurClient):
         Retour :
             un str qui indique les caractéristiques du profil utilisateur
         """
-        return UtilisateurDao.afficher_profil(self, email, pseudo, nom, prenom, mdp)
+        return UtilisateurDao.afficher_profil(email, pseudo, nom, prenom, mdp)
 
-    def modifier_nom(self, email, modification):
+    def modifier_nom(email, modification):
         """
         Méthode qui permet à un utilisateur de changer son nom sur son profil.
 
@@ -61,9 +61,9 @@ class UtilisateurClient(VisiteurClient):
         Retour :
             un booléen qui indique si la tâche a été effectuée
         """
-        return UtilisateurDao.modifier_nom(self, email, modification)
+        return UtilisateurDao.modifier_nom(email, modification)
 
-    def modifier_prenom(self, email, modification):
+    def modifier_prenom(email, modification):
         """
         Méthode qui permet à un utilisateur de changer son prénom sur son profil.
 
@@ -74,9 +74,9 @@ class UtilisateurClient(VisiteurClient):
         Retour :
             un booléen qui indique si la tâche a été effectuée
         """
-        return UtilisateurDao.modifier_prenom(self, email, modification)
+        return UtilisateurDao.modifier_prenom(email, modification)
 
-    def modifier_mdp(self, email, modification):
+    def modifier_mdp(email, modification):
         """
         Méthode qui permet à un utilisateur de changer son mot de passe.
 
@@ -87,9 +87,9 @@ class UtilisateurClient(VisiteurClient):
         Retour :
             un booléen qui indique si la tâche a été effectuée
         """
-        return UtilisateurDao.modifier_mdp(self, email, modification)
+        return UtilisateurDao.modifier_mdp(email, modification)
 
-    def supprimer_profil(self, email):
+    def supprimer_profil(email):
         """
         Méthode qui permet à un utilisateur de supprimer son historique.
 
@@ -99,4 +99,4 @@ class UtilisateurClient(VisiteurClient):
         Retour :
             un booléen qui indique si la tâche a été effectuée
         """
-        return UtilisateurDao.supprimer_profil(self, email)
+        return UtilisateurDao.supprimer_profil(email)
