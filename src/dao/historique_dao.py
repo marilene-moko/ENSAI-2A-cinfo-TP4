@@ -4,24 +4,23 @@ from dao.db_connection import DBConnection
 
 
 class HistoriqueDAO(metaclass=Singleton):
-    def afficher_historique_utilisateur(self, utilisateur):
+    def afficher_historique_utilisateur(self, adresse_mail):
         """
         Affiche l'historique d'un utilisateur
         """
 
-        identifiant_personne = utilisateur.identifiant_personne
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
                     "Select *             "
                     'FROM "Projet_Info".page_visitee'
-                    "WHERE identifiant_personne = %(identifiant_personne)s;",
-                    {"identifiant_personne": identifiant_personne},
+                    "WHERE adresse_mail = %(adresse_mail)s;",
+                    {"adresse_mail": adresse_mail},
                 )
                 res = cursor.fetchall()
             return res
 
-    def importer_historique(self, utilisateur):
+    def importer_historique(self, adresse_mail):
         """
         Importe un historique aux entêtes date_visite,URL_page,identifiant_personne
 
@@ -39,13 +38,11 @@ class HistoriqueDAO(metaclass=Singleton):
                             ","
                         )  # Supposer que le CSV est délimité par des virgules
                         # Assurez-vous que l'identifiant de l'utilisateur est utilisé pour l'insertion
-                        sql = """INSERT INTO "Projet_Info".page_visitee (date_visite, URL_page, identifiant_personne)
+                        sql = """INSERT INTO "Projet_Info".page_visitee (date_visite, URL_page, adresse_mail)
                                 VALUES (%s, %s, %s);"""
-                        cursor.execute(
-                            sql, (data[0], data[1], utilisateur.identifiant_personne)
-                        )
+                        cursor.execute(sql, (data[0], data[1], adresse_mail))
 
-    def exporter_historique(self, utilisateur):
+    def exporter_historique(self, adresse_mail):
         """
         Exporter un historique
 
@@ -53,14 +50,13 @@ class HistoriqueDAO(metaclass=Singleton):
         L'utilisateur qui exporte ne peut exporter que SON historique
         """
 
-        identifiant_personne = utilisateur.identifiant_personne
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """SELECT *
                     FROM "Projet_Info".page_visitee
-                    WHERE identifiant_personne = %(identifiant_personne)s""",
-                    {"identifiant_personne": identifiant_personne},
+                    WHERE adresse_mail = %(adresse_mail)s""",
+                    {"adresse_mail": adresse_mail},
                 )
                 res = cursor.fetchall()
                 with open("data/exporterHistorique.txt", "w", newline="") as f:
@@ -70,7 +66,7 @@ class HistoriqueDAO(metaclass=Singleton):
                             "Identifiant_page",
                             "date_visite",
                             "URL_page",
-                            "identifiant_personne",
+                            "adresse_mail",
                         ]
                         f.write(",".join(header) + "\n")
                     # Écrire les données
@@ -80,20 +76,19 @@ class HistoriqueDAO(metaclass=Singleton):
                             str(row["identifiant_page"]),
                             str(row["date_visite"]),
                             row["url_page"],
-                            str(row["identifiant_personne"]),
+                            str(row["adresse_mail"]),
                         ]
                         f.write(",".join(row_data) + "\n")
 
-    def supprimer_historique_utilisateur(self, utilisateur):
+    def supprimer_historique_utilisateur(self, adresse_mail):
         """
         Supprime l'historique d'un utilisateur
         """
 
-        identifiant_personne = utilisateur.identifiant_personne
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
                     'DELETE FROM "Projet_Info".page_visitee '
-                    "WHERE identifiant_personne = %(identifiant_personne)s;",
-                    {"identifiant_personne": identifiant_personne},
+                    "WHERE adresse_mail = %(adresse_mail)s;",
+                    {"adresse_mail": adresse_mail},
                 )
