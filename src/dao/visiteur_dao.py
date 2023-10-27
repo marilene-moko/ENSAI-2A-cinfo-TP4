@@ -29,9 +29,6 @@ class VisiteurDao(metaclass=Singleton):
         """
         created = False
 
-        # hacher le mot de passe
-        mdp_hache = self.hash_mdp(mot_de_passe)
-
         # Get the id type
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -41,7 +38,7 @@ class VisiteurDao(metaclass=Singleton):
                     "WHERE adresse_mail = %(adresse_mail)s;           ",
                     {"adresse_mail": adresse_mail},
                 )
-                res = cursor.fetchone
+                res = cursor.fetchone()
         if res:
             return created
         else:
@@ -50,12 +47,12 @@ class VisiteurDao(metaclass=Singleton):
                     cursor.execute(
                         'INSERT INTO "Projet_Info".Personne (adresse_mail, nom, prenom, mot_de_passe, statut)'
                         "VALUES                                                                              "
-                        "(%(adresse_mail)s, %(nom)s, %(prenom)s, %(mdp_hache)s, %(statut)s);                 ",
+                        "(%(adresse_mail)s, %(nom)s, %(prenom)s, %(mot_de_passe)s, %(statut)s);                 ",
                         {
                             "adresse_mail": adresse_mail,
                             "nom": nom,
                             "prenom": prenom,
-                            "mdp_hache": mot_de_passe,
+                            "mot_de_passe": mot_de_passe,
                             "statut": statut,
                         },
                     )
@@ -69,7 +66,7 @@ class VisiteurDao(metaclass=Singleton):
         return HistoriqueDAO().voir_historique()
 
     def exporter_historique(self):
-        return HistoriqueDao().exporter_historique()
+        return HistoriqueDAO().exporter_historique()
 
 
 """ 
