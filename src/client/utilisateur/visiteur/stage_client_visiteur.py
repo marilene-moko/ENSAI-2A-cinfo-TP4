@@ -5,7 +5,8 @@ from typing import List, Optional
 from bs4 import BeautifulSoup
 from business_object.stage.stage_factory import stageFactory
 from business_object.stage.stage_layout import Stagelayout
-
+from dao.historique_dao import HistoriqueDAO
+from dao.listeenvie_dao  import ListeEnvieDAO
 
 class Stageclientvisiteur:
     def __init__(self, utility="faire des operations sur les stage"):
@@ -138,9 +139,12 @@ class Stageclientvisiteur:
 
         return stages
 
-    def afficher_stage(self, stages, compteur=1):
+    def afficher_stage(self, stages, compteur=1, email):
         if stages is not None:
             i = 0
+            HistoriqueDAO.importer_historique_modified(
+                        adresse_mail=email, stage=stages[0]
+                    )
             localisation = stages[0].localisation
             specialite = stages[0].specialite
             n = len(stages)
@@ -185,6 +189,11 @@ class Stageclientvisiteur:
 
                 if rep == "1":
                     i = i + 1
+                    #ajout_hist= HistoriqueDAO.importer_historique_modified(
+                        #adresse_mail=email, stage=stages[i]
+                    #)
+                    if ajout_hist:
+                        print("ajout à l'historique reussi")
                 if rep == "3":
                     if i >= 1:
                         i = i - 1
@@ -195,8 +204,11 @@ class Stageclientvisiteur:
                         break
                 if rep == "2":
                     # importer le voeu via le DAO
-                    print("clémént à toi de jouer")
-                    break
+                    """ajout_LV=ListeEnvieDAO.ajouter_stage_listeEnvie_utilisateur(adresse_mail=email, stage = stage[i])
+                    if ajout_LV:
+                        print("ajout à la liste d'envie reussie")
+                        break
+                    """
                 if rep == "4":
                     print("on retourne à la page d'accueil so, suzanne à toi de jouer")
                     break

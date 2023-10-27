@@ -44,6 +44,26 @@ class HistoriqueDAO(metaclass=Singleton):
             return True  # L'importation a réussi
         except Exception as e:
             return False  # L'importation a échoué
+    
+
+
+    def importer_historique_modified(self, adresse_mail, stage):
+        """
+        On conserve les liens, des stages qui ont parcourus par les utilisateurs ainsi que les dates auxquelles ils ont été consultés.
+        """
+        try:
+            now = datetime.datetime.now()
+            date_f = now.strftime("%Y-%m-%d %H:%M:%S")
+            
+            with DBConnection().connection as connection:
+                with connection.cursor() as cursor:
+                    # Assurez-vous que l'identifiant de l'utilisateur est utilisé pour l'insertion
+                    sql = """INSERT INTO "Projet_Info".page_visitee (date_visite, URL_page, titre , adresse_mail)
+                            VALUES (%s, %s, %s,  %s);"""
+                    cursor.execute(sql, date_f, stage.URL_stage, stage.titre, adresse_mail)
+            return True  # L'importation a réussi
+        except Exception as :
+            return False  # L'importation a échoué
 
     def exporter_historique(self, adresse_mail):
         """
