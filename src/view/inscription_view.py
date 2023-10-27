@@ -1,4 +1,4 @@
-from InquirerPy import prompt, inquirer
+from InquirerPy import prompt
 from InquirerPy.validator import PasswordValidator
 
 from view.abstract_view import AbstractView
@@ -14,7 +14,7 @@ class InscriptionView(AbstractView):
             {"type": "input", "message": "Prénom: "},
             {
                 "type": "input",
-                "message": "Mot de passe (au moins 8 caractères): ",
+                "message": "Mot de passe (au moins 8 caractères dont un spécial, une majuscule et un chiffre): ",
                 "validate": PasswordValidator(
                     length=8,
                     cap=True,
@@ -43,9 +43,9 @@ class InscriptionView(AbstractView):
             print("Votre compte a bien été créé")
 
         else:
-            from view.start_view import StartView
-
-            return StartView()
             print(
                 "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
             )
+        from view.start_view import StartView
+
+        return StartView()
