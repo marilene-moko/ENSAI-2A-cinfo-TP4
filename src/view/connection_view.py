@@ -12,6 +12,13 @@ class ConnectionView(AbstractView):
             {"type": "input", "message": "Email:"},
             {"type": "input", "message": "Mot de passe: "},
         ]
+        self.__revenir_menu = [
+            {
+                "type": "confirm",
+                "message": "Voulez-vous réessayer de vous connecter:",
+                "default": True,
+            }
+        ]
 
     def display_info(self):
         print("Veuillez renseigner les champs suivants:")
@@ -59,7 +66,11 @@ class ConnectionView(AbstractView):
 
                 return ApConnexionViewAdmin()
         else:
-            from view.start_view import StartView
-
-            return StartView()
             print("L'email et/ou le mot de passe est incorrect")
+            quest = prompt(self.__revenir_menu)
+            if quest is True:
+                from star_view import StartView
+
+                return StartView()
+            else:
+                return ConnectionView()

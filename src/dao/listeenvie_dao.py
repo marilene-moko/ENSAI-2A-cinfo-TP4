@@ -65,7 +65,6 @@ class ListeEnvieDAO(metaclass=Singleton):
 
         return True
 
-    def ajouter_stage_listeEnvie_utilisateur(self, adresse_mail, stage):
     @staticmethod
     def ajouter_stage_listeEnvie_utilisateur(adresse_mail, identifiant_stage):
         """

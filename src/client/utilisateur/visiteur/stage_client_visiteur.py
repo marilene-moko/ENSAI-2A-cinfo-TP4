@@ -6,7 +6,8 @@ from bs4 import BeautifulSoup
 from business_object.stage.stage_factory import stageFactory
 from business_object.stage.stage_layout import Stagelayout
 from dao.historique_dao import HistoriqueDAO
-from dao.listeenvie_dao  import ListeEnvieDAO
+from dao.listeenvie_dao import ListeEnvieDAO
+
 
 class Stageclientvisiteur:
     def __init__(self, utility="faire des operations sur les stage"):
@@ -54,7 +55,6 @@ class Stageclientvisiteur:
 
         # On verifie si le lien vers la page fonctionne bien
         if response.status_code == 200:
-            print("Bonjour")
             html = response.text
             soup = BeautifulSoup(html, "lxml")
 
@@ -139,12 +139,12 @@ class Stageclientvisiteur:
 
         return stages
 
-    def afficher_stage(self, stages, compteur=1, email):
+    def afficher_stage(self, stages, email, compteur=1):
         if stages is not None:
             i = 0
             HistoriqueDAO.importer_historique_modified(
-                        adresse_mail=email, stage=stages[0]
-                    )
+                adresse_mail=email, stage=stages[0]
+            )
             localisation = stages[0].localisation
             specialite = stages[0].specialite
             n = len(stages)
@@ -189,9 +189,9 @@ class Stageclientvisiteur:
 
                 if rep == "1":
                     i = i + 1
-                    #ajout_hist= HistoriqueDAO.importer_historique_modified(
-                        #adresse_mail=email, stage=stages[i]
-                    #)
+                    # ajout_hist= HistoriqueDAO.importer_historique_modified(
+                    # adresse_mail=email, stage=stages[i]
+                    # )
                     if ajout_hist:
                         print("ajout à l'historique reussi")
                 if rep == "3":
