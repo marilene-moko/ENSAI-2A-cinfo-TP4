@@ -20,5 +20,5 @@ if __name__ == "__main__":
         # ask user for a choice
         current_view = current_view.make_choice()
 
-    with open("src/graphical_assets/raccon_petit.txt", "r", encoding="utf-8") as asset:
+    with open("src/graphical_assets/fin.txt", "r", encoding="utf-8") as asset:
         print(asset.read())
