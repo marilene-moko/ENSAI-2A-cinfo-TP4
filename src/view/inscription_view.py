@@ -46,6 +46,6 @@ class InscriptionView(AbstractView):
             print(
                 "L'email choisi existe déjà. Veuillez en choisir un autre s'il-vous-plaît."
             )
-        from view.start_view import StartView
+            from view.start_view_sans_logo import StartViewSimple
 
-        return StartView()
+            return StartViewSimple()

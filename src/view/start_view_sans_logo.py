@@ -2,10 +2,9 @@ from InquirerPy import prompt
 
 from view.abstract_view import AbstractView
 from view.session import Session
-from view.fct_statut import Statut
 
 
-class NotificationsView(AbstractView):
+class StartViewSimple(AbstractView):
     def __init__(self):
         self.__questions = [
             {
@@ -13,8 +12,9 @@ class NotificationsView(AbstractView):
                 "name": "choix",
                 "message": f" {Session().pseudo}",
                 "choices": [
-                    "Afficher ses notifications",
-                    "Envoyer des notifications",
+                    "Connection",
+                    "Inscription",
+                    "Utiliser sans s'authentifier",
                     "Quitter",
                 ],
             }
@@ -29,8 +29,17 @@ class NotificationsView(AbstractView):
         if reponse["choix"] == "Quitter":
             pass
 
-        elif reponse["choix"] == "Afficher ses notifications":
-            Statut.def_statut(Session().statut)
+        elif reponse["choix"] == "Connection":
+            from view.connection_view import ConnectionView
 
-        elif reponse["choix"] == "Envoyer des notifications":
-            Statut.def_statut(Session().statut)
+            return ConnectionView()
+
+        elif reponse["choix"] == "Inscription":
+            from view.inscription_view import InscriptionView
+
+            return InscriptionView()
+
+        elif reponse["choix"] == "Utiliser sans s'authentifier":
+            from view.ap_sans_authentification_view import ApSansAuthentificationView
+
+            return ApSansAuthentificationView()

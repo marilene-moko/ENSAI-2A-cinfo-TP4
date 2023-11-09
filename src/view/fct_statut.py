@@ -12,7 +12,11 @@ class Statut:
             from view.ap_connexion_view_prof import ApConnexionViewProf
 
             return ApConnexionViewProf()
-        else:
+        elif statut == "administrateur":
             from view.ap_connexion_view_admin import ApConnexionViewAdmin
 
             return ApConnexionViewAdmin()
+        else:
+            from view.ap_sans_authentification_view import ApSansAuthentificationView
+
+            return ApSansAuthentificationView()

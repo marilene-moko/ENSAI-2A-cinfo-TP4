@@ -24,7 +24,7 @@ class HistoriqueView(AbstractView):
         ]
 
     def display_info(self):
-        with open("src/graphical_assets/banner.txt", "r", encoding="utf-8") as asset:
+        with open("src/graphical_assets/border.txt", "r", encoding="utf-8") as asset:
             print(asset.read())
 
     def make_choice(self):
@@ -36,8 +36,8 @@ class HistoriqueView(AbstractView):
             historique = HistoriqueService.afficher_historique_utilisateur(
                 adresse_mail=Session().email
             )
-            Statut.def_statut(Session().statut)
             print(historique)
+            Statut().def_statut(Session().statut)
 
         elif reponse["choix"] == "Supprimer l'historique":
             supp = HistoriqueService.supprimer_historique_utilisateur(

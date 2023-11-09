@@ -21,7 +21,7 @@ class PublicationView(AbstractView):
         ]
 
     def display_info(self):
-        with open("src/graphical_assets/banner.txt", "r", encoding="utf-8") as asset:
+        with open("src/graphical_assets/border.txt", "r", encoding="utf-8") as asset:
             print(asset.read())
 
     def make_choice(self):

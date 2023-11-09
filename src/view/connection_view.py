@@ -69,8 +69,8 @@ class ConnectionView(AbstractView):
             print("L'email et/ou le mot de passe est incorrect")
             quest = prompt(self.__revenir_menu)
             if quest is True:
-                from star_view import StartView
+                from view.star_view_sans_logo import StartViewSimple
 
-                return StartView()
+                return StartViewSimple()
             else:
                 return ConnectionView()

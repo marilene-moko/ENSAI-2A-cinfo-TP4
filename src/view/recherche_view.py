@@ -4,7 +4,6 @@ from tabulate import tabulate
 from view.abstract_view import AbstractView
 from view.session import Session
 from view.fct_statut import Statut
-from view.start_view import StartView
 
 from client.utilisateur.visiteur.stage_client_visiteur import Stageclientvisiteur
 
@@ -103,7 +102,9 @@ class RechercheView(AbstractView):
                     affichage = Stageclientvisiteur().afficher_stage(recherche)
                     quest = prompt(self.__revenir_menu)
                     if quest is True:
-                        return StartView()
+                        from view.start_view_sans_logo import StartViewSimple
+
+                        return StartViewSimple()
                     else:
                         pass
 
