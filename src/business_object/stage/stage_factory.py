@@ -27,6 +27,6 @@ class stageFactory(metaclass=Singleton):
                 URL_stage=URL_stage,
                 employeur=employeur,
                 date_publication=date_publication,
-            )
+            ).__list__()
 
         return stage

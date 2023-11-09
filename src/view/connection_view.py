@@ -10,7 +10,7 @@ class ConnectionView(AbstractView):
     def __init__(self):
         self.__questions = [
             {"type": "input", "message": "Email:"},
-            {"type": "input", "message": "Mot de passe: "},
+            {"type": "password", "message": "Mot de passe: "},
         ]
         self.__revenir_menu = [
             {

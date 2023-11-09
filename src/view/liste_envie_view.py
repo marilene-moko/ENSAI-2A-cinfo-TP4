@@ -1,4 +1,4 @@
-from InquirerPy import prompt
+from InquirerPy import prompt, GreenPassion
 
 from view.abstract_view import AbstractView
 from view.session import Session

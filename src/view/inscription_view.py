@@ -13,7 +13,7 @@ class InscriptionView(AbstractView):
             {"type": "input", "message": "Nom: "},
             {"type": "input", "message": "Prénom: "},
             {
-                "type": "input",
+                "type": "password",
                 "message": "Mot de passe (au moins 8 caractères dont un spécial, une majuscule et un chiffre): ",
                 "validate": PasswordValidator(
                     length=8,

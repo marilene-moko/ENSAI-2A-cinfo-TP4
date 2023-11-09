@@ -21,8 +21,20 @@ class Stagelayout:
         self.employeur = employeur
         self.date_publication = date_publication
 
-    def __str__(self):
-        s1 = "Ce stage peut être brèvement décrit comme étant {} ".format(
-            self.description
-        )
-        return s1
+    def __list__(self):
+        #        s1 = "Ce stage peut être brèvement décrit comme étant {} ".format(
+        #            self.description
+        #        )
+        #        return s1
+        stage = [
+            self.id_stage,
+            self.titre,
+            self.description,
+            self.specialite,
+            self.localisation,
+            self.siteSource,
+            self.URL_stage,
+            self.employeur,
+            self.date_publication,
+        ]
+        return stage
