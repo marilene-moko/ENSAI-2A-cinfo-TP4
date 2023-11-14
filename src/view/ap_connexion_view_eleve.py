@@ -16,7 +16,6 @@ class ApConnexionViewEleve(AbstractView):
                     "Historique",
                     "Liste d'envie",
                     "Profil",
-                    "Notifications",
                     "Quitter",
                 ],
             }
@@ -50,8 +49,3 @@ class ApConnexionViewEleve(AbstractView):
             from view.profil_view import ProfilView
 
             return ProfilView()
-
-        elif reponse["choix"] == "Notifications":
-            from view.notifications_view import NotificationsView
-
-            return NotificationsView()

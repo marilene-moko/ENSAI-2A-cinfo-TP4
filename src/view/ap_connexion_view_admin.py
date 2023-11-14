@@ -12,11 +12,10 @@ class ApConnexionViewProf(AbstractView):
                 "name": "choix",
                 "message": f" {Session().pseudo}",
                 "choices": [
-                    "Rechercher",
                     "Historique",
                     "Liste d'envie",
                     "Profil",
-                    "Notifications",
+                    "Recherche - Notifications",
                     "Publication",
                     "Site",
                     "Quitter",
@@ -33,11 +32,6 @@ class ApConnexionViewProf(AbstractView):
         if reponse["choix"] == "Quitter":
             pass
 
-        elif reponse["choix"] == "Rechercher":
-            from view.recherche_view import RechercheView
-
-            return RechercheView()
-
         elif reponse["choix"] == "Historique":
             from view.historique_view import HistoriqueView
 
@@ -53,15 +47,15 @@ class ApConnexionViewProf(AbstractView):
 
             return ProfilView()
 
-        elif reponse["choix"] == "Notifications":
+        elif reponse["choix"] == "Recherche - Notifications":
             from view.notifications_view import NotificationsView
 
             return NotificationsView()
 
-        elif reponse["choix"] == "Publication":
-            from view.publication_view import PublicationView
+        # elif reponse["choix"] == "Publication":
+        #    from view.publication_view import PublicationView
 
-            return PublicationView()
+        #    return PublicationView()
 
         elif reponse["choix"] == "Site":
             from view.site_view import SiteView

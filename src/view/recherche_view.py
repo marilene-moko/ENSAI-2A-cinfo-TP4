@@ -6,7 +6,8 @@ from view.session import Session
 from view.fct_statut import Statut
 
 from client.utilisateur.visiteur.stage_client_visiteur import Stageclientvisiteur
-from services.historique_service
+from services.historique_service import HistoriqueService
+
 
 class RechercheView(AbstractView):
     def __init__(self):
@@ -109,6 +110,9 @@ class RechercheView(AbstractView):
                     ]
                     recherche = prompt(questions).get("recherche_selectionnee")
                     affichage = Stageclientvisiteur().afficher_stage(recherche)
+                    HistoriqueService().ajouter_historique(
+                        Session().email, recherche[6]
+                    )
                     parcours = prompt(self.__revenir_menu)
 
         elif (answers[0] is True) & (answers[1] is False):
@@ -172,6 +176,9 @@ class RechercheView(AbstractView):
                     ]
                     recherche = prompt(questions).get("recherche_selectionnee")
                     affichage = Stageclientvisiteur().afficher_stage(recherche)
+                    HistoriqueService().ajouter_historique(
+                        Session().email, recherche[6]
+                    )
                     parcours = prompt(self.__revenir_menu)
         elif (answers[0] is False) & (answers[1] is True):
             localisation = input("Localisation: ")
@@ -233,7 +240,9 @@ class RechercheView(AbstractView):
                         }
                     ]
                     recherche = prompt(questions).get("recherche_selectionnee")
-
+                    HistoriqueService().ajouter_historique(
+                        Session().email, recherche[6]
+                    )
                     affichage = Stageclientvisiteur().afficher_stage(recherche)
                     parcours = prompt(self.__revenir_menu)
         else:

@@ -51,7 +51,7 @@ class ApConnexionViewProf(AbstractView):
 
             return NotificationsView()
 
-        elif reponse["choix"] == "Publication":
-            from view.publication_view import PublicationView
+        # elif reponse["choix"] == "Publication":
+        #    from view.publication_view import PublicationView
 
-            return PublicationView()
+        #    return PublicationView()

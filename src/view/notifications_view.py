@@ -17,7 +17,6 @@ class NotificationsView(AbstractView):
                 "name": "choix",
                 "message": f" {Session().pseudo}",
                 "choices": [
-                    "Afficher ses notifications",
                     "Envoyer des notifications",
                     "Quitter",
                 ],
@@ -79,7 +78,7 @@ class NotificationsView(AbstractView):
         if reponse["choix"] == "Quitter":
             pass
 
-        elif reponse["choix"] == "Afficher ses notifications":
+        elif reponse["choix"] == "Envoyer des notifications":
             answers = prompt(self.__recherche)
             if (answers[0] is True) & (answers[1] is True):
                 localisation = input("Localisation: ")
@@ -295,8 +294,5 @@ class NotificationsView(AbstractView):
                 print("Il est nécessaire de rentrer au moins l'un des deux")
                 continu = prompt(self.__continuer)
                 if continu[0] is True:
-                    return RechercheView()
+                    return NotificationsView()
             Statut().def_statut(Session().statut)
-
-        elif reponse["choix"] == "Envoyer des notifications":
-            Statut.def_statut(Session().statut)
