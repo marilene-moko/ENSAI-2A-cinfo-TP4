@@ -29,7 +29,14 @@ class Notification:
         server.quit()
 
     @staticmethod
-    def notify_internship(notif_sender, internship_name, receiver_email):
+    def notify_internship(
+        notif_sender,
+        internship_name,
+        intership_specialite,
+        internship_date,
+        internship_localisation,
+        receiver_email,
+    ):
         cwd = os.getcwd()
         # Charger le contenu du modèle d'e-mail depuis le fichier email_template.txt
         with open(cwd + "/src/utils/email_template.txt", "r") as file:
@@ -38,6 +45,13 @@ class Notification:
         # Remplacer les placeholders dans le modèle
         email_template = email_template.replace("{notif_sender}", notif_sender)
         email_template = email_template.replace("{internship_name}", internship_name)
+        email_template = email_template.replace(
+            "{internship_specialite}", intership_specialite
+        )
+        email_template = email_template.replace("{intership_date}", internship_date)
+        email_template = email_template.replace(
+            "{internship_localisation}", internship_localisation
+        )
 
         # Sujet de l'e-mail
         subject = "Nouvelle offre de stage : " + internship_name
