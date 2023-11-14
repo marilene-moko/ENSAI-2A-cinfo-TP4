@@ -41,6 +41,9 @@ class InscriptionView(AbstractView):
             is True
         ):
             print("Votre compte a bien été créé")
+            from view.start_view_sans_logo import StartViewSimple
+
+            return StartViewSimple()
 
         else:
             print(

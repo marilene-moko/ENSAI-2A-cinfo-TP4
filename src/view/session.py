@@ -14,4 +14,4 @@ class Session(metaclass=Singleton):
         self.pseudo: str = "Visiteur"
         self.email: str = "adresse_mail_visiteur"
         self.mot_de_passe: str = None
-        self.statut: str = "eleve"
+        self.statut: str = "visiteur"

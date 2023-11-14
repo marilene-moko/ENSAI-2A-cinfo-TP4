@@ -37,7 +37,8 @@ class HistoriqueView(AbstractView):
                 adresse_mail=Session().email
             )
             print(historique)
-            Statut().def_statut(Session().statut)
+            print(Session().statut)
+            Statut.def_statut(Session().statut)
 
         elif reponse["choix"] == "Supprimer l'historique":
             supp = HistoriqueService.supprimer_historique_utilisateur(

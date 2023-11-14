@@ -1,6 +1,7 @@
 from utils.send_email import send_email
 import os
 
+
 def notify_internship(notif_sender, internship_name, receiver_email):
     cwd = os.getcwd()
     # Charger le contenu du modèle d'e-mail depuis le fichier email_template.txt
@@ -17,7 +18,10 @@ def notify_internship(notif_sender, internship_name, receiver_email):
     # Envoyer l'e-mail
     send_email(receiver_email, subject, email_template)
 
+
 if __name__ == "__main__":
     # Exemple d'utilisation de la fonction notify_internship
-    receiver = "ebourrigan@gmail.com"
-    notify_internship("Maude Mathieu", "Offre de stage chez Bacchus Corporation", receiver)
+    receiver = "suzanne.heidsieck@eleve.ensai.fr"
+    notify_internship(
+        "Maude Mathieu", "Offre de stage chez Bacchus Corporation", receiver
+    )
