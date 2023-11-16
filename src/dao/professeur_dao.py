@@ -8,7 +8,21 @@ from dao.utilisateur_dao import UtilisateurDao
 class ProfesseurDao(UtilisateurDao):
     @staticmethod
     def ajouterStage(email, titre_stage, URL, categorie_stage, ville_stage, poste_stage):
+        """ 
+        Méthode qui permet à un professeur d'ajouter un stage
 
+        Paramètres :
+            adresse_mail : str : adresse mail du professeur
+            titre_stage : str : titre/intitulé du stage à ajouter
+            URL : str : URL du stage à ajouter
+            categorie_stage : str : catégorie du stage à ajouter
+            ville_stage : str : ville du stage à ajouter
+            poste_stage : str : type de poste du stage à ajouter
+            
+        Retour : 
+            un str qui indique si la tâche a été effectuée
+        """
+        
         # Vérifier que le stage n'existe pas
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -40,6 +54,16 @@ class ProfesseurDao(UtilisateurDao):
 
     @staticmethod
     def retirerStage(email, URL):
+        """ 
+        Méthode qui permet à un professeur d'ajouter un stage
+
+        Paramètres :
+            adresse_mail : str : adresse mail du professeur
+            URL : str : URL du stage à retirer
+        
+        Retour : 
+            un str qui indique si la tâche a été effectuée
+        """ 
 
         # Vérifier que le stage existe
         with DBConnection().connection as connection:

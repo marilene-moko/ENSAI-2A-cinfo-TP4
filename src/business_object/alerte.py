@@ -12,7 +12,8 @@ class Alerte:
         """
         Méthode permettant de vérifier s'il y a des nouveaux stages qui correspond à l'alerte.
 
-        retourne : une liste de (nouveaux) stages (éventuellement vide)
+        Retour : 
+            une liste de (nouveaux) stages (éventuellement vide)
         """
         nouveaux_stages = []
         
@@ -28,7 +29,8 @@ class Alerte:
         """
         Méthode qui renvoie des alertes pour les nouveaux stages
 
-        retourne : un message d'alerte : str
+        Retour : 
+            un message d'alerte : str
         """
         nvx_stages = verifierNouveauxStages(self)
 

@@ -64,6 +64,7 @@ class ListeEnvie:
     def exporter_voeux(adresse_mail):
         """
         Méthode qui permet à un utilisateur d'exporter sa liste d'envie.
+
         Paramètre :
             adresse_mail : str : l'adresse mail de l'utilisateur qui souhaite faire l'export
 

@@ -10,6 +10,14 @@ class AdministrateurDao(ProfesseurDao):
     def modifierDroitsUtilisateur(email_utilisateur, nv_statut):
         """
         Modifier les droits d'un utilisateur : utilisateur ou professeur ou administrateur
+
+        Paramètres :
+            email_utilisateur : str : l'adresse mail de l'utilisateur dont l'administrateur veut changer le statut
+            nv_statut : str : le statut que l'administrateur veut attribuer à l'utilisateur
+                            ce statut ne peut qu'être : 'utilisateur', 'professeur', 'administrateur'
+
+        Retour :
+            un str qui indique si la modification des droits a bien été faite
         """
 
         # Vérifier que l'utilisateur avec cet email existe

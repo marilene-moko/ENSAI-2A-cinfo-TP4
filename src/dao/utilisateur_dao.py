@@ -11,6 +11,13 @@ class UtilisateurDao(VisiteurDao):
     def utilisateur_exists(adresse_mail: str, mot_de_passe: str):
         """
         Regarder si l'utilisateur existe bien
+
+        Paramètres :
+            adresse_mail : str : l'adresse mail de l'utilisateur
+            mot_de_passe : str : le mot de passe de l'utilisateur
+
+        Retour :
+            None si l'utilisateur n'existe pas et les caractéristiques de l'utilisateur s'il existe
         """
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -36,10 +43,34 @@ class UtilisateurDao(VisiteurDao):
 
     @staticmethod
     def afficher_profil(adresse_mail, pseudo, nom, prenom, mot_de_passe):
+        """
+        Méthode qui permet d'afficher les caractéristiques d'un profil utilisateur.
+
+        Paramètres :
+            adresse_mail : str : adresse mail de l'utilisateur
+            pseudo : str : pseudo de l'utilisateur
+            nom : str : nom de l'utilisateur
+            prenom : str : prénom de l'utilisateur
+            mot_de_passe : str : mot de passe de l'utilisateur
+
+        Retour :
+            un str qui indique les caractéristiques du profil utilisateur
+        """
         print(f"Voici les informations de votre profil: {adresse_mail}")
 
     @staticmethod
     def modifier_nom(adresse_mail, modification) -> bool:
+        """
+        Méthode qui permet à un utilisateur de changer son nom sur son profil.
+
+        Paramètres :
+            adresse_mail : str : adresse mail de l'utilisateur
+            modification : str : le nouveau nom
+
+        Retour :
+            un booléen qui indique si la tâche a été effectuée
+        """
+
         updated = False
 
         # Get the email
@@ -60,6 +91,17 @@ class UtilisateurDao(VisiteurDao):
 
     @staticmethod
     def modifier_prenom(adresse_mail, modification) -> bool:
+        """
+        Méthode qui permet à un utilisateur de changer son prénom sur son profil.
+
+        Paramètres :
+            adresse_mail : str : adresse mail de l'utilisateur
+            modification : str : le nouveau prénom
+
+        Retour :
+            un booléen qui indique si la tâche a été effectuée
+        """
+
         updated = False
 
         # Get the email
@@ -80,6 +122,17 @@ class UtilisateurDao(VisiteurDao):
 
     @staticmethod
     def modifier_mdp(adresse_mail, modification) -> bool:
+        """
+        Méthode qui permet à un utilisateur de changer son mot de passe.
+
+        Paramètres :
+            adresse_mail : str : adresse mail de l'utilisateur
+            modification : str : le nouveau mot de passe
+
+        Retour :
+            un booléen qui indique si la tâche a été effectuée
+        """
+
         updated = False
 
         # Get the email
@@ -100,6 +153,16 @@ class UtilisateurDao(VisiteurDao):
 
     @staticmethod
     def supprimer_profil(adresse_mail):
+        """
+        Méthode qui permet à un utilisateur de supprimer son historique.
+
+        Paramètres :
+            adresse_mail : str : adresse mail de l'utilisateur
+
+        Retour :
+            un booléen qui indique si la tâche a été effectuée
+        """
+
         supp = False
 
         if adresse_mail is None:

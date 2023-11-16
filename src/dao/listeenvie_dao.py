@@ -15,6 +15,12 @@ class ListeEnvieDAO(metaclass=Singleton):
     def afficher_listeEnvie_utilisateur(adresse_mail):
         """
         Affiche la liste d'envie d'une personne en fonction de so identifiant
+
+        Paramètre :
+            adresse_mail : str : l'adresse mail de l'utilisateur qui veut afficher sa liste d'envie
+
+        Retour :
+            la liste d'envie de l'utilisateur
         """
 
         with DBConnection().connection as connection:
@@ -34,6 +40,13 @@ class ListeEnvieDAO(metaclass=Singleton):
         Supprime un voeu de la liste d'envie d'un utilisateur.
         Plusieurs tests pour savoir si le voeu existe et s'il appartient
         bien à l'utilisateur sont fait.
+
+        Paramètres :
+            adresse_mail : str : l'adresse mail de l'utiliseur qui veut retirer un stage de sa liste d'envie
+            identifiant_voeu : l'identifiant du stage à retirer de la liste d'envie
+
+        Retour :
+            un booléen qui indique si la tâche a été affectuée
         """
 
         # Vérifier si le voeu appartient à l'utilisateur
@@ -70,6 +83,14 @@ class ListeEnvieDAO(metaclass=Singleton):
         """
         Permet d'ajouter un stage a la liste d'envie d'un utilisateur en utilisant son id.
         On vérifie en amont si le voeu est déjà présent ou non et si le stage existe bien
+
+        Paramètres :
+            adresse_mail : str : l'adresse mail de l'utiliseur qui veut ajouter un stage de sa liste d'envie
+            identifiant_stage : l'identifiant du stage à ajouter dans la liste d'envie
+
+
+        Retour :
+            un booléen qui indique si la tâche a été affectuée
         """
 
         # Vérifier si le stage existe et n'est pas déjà dans la liste d'envies de l'utilisateur
@@ -112,6 +133,12 @@ class ListeEnvieDAO(metaclass=Singleton):
         L'importation se fait nécessairement d'un fichier nommé "importerVoeux" situé
         dans le dossier data.
         L'utilisateur qui importe ne peut importer des voeux que dans sa propre liste d'envies
+
+        Paramètre :
+            adresse_mail : str : l'adresse mail de l'utilisateur qui souhaite faire l'import
+
+        Retour :
+            un booléen qui indique si la tâche a été effectuée
         """
         try:
             with open("data/importerVoeux.txt", "r") as f:
@@ -148,6 +175,12 @@ class ListeEnvieDAO(metaclass=Singleton):
 
         L'exportation se fait dans un fichier "exporterVoeux" dans le dossier data
         L'utilisateur qui exporte ne peut exporter que SON historique
+
+        Paramètre :
+            adresse_mail : str : l'adresse mail de l'utilisateur qui souhaite faire l'export
+
+        Retour :
+            un booléen qui indique si la tâche a été effectuée
         """
         try:
             with DBConnection().connection as connection:

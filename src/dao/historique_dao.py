@@ -9,6 +9,12 @@ class HistoriqueDAO(metaclass=Singleton):
     def afficher_historique_utilisateur(adresse_mail):
         """
         Affiche l'historique d'un utilisateur
+
+        Paramètre:
+            adresse_mail : str : l'adresse mail de l'utilisateur
+
+        Retour :
+            l'historique
         """
 
         with DBConnection().connection as connection:
@@ -29,6 +35,12 @@ class HistoriqueDAO(metaclass=Singleton):
         L'importation se fait nécessairement d'un fichier nommé "importHistorique" situé
         dans le dossier data.
         L'utilisateur qui importe ne peut importer des lignes d'historiques que pour son id
+
+        Paramètre :
+            adresse_mail : str : l'adresse mail de l'utilisateur qui souhaite faire l'import
+
+        Retour :
+            un booléen qui indique si la tâche a bien été effectuée
         """
         try:
             with open("data/importerHistorique.txt", "r") as f:
@@ -74,6 +86,12 @@ class HistoriqueDAO(metaclass=Singleton):
 
         L'exportation se fait en envoyés dans un fichier "exporterHistorique"
         L'utilisateur qui exporte ne peut exporter que SON historique
+
+        Paramètre :
+            adresse_mail : str : l'adresse mail de l'utilisateur qui souhaite faire l'import
+
+        Retour :
+            un booléen qui indique si la tâche a bien été effectuée
         """
         try:
             with DBConnection().connection as connection:
@@ -112,6 +130,12 @@ class HistoriqueDAO(metaclass=Singleton):
     def supprimer_historique_utilisateur(adresse_mail):
         """
         Supprime l'historique d'un utilisateur
+
+        Paramètre :
+            adresse_mail : str : l'adresse mail de l'utilisateur qui souhaite faire l'import
+
+        Retour :
+            un booléen qui indique si la tâche a bien été effectuée
         """
         try:
             with DBConnection().connection as connection:
@@ -130,6 +154,13 @@ class HistoriqueDAO(metaclass=Singleton):
     def ajouter_historique(adresse_mail, URL_page):
         """
         Ajoute les informations de la recherche dans la table page_visitee avec l'adresse_mail de la personne ayant fait la recherche
+
+        Paramètre :
+            adresse_mail : str : l'adresse mail de l'utilisateur qui souhaite faire l'ajout
+            URL_page : str : l'URL de la page du stage que l'utilisateur souhaite ajouter
+
+        Retour :
+            un booléen qui indique si la tâche a bien été effectuée
         """
         try:
             current_date = datetime.date.today()
