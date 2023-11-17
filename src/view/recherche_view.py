@@ -121,7 +121,7 @@ class RechercheView(AbstractView):
                     recherche = prompt(questions).get("recherche_selectionnee")
                     affichage = Stageclientvisiteur().afficher_stage(recherche)
                     HistoriqueService().ajouter_historique(
-                        Session().email, recherche[6]
+                        Session().email, recherche[6], recherche[1]
                     )
                     favori = prompt(self.__fav)
                     if favori[0] is True:
@@ -198,7 +198,7 @@ class RechercheView(AbstractView):
                     recherche = prompt(questions).get("recherche_selectionnee")
                     affichage = Stageclientvisiteur().afficher_stage(recherche)
                     HistoriqueService().ajouter_historique(
-                        Session().email, recherche[6]
+                        Session().email, recherche[6], recherche[1]
                     )
                     favori = prompt(self.__fav)
                     if favori[0] is True:
@@ -275,7 +275,7 @@ class RechercheView(AbstractView):
                     recherche = prompt(questions).get("recherche_selectionnee")
                     affichage = Stageclientvisiteur().afficher_stage(recherche)
                     HistoriqueService().ajouter_historique(
-                        Session().email, recherche[6]
+                        Session().email, recherche[6], recherche[1]
                     )
                     favori = prompt(self.__fav)
                     if favori[0] is True:

@@ -145,7 +145,7 @@ class NotificationsView(AbstractView):
                         recherche = prompt(questions).get("recherche_selectionnee")
                         affichage = Stageclientvisiteur().afficher_stage(recherche)
                         HistoriqueService().ajouter_historique(
-                            Session().email, recherche[6]
+                            Session().email, recherche[6], recherche[1]
                         )
                         notif = prompt(self.__notif)
                         if notif[0] is True:
@@ -226,7 +226,7 @@ class NotificationsView(AbstractView):
                         recherche = prompt(questions).get("recherche_selectionnee")
                         affichage = Stageclientvisiteur().afficher_stage(recherche)
                         HistoriqueService().ajouter_historique(
-                            Session().email, recherche[6]
+                            Session().email, recherche[6], recherche[1]
                         )
                         notif = prompt(self.__notif)
                         if notif[0] is True:
@@ -307,7 +307,7 @@ class NotificationsView(AbstractView):
                         recherche = prompt(questions).get("recherche_selectionnee")
                         affichage = Stageclientvisiteur().afficher_stage(recherche)
                         HistoriqueService().ajouter_historique(
-                            Session().email, recherche[6]
+                            Session().email, recherche[6], recherche[1]
                         )
                         notif = prompt(self.__notif)
                         if notif[0] is True:
