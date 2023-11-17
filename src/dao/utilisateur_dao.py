@@ -37,6 +37,7 @@ class UtilisateurDao(VisiteurDao):
                 nom=res["nom"],
                 prenom=res["prenom"],
                 mdp=res["mot_de_passe"],
+                statut=res["statut"],
             )
 
         return utilisateur
