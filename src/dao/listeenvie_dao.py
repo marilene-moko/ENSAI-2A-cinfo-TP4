@@ -150,7 +150,7 @@ class ListeEnvieDAO(metaclass=Singleton):
                                 ","
                             )  # Supposer que le CSV est délimité par des virgules
                             # Assurez-vous que l'identifiant de l'utilisateur est utilisé pour l'insertion
-                            sql = """INSERT INTO "Projet_Info".voeu (URL_voeu, Categorie, Intitule, Ville, Poste, Entreprise, adresse_mail)
+                            sql = """INSERT INTO "Projet_Info".voeu (identifiant_stage, Categorie, Intitule, Ville, Entreprise, adresse_mail)
                                     VALUES (%s, %s, %s, %s, %s, %s, %s);"""
                             cursor.execute(
                                 sql,
@@ -160,7 +160,6 @@ class ListeEnvieDAO(metaclass=Singleton):
                                     data[2],
                                     data[3],
                                     data[4],
-                                    data[5],
                                     adresse_mail,
                                 ),
                             )
@@ -197,11 +196,9 @@ class ListeEnvieDAO(metaclass=Singleton):
                             # Écrire le header seulement si le fichier est vide
                             header = [
                                 "identifiant_voeu",
-                                "URL_voeu",
                                 "Categorie",
                                 "Intitule",
                                 "Ville",
-                                "Poste",
                                 "Entreprise",
                                 "adresse_mail",
                             ]
@@ -209,12 +206,10 @@ class ListeEnvieDAO(metaclass=Singleton):
                         # Écrire les données
                         for row in res:
                             row_data = [
-                                str(row["identifiant_voeu"]),
-                                row["URL_voeu"],
+                                str(row["identifiant_stage"]),
                                 row["Categorie"],
                                 row["Intitule"],
                                 row["Ville"],
-                                row["Poste"],
                                 row["Entreprise"],
                                 str(row["adresse_mail"]),
                             ]
