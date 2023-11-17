@@ -47,4 +47,4 @@ class ProfilView(AbstractView):
                 return StartViewSimple()
             else:
                 print("Une erreur est survenue. Veuillez essayer ultérieurement.")
-                Statut.def_statut(Session().statut)
+                return Statut.def_statut(Session().statut)

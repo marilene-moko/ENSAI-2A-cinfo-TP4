@@ -28,12 +28,10 @@ CREATE TABLE "Projet_Info".recommander (
 
 -- Table Voeu
 CREATE TABLE "Projet_Info".voeu (
-    identifiant_voeu SERIAL4 PRIMARY KEY,
-    URL_voeu VARCHAR(255),
+    identifiant_stage text PRIMARY KEY,
     Categorie text,
     Intitule text,
     Ville text,
-    Poste text,
     Entreprise VARCHAR(255),
     adresse_mail VARCHAR(255) NOT NULL,
     FOREIGN KEY (adresse_mail) REFERENCES "Projet_Info".personne(adresse_mail)
@@ -65,3 +63,4 @@ CREATE TABLE "Projet_Info".stage (
     FOREIGN KEY (adresse_mail_sauvegardee) REFERENCES "Projet_Info".personne(adresse_mail),
     FOREIGN KEY (adresse_mail_ajout) REFERENCES "Projet_Info".personne(adresse_mail),
     FOREIGN KEY (adresse_mail_modif) REFERENCES "Projet_Info".personne(adresse_mail)
+);

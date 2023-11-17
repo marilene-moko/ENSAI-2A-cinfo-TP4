@@ -38,13 +38,13 @@ class HistoriqueView(AbstractView):
             )
             print(historique)
             print(Session().statut)
-            Statut.def_statut(Session().statut)
+            return Statut.def_statut(Session().statut)
 
         elif reponse["choix"] == "Supprimer l'historique":
             supp = HistoriqueService.supprimer_historique_utilisateur(
                 adresse_mail=Session().email
             )
-            Statut.def_statut(Session().statut)
+            return Statut.def_statut(Session().statut)
             if supp is True:
                 print("La suppression de votre historique a bien eu lieu")
             else:
@@ -54,7 +54,7 @@ class HistoriqueView(AbstractView):
             exporter = HistoriqueService.exporter_historique(
                 adresse_mail=Session().email
             )
-            Statut.def_statut(Session().statut)
+            return Statut.def_statut(Session().statut)
             if exporter is True:
                 print("Votre historique a bien été exporté")
             else:
@@ -64,7 +64,7 @@ class HistoriqueView(AbstractView):
             importer = HistoriqueService.importer_historique(
                 adresse_mail=Session().email
             )
-            Statut.def_statut(Session().statut)
+            return Statut.def_statut(Session().statut)
             if importer is True:
                 print("Votre historique a bien été exporté")
             else:
