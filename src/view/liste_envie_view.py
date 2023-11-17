@@ -43,7 +43,7 @@ class ListeEnvieView(AbstractView):
             liste_envie = ListeEnvieService.afficher_listeEnvie_utilisateur(
                 adresse_mail=Session().email
             )
-            Statut.def_statut(Session().statut)
+            return Statut.def_statut(Session().statut)
             print(liste_envie)
 
         elif reponse["choix"] == "Modifier sa liste d'envie":
@@ -53,7 +53,7 @@ class ListeEnvieView(AbstractView):
             modif = ListeEnvieService.supprimer_listeEnvie_utilisateur(
                 adresse_mail=Session().email, identifiant_voeu=choix
             )
-            Statut.def_statut(Session().statut)
+            return Statut.def_statut(Session().statut)
             if modif is True:
                 print("Votre voeux a bien été supprimé")
             else:
@@ -61,7 +61,7 @@ class ListeEnvieView(AbstractView):
 
         elif reponse["choix"] == "Importer sa liste d'envie":
             importer = ListeEnvieService.importer_voeux(adresse_mail=Session().email)
-            Statut.def_statut(Session().statut)
+            return Statut.def_statut(Session().statut)
             if importer is True:
                 print("Votre liste a bien été importée")
             else:
@@ -69,7 +69,7 @@ class ListeEnvieView(AbstractView):
 
         elif reponse["choix"] == "Exporter sa liste d'envie":
             exporter = ListeEnvieService.exporter_voeux(adresse_mail=Session().email)
-            Statut.def_statut(Session().statut)
+            return Statut.def_statut(Session().statut)
             if exporter is True:
                 print("Votre liste a bien été exportée")
             else:

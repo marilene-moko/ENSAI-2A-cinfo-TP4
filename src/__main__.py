@@ -15,6 +15,7 @@ if __name__ == "__main__":
         # a border between view
         with open("src/graphical_assets/border.txt", "r", encoding="utf-8") as asset:
             print(asset.read())
+
         # Display the info of the view
         current_view.display_info()
         # ask user for a choice
