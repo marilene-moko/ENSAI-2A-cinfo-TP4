@@ -2,4 +2,7 @@ Bonjour,
 
 Vous avez reçu une notification de {notif_sender} pour le stage suivant :
 
-{internship_name}
+intitulé : {internship_name} 
+Date de publication : {intership_date}
+Spécialité : {internship_specialite}
+Localisation : {internship_localisation}
