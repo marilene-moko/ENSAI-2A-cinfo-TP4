@@ -32,7 +32,25 @@ class ProfilView(AbstractView):
             pass
 
         elif reponse["choix"] == "Afficher son profil":
-            Statut().def_statut(Session().statut)
+            print("Nom :")
+            print(Session().nom)
+            print("\n")
+            print("Prénom : ")
+            print(Session().prenom)
+            print("\n")
+            print("Email :  ")
+            print(Session().email)
+            print("\n")
+            print("Pseudo :  ")
+            print(Session().pseudo)
+            print("\n")
+            print("Mot de passe :")
+            print(Session().mot_de_passe)
+            print("\n")
+            print("Statut :")
+            print(Session().statut)
+            print("\n")
+            return Statut().def_statut(Session().statut)
 
         elif reponse["choix"] == "Modifier son profil":
             from view.modif_profil_view import ModifProfilView

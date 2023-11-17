@@ -35,7 +35,7 @@ class HistoriqueService:
         return dao.supprimer_historique_utilisateur(adresse_mail)
 
     @staticmethod
-    def ajouter_historique(adresse_mail, URL_page):
+    def ajouter_historique(adresse_mail, URL_page, titre):
         """
         Call the DAO function to add history data.
         """
