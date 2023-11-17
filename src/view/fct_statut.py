@@ -10,20 +10,11 @@ class Statut:
 
     @staticmethod
     def def_statut(statut: str):
-        print("Statut: " + statut)
         if statut == "eleve":
-            print("Eleve detected")
-
             return ApConnexionViewEleve()
         elif statut == "professeur":
-            print("Prof detected")
-
             return ApConnexionViewProf()
         elif statut == "administrateur":
-            print("Admin detected")
-
             return ApConnexionViewAdmin()
         else:
-            print("Visiteur detected")
-
             return ApSansAuthentificationView()

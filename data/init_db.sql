@@ -28,7 +28,8 @@ CREATE TABLE "Projet_Info".recommander (
 
 -- Table Voeu
 CREATE TABLE "Projet_Info".voeu (
-    identifiant_stage text PRIMARY KEY,
+    identifiant_stage_int SERIAL4 PRIMARY key,
+    identifiant_stage text NOT Null,
     Categorie text,
     Intitule text,
     Ville text,
