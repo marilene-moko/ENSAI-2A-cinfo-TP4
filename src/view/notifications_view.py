@@ -18,7 +18,7 @@ class NotificationsView(AbstractView):
                 "name": "choix",
                 "message": f" {Session().pseudo}",
                 "choices": [
-                    "Envoyer des notifications",
+                    "Rechercher",
                     "Quitter",
                 ],
             }
