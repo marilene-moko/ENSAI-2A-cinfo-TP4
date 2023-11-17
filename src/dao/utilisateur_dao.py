@@ -172,8 +172,8 @@ class UtilisateurDao(VisiteurDao):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    'DELETE FROM "Projet_Info".Personne                  '
-                    "WHERE adresse_mail = %(adresse_mail)s;                            ",
+                    'DELETE FROM "Projet_Info".Personne WHERE adresse_mail = %(adresse_mail)s;',
+                    {"adresse_mail": adresse_mail},
                 )
                 if cursor.rowcount:
                     supp = True
