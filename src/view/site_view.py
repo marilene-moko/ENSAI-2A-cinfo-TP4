@@ -3,7 +3,6 @@ from InquirerPy import prompt
 from view.abstract_view import AbstractView
 from view.session import Session
 from client.utilisateur_client import UtilisateurClient
-from services.stage_service import StageService
 
 
 class SiteView(AbstractView):
@@ -47,7 +46,7 @@ class SiteView(AbstractView):
                 "Veuillez entrer l'identifiant de l'offre que vous voulez supprimer: "
             )
             if StageService().supprimer_stage(supp_offre) is True:
-                print("Le compte a bien été supprimé")
+                print("Le stage a bien été supprimé")
             else:
                 print("Une erreur est survenue. Veuillez essayer ultérieurement.")
             from view.ap_connexion_view_admin import ApConnexionViewAdmin
