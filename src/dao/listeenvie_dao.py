@@ -79,7 +79,9 @@ class ListeEnvieDAO(metaclass=Singleton):
         return True
 
     @staticmethod
-    def ajouter_stage_listeEnvie_utilisateur(adresse_mail, identifiant_stage):
+    def ajouter_stage_listeEnvie_utilisateur(
+        adresse_mail, identifiant_stage, specialite, titre, localisation, employeur
+    ):
         """
         Permet d'ajouter un stage a la liste d'envie d'un utilisateur en utilisant son id.
         On vérifie en amont si le voeu est déjà présent ou non et si le stage existe bien
@@ -98,10 +100,10 @@ class ListeEnvieDAO(metaclass=Singleton):
             with connection.cursor() as cursor:
                 # Vérifier si le stage est déjà dans la liste d'envies de l'utilisateur
                 cursor.execute(
-                    'SELECT * FROM "Projet_Info".voeu WHERE adresse_mail = %(adresse_mail)s AND URL_voeu = %(URL_voeu)s;',
+                    'SELECT * FROM "Projet_Info".voeu WHERE adresse_mail = %(adresse_mail)s AND identifiant_stage = %(identifiant_stage)s;',
                     {
                         "adresse_mail": adresse_mail,
-                        "identifiant_stage": stage.URL_stage,
+                        "identifiant_stage": identifiant_stage,
                     },
                 )
                 existing_entry = cursor.fetchone()
@@ -111,15 +113,15 @@ class ListeEnvieDAO(metaclass=Singleton):
 
                 # Ajouter le stage à la liste d'envies de l'utilisateur
                 cursor.execute(
-                    'INSERT INTO "Projet_Info".voeu (adresse_mail, URL_voeu, Categorie, Intitule, Ville , Entreprise )'
-                    "VALUES (%(adresse_mail)s, %(URL_voeu)s, %(Categorie)s, %(Intitule)s, %(Ville)s, %(Entreprise)s  );",
+                    'INSERT INTO "Projet_Info".voeu (adresse_mail, identifiant_stage, Categorie, Intitule, Ville , Entreprise )'
+                    "VALUES (%(adresse_mail)s, %(identifiant_stage)s, %(Categorie)s, %(Intitule)s, %(Ville)s, %(Entreprise)s  );",
                     {
                         "adresse_mail": adresse_mail,
-                        "URL_voeu": stage.URL_stage,
-                        "Categorie": stage.specialite,
-                        "Intitule": stage.titre,
-                        "Ville": stage.localisation,
-                        "Entreprise": stage.employeur,
+                        "identifiant_stage": identifiant_stage,
+                        "Categorie": specialite,
+                        "Intitule": titre,
+                        "Ville": localisation,
+                        "Entreprise": employeur,
                     },
                 )
 

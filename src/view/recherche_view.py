@@ -7,6 +7,7 @@ from view.fct_statut import Statut
 
 from client.utilisateur.visiteur.stage_client_visiteur import Stageclientvisiteur
 from services.historique_service import HistoriqueService
+from services.listeenvie_service import ListeEnvieService
 
 
 class RechercheView(AbstractView):
@@ -44,6 +45,13 @@ class RechercheView(AbstractView):
                 "default": False,
             }
         ]
+        self.__fav = [
+            {
+                "type": "confirm",
+                "message": "Voulez-vous enregister ce stage dans vos favoris ?",
+                "default": False,
+            }
+        ]
 
     def display_info(self):
         with open("src/graphical_assets/border.txt", "r", encoding="utf-8") as asset:
@@ -53,8 +61,8 @@ class RechercheView(AbstractView):
     def make_choice(self):
         answers = prompt(self.__questions)
         if (answers[0] is True) & (answers[1] is True):
-            localisation = input("Localisation: ")
             specialite = input("Spécialité: ")
+            localisation = input("Localisation: ")
             liste_stage = Stageclientvisiteur().get_stage_spe_loc(
                 specialite, localisation
             )
@@ -113,6 +121,16 @@ class RechercheView(AbstractView):
                     HistoriqueService().ajouter_historique(
                         Session().email, recherche[6]
                     )
+                    favori = prompt(self.__fav)
+                    if favori[0] is True:
+                        ListeEnvieService().ajouter_stage_listeEnvie_utilisateur(
+                            Session().email,
+                            recherche[6],
+                            recherche[3],
+                            recherche[1],
+                            recherche[4],
+                            recherche[7],
+                        )
                     parcours = prompt(self.__revenir_menu)
 
         elif (answers[0] is True) & (answers[1] is False):
@@ -176,6 +194,16 @@ class RechercheView(AbstractView):
                     ]
                     recherche = prompt(questions).get("recherche_selectionnee")
                     affichage = Stageclientvisiteur().afficher_stage(recherche)
+                    favori = prompt(self.__fav)
+                    if favori[0] is True:
+                        ListeEnvieService().ajouter_stage_listeEnvie_utilisateur(
+                            Session().email,
+                            recherche[6],
+                            recherche[3],
+                            recherche[1],
+                            recherche[4],
+                            recherche[7],
+                        )
                     HistoriqueService().ajouter_historique(
                         Session().email, recherche[6]
                     )
@@ -244,6 +272,16 @@ class RechercheView(AbstractView):
                         Session().email, recherche[6]
                     )
                     affichage = Stageclientvisiteur().afficher_stage(recherche)
+                    favori = prompt(self.__fav)
+                    if favori[0] is True:
+                        ListeEnvieService().ajouter_stage_listeEnvie_utilisateur(
+                            Session().email,
+                            recherche[6],
+                            recherche[3],
+                            recherche[1],
+                            recherche[4],
+                            recherche[7],
+                        )
                     parcours = prompt(self.__revenir_menu)
         else:
             print("Il est nécessaire de rentrer au moins l'un des deux")

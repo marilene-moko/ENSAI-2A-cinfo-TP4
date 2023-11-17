@@ -7,6 +7,7 @@ from view.fct_statut import Statut
 
 from client.utilisateur.visiteur.stage_client_visiteur import Stageclientvisiteur
 from utils.send_email import Notification
+from services.historique_service import HistoriqueService
 
 
 class NotificationsView(AbstractView):
@@ -81,8 +82,8 @@ class NotificationsView(AbstractView):
         elif reponse["choix"] == "Envoyer des notifications":
             answers = prompt(self.__recherche)
             if (answers[0] is True) & (answers[1] is True):
-                localisation = input("Localisation: ")
                 specialite = input("Spécialité: ")
+                localisation = input("Localisation: ")
                 liste_stage = Stageclientvisiteur().get_stage_spe_loc(
                     specialite, localisation
                 )
@@ -140,11 +141,19 @@ class NotificationsView(AbstractView):
                         ]
                         recherche = prompt(questions).get("recherche_selectionnee")
                         affichage = Stageclientvisiteur().afficher_stage(recherche)
+                        HistoriqueService().ajouter_historique(
+                            Session().email, recherche[6]
+                        )
                         notif = prompt(self.__notif)
                         if notif[0] is True:
                             mail = prompt(self.__mail)
                             Notification().notify_internship(
-                                Session().pseudo, recherche[1], mail[0]
+                                Session().pseudo,
+                                recherche[1],
+                                recherche[3],
+                                recherche[5],
+                                recherche[4],
+                                mail[0],
                             )
                         parcours = prompt(self.__revenir_menu)
 
@@ -211,11 +220,19 @@ class NotificationsView(AbstractView):
                         ]
                         recherche = prompt(questions).get("recherche_selectionnee")
                         affichage = Stageclientvisiteur().afficher_stage(recherche)
+                        HistoriqueService().ajouter_historique(
+                            Session().email, recherche[6]
+                        )
                         notif = prompt(self.__notif)
                         if notif[0] is True:
                             mail = prompt(self.__mail)
                             Notification().notify_internship(
-                                Session().pseudo, affichage, mail[0]
+                                Session().pseudo,
+                                recherche[1],
+                                recherche[3],
+                                recherche[5],
+                                recherche[4],
+                                mail[0],
                             )
                         parcours = prompt(self.__revenir_menu)
 
@@ -281,13 +298,20 @@ class NotificationsView(AbstractView):
                             }
                         ]
                         recherche = prompt(questions).get("recherche_selectionnee")
-
                         affichage = Stageclientvisiteur().afficher_stage(recherche)
+                        HistoriqueService().ajouter_historique(
+                            Session().email, recherche[6]
+                        )
                         notif = prompt(self.__notif)
                         if notif[0] is True:
                             mail = prompt(self.__mail)
                             Notification().notify_internship(
-                                Session().pseudo, recherche[1], mail[0]
+                                Session().pseudo,
+                                recherche[1],
+                                recherche[3],
+                                recherche[5],
+                                recherche[4],
+                                mail[0],
                             )
                         parcours = prompt(self.__revenir_menu)
             else:
