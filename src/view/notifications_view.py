@@ -168,9 +168,6 @@ class NotificationsView(AbstractView):
                 liste_stage = Stageclientvisiteur().get_stage_spe_loc(
                     specialite, localisation
                 )
-                liste_stage = Stageclientvisiteur().get_stage_spe_loc(
-                    specialite, localisation
-                )
                 if liste_stage is not None:
                     liste_stage_modif = {
                         "titre": [
@@ -249,9 +246,6 @@ class NotificationsView(AbstractView):
             elif (answers[0] is False) & (answers[1] is True):
                 localisation = input("Localisation: ")
                 specialite = "0"
-                liste_stage = Stageclientvisiteur().get_stage_spe_loc(
-                    specialite, localisation
-                )
                 liste_stage = Stageclientvisiteur().get_stage_spe_loc(
                     specialite, localisation
                 )
