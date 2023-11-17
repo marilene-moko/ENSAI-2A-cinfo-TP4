@@ -38,9 +38,9 @@ class HistoriqueView(AbstractView):
                 adresse_mail=Session().email
             )
             liste_modif = {
-                "titre": [liste[stage][4] for stage in range(0, len(liste))],
-                "url_page": [liste[stage][2] for stage in range(0, len(liste))],
-                "date_visite": [liste[stage][1] for stage in range(0, len(liste))],
+                "titre": [liste[stage][4][1] for stage in range(0, len(liste))],
+                "url_page": [liste[stage][2][1] for stage in range(0, len(liste))],
+                "date_visite": [liste[stage][1][1] for stage in range(0, len(liste))],
             }
             if liste is not None:
                 historique = tabulate(

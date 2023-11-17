@@ -18,7 +18,7 @@ class NotificationsView(AbstractView):
                 "name": "choix",
                 "message": f" {Session().pseudo}",
                 "choices": [
-                    "Envoyer des notifications",
+                    "Rechercher",
                     "Quitter",
                 ],
             }
@@ -328,4 +328,4 @@ class NotificationsView(AbstractView):
                 continu = prompt(self.__continuer)
                 if continu[0] is True:
                     return NotificationsView()
-            Statut().def_statut(Session().statut)
+            return Statut().def_statut(Session().statut)
