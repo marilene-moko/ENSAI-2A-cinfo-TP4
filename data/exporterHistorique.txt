@@ -1,1 +1,4 @@
 Identifiant_page,date_visite,URL_page,adresse_mail
+17,2023-11-17,https://www.stage.fr/job/6489738/deluxe-travel-coordinator-montréal/,t
+18,2023-11-17,https://www.stage.fr/job/6533078/data-analyst-h-f-en-stage/,t
+19,2023-11-17,https://www.stage.fr/job/6533088/data-analyst-power-bi-h-f-en-stage/,t
