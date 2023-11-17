@@ -151,7 +151,7 @@ class HistoriqueDAO(metaclass=Singleton):
             return False  # La suppression de l'historique a échoué
 
     @staticmethod
-    def ajouter_historique(adresse_mail, URL_page):
+    def ajouter_historique(adresse_mail, URL_page, titre):
         """
         Ajoute les informations de la recherche dans la table page_visitee avec l'adresse_mail de la personne ayant fait la recherche
 
@@ -168,12 +168,13 @@ class HistoriqueDAO(metaclass=Singleton):
             with DBConnection().connection as connection:
                 with connection.cursor() as cursor:
                     cursor.execute(
-                        'INSERT INTO "Projet_Info".page_visitee (date_visite, URL_page, adresse_mail) '
-                        "VALUES (%(current_date)s, %(URL_page)s, %(adresse_mail)s);",
+                        'INSERT INTO "Projet_Info".page_visitee (date_visite, URL_page, adresse_mail, titre) '
+                        "VALUES (%(current_date)s, %(URL_page)s, %(adresse_mail)s, %(titre)s);",
                         {
                             "current_date": current_date,
                             "URL_page": URL_page,
                             "adresse_mail": adresse_mail,
+                            "titre": titre,
                         },
                     )
                     connection.commit()  # N'oubliez pas de commettre la transaction

@@ -205,7 +205,7 @@ class RechercheView(AbstractView):
                             recherche[7],
                         )
                     HistoriqueService().ajouter_historique(
-                        Session().email, recherche[6]
+                        Session().email, recherche[6], recherche[1]
                     )
                     parcours = prompt(self.__revenir_menu)
         elif (answers[0] is False) & (answers[1] is True):
