@@ -9,7 +9,7 @@ Specialite : {internship_specialite}
 Date de parution : {intership_date}
 Localisation : {internship_localisation}
 
-Bonne recherche à vous.
+Bonne recherche  vous.
 
 Smart Intership
 
