@@ -4,7 +4,7 @@ from view.abstract_view import AbstractView
 from view.session import Session
 
 
-class ApConnexionViewProf(AbstractView):
+class ApConnexionViewAdmin(AbstractView):
     def __init__(self):
         self.__questions = [
             {
