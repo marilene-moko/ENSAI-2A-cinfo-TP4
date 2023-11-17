@@ -26,9 +26,7 @@ class ListeEnvieDAO(metaclass=Singleton):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    "Select *             "
-                    'FROM "Projet_Info".voeu'
-                    "WHERE adresse_mail = %(adresse_mail)s;",
+                    'Select * FROM "Projet_Info".voeu WHERE adresse_mail = %(adresse_mail)s;',
                     {"adresse_mail": adresse_mail},
                 )
                 res = cursor.fetchall()
