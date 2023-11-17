@@ -328,4 +328,4 @@ class NotificationsView(AbstractView):
                 continu = prompt(self.__continuer)
                 if continu[0] is True:
                     return NotificationsView()
-            Statut().def_statut(Session().statut)
+            return Statut().def_statut(Session().statut)
