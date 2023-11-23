@@ -67,10 +67,10 @@ class RechercheView(AbstractView):
             liste_stage = Stageclientvisiteur().get_stage_spe_loc(
                 specialite, localisation
             )
-            if liste_stage is not None:
+            if len(liste_stage) > 0:
                 liste_stage_modif = {
                     "titre": [
-                        textwrap.fill(liste_stage[stage][1], 50)
+                        textwrap.fill(liste_stage[stage][1], 35)
                         for stage in range(0, len(liste_stage))
                     ],
                     "description": [

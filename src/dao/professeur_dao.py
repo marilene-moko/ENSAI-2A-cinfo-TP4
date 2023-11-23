@@ -93,9 +93,3 @@ class ProfesseurDao(UtilisateurDao):
                     else:
                         return "Un problème est survenu et le stage n'a pas pu être retiré."
         return "Ce stage n'existe pas."
-
-
-"""
- ################ à faire  ##############################     
-    def conseillerStageAEleve(self,):
-"""

@@ -16,6 +16,7 @@ class ApSansAuthentificationView(AbstractView):
                 "choices": [
                     "Rechercher",
                     "Historique",
+                    "Revenir à la page précédente",
                     "Quitter",
                 ],
             }
@@ -43,3 +44,8 @@ class ApSansAuthentificationView(AbstractView):
             from view.historique_view import HistoriqueView
 
             return HistoriqueView()
+
+        elif reponse["choix"] == "Revenir à la page précédente":
+            from view.start_view_sans_logo import StartViewSimple
+
+            return StartViewSimple()

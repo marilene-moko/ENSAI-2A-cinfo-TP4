@@ -1,9 +1,6 @@
-from typing import List, Optional
-
 from client.utilisateur.utilisateur.utilisateur_factory import UtilisateurFactory
 from dao.db_connection import DBConnection
 from dao.visiteur_dao import VisiteurDao
-from dao.historique_dao import HistoriqueDAO
 
 
 class UtilisateurDao(VisiteurDao):
@@ -28,7 +25,6 @@ class UtilisateurDao(VisiteurDao):
                     {"adresse_mail": adresse_mail, "mot_de_passe": mot_de_passe},
                 )
                 res = cursor.fetchone()
-        print(res)
         if res:
             utilisateur = UtilisateurFactory.instantiate_utilisateur(
                 email=res["adresse_mail"],
@@ -171,30 +167,9 @@ class UtilisateurDao(VisiteurDao):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    'DELETE FROM "Projet_Info".Personne WHERE adresse_mail = %(adresse_mail)s;',
-                    {"adresse_mail": adresse_mail},
+                    'DELETE FROM "Projet_Info".Personne WHERE adresse_mail = %s;',
+                    (adresse_mail,),
                 )
                 if cursor.rowcount:
                     supp = True
         return supp
-
-
-""" 
-if __name__ == "__main__":
-    # Pour charger les variables d'environnement contenues dans le fichier .env
-    import dotenv
-    from business_object.attack.physical_attack import PhysicalFormulaAttack
-
-    dotenv.load_dotenv(override=True)
-
-    # Création d'une attaque et ajout en BDD
-    mon_utilisateur = PhysicalFormulaAttack(
-        nom=,
-        prenom=,
-        email=,
-        mdp=
-    )
-
-    succes = UtilisateurDao().add_utilisateur(mon_utilisateur)
-    print("Utilisateur created in database : " + str(succes))
- """

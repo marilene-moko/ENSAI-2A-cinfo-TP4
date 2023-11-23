@@ -1,13 +1,14 @@
 from client.utilisateur_client import UtilisateurClient
 from dao.professeur_dao import ProfesseurDao
 
-class ProfesseurClient(Utilisateur):
+
+class ProfesseurClient(UtilisateurClient):
     def __init__(self):
         super().__init__()
 
     @staticmethod
     def ajouterStage(adresse_mail, titre, URL, categorie, ville, poste):
-        """ 
+        """
         Méthode qui permet à un professeur d'ajouter un stage
 
         Paramètres :
@@ -17,30 +18,24 @@ class ProfesseurClient(Utilisateur):
             categorie : str : catégorie du stage à ajouter
             ville : str : ville du stage à ajouter
             poste : str : type de poste du stage à ajouter
-            
-        Retour : 
+
+        Retour :
             un str qui indique si la tâche a été effectuée
-        """ 
-        return ProfesseurDao.ajouterStage(adresse_mail, titre, URL, categorie, ville, poste)
+        """
+        return ProfesseurDao.ajouterStage(
+            adresse_mail, titre, URL, categorie, ville, poste
+        )
 
     @staticmethod
     def retirerStage(adresse_mail, stage_id):
-        """ 
+        """
         Méthode qui permet à un professeur d'ajouter un stage
 
         Paramètres :
             adresse_mail : str : adresse mail du professeur
             URL : str : URL du stage à retirer
-        
-        Retour : 
-            un str qui indique si la tâche a été effectuée
-        """ 
-        return ProfesseurDao.retirerStage(adresse_mail, URL)
-        
- """    ################ à faire  ##############################     
-        def notify_user(self, user, stage_id):
-            if self.authenticated:
-                # Notification l'utilisateur sur le stage
-                # ...
 
- """
+        Retour :
+            un str qui indique si la tâche a été effectuée
+        """
+        return ProfesseurDao.retirerStage(adresse_mail, URL)
