@@ -22,7 +22,7 @@ class ModifProfilView(AbstractView):
             },
             {
                 "type": "confirm",
-                "message": "Voulez-vous changer votre mot de passe? Y/N ",
+                "message": "Voulez-vous changer votre mot de passe? ",
                 "default": False,
             },
         ]

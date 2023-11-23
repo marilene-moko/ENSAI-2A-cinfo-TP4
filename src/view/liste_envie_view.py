@@ -1,4 +1,6 @@
 from InquirerPy import prompt
+from tabulate import tabulate
+import textwrap
 
 from view.abstract_view import AbstractView
 from view.session import Session
@@ -18,6 +20,7 @@ class ListeEnvieView(AbstractView):
                     "Modifier sa liste d'envie",
                     "Importer sa liste d'envie",
                     "Exporter sa liste d'envie",
+                    "Revenir à la page précédente",
                     "Quitter",
                 ],
             }
@@ -43,21 +46,77 @@ class ListeEnvieView(AbstractView):
             liste_envie = ListeEnvieService.afficher_listeEnvie_utilisateur(
                 adresse_mail=Session().email
             )
-            print(liste_envie)
+            if len(liste_envie) > 0:
+                liste_envie_modif = {
+                    "titre": [
+                        textwrap.fill(liste_envie[stage]["intitule"], 50)
+                        for stage in range(0, len(liste_envie))
+                    ],
+                    "URL du stage": [
+                        liste_envie[stage]["identifiant_stage"]
+                        for stage in range(0, len(liste_envie))
+                    ],
+                    "specialite": [
+                        liste_envie[stage]["categorie"]
+                        for stage in range(0, len(liste_envie))
+                    ],
+                    "localisation": [
+                        liste_envie[stage]["ville"]
+                        for stage in range(0, len(liste_envie))
+                    ],
+                    "entreprise": [
+                        liste_envie[stage]["entreprise"]
+                        for stage in range(0, len(liste_envie))
+                    ],
+                }
+                table = tabulate(
+                    liste_envie_modif,
+                    headers=[
+                        "titre",
+                        "URL du stage",
+                        "specialite",
+                        "localisation",
+                        "entreprise",
+                    ],
+                    tablefmt="fancy_grid",
+                    disable_numparse=True,
+                    colalign=["center", "center", "center", "center", "center"],
+                )
+                print(table)
+            else:
+                print("Votre liste d'envie est vide")
             return Statut.def_statut(Session().statut)
 
         elif reponse["choix"] == "Modifier sa liste d'envie":
-            choix = input(
-                "Choississez l'identifiant du voeux que vous voulez supprimer: "
+            liste_envie = ListeEnvieService.afficher_listeEnvie_utilisateur(
+                adresse_mail=Session().email
             )
-            modif = ListeEnvieService.supprimer_listeEnvie_utilisateur(
-                adresse_mail=Session().email, identifiant_voeu=choix
-            )
-            if modif is True:
-                print("Votre voeux a bien été supprimé")
-            else:
-                print(modif)
-            return Statut.def_statut(Session().statut)
+            if liste_envie is not None:
+                choix_modif = [
+                    {
+                        "name": f"Titre: {modif['intitule']}, Specialite: {modif['categorie']}, Localisation: {modif['ville']}",
+                        "value": modif,
+                    }
+                    for modif in liste_envie
+                ]
+                questions = [
+                    {
+                        "type": "list",
+                        "message": "Sélectionnez le stage que vous voulez supprimer :",
+                        "name": "modification",
+                        "choices": choix_modif,
+                    }
+                ]
+                modif_stage = prompt(questions).get("modification")
+                modif = ListeEnvieService.supprimer_listeEnvie_utilisateur(
+                    adresse_mail=Session().email,
+                    identifiant_stage=modif_stage["identifiant_stage"],
+                )
+                if modif is True:
+                    print("Votre voeux a bien été supprimé")
+                else:
+                    print(modif)
+                return Statut.def_statut(Session().statut)
 
         elif reponse["choix"] == "Importer sa liste d'envie":
             importer = ListeEnvieService.importer_voeux(adresse_mail=Session().email)
@@ -73,4 +132,7 @@ class ListeEnvieView(AbstractView):
                 print("Votre liste a bien été exportée")
             else:
                 print("Une erreur s'est produite. Veuillez essayer ultérieurement.")
+            return Statut.def_statut(Session().statut)
+
+        elif reponse["choix"] == "Revenir à la page précédente":
             return Statut.def_statut(Session().statut)

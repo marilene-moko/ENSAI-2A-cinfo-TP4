@@ -166,8 +166,7 @@ class HistoriqueDAO(metaclass=Singleton):
             un booléen qui indique si la tâche a bien été effectuée
         """
         try:
-            current_date = datetime.date.today()
-            date_visite = current_date.strftime("%Y/%m/%d")
+            date_visite = datetime.date.today()
 
             with DBConnection().connection as connection:
                 with connection.cursor() as cursor:

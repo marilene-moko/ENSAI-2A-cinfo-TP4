@@ -122,7 +122,7 @@ class NotificationsView(AbstractView):
                         ],
                         tablefmt="fancy_grid",
                         disable_numparse=True,
-                        colalign=["left", "center", "center", "center", "center"],
+                        colalign=["center", "center", "center", "center", "center"],
                     )
                     print(table)
                     # Proposer à l'utilisateur de parcourir la liste des voeux

@@ -17,6 +17,7 @@ class ProfilView(AbstractView):
                     "Afficher son profil",
                     "Modifier son profil",
                     "Supprimer son profil",
+                    "Revenir à la page précédente",
                     "Quitter",
                 ],
             }
@@ -66,3 +67,6 @@ class ProfilView(AbstractView):
             else:
                 print("Une erreur est survenue. Veuillez essayer ultérieurement.")
                 return Statut.def_statut(Session().statut)
+
+        elif reponse["choix"] == "Revenir à la page précédente":
+            return Statut.def_statut(Session().statut)

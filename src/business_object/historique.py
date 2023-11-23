@@ -58,7 +58,7 @@ class Historique :
         """
         return HistoriqueDAO.supprimer_historique_utilisateur(email)
 
-    def ajouter_historique(email, URL_page):
+    def ajouter_historique(email, URL_page, titre):
         """ 
         Méthode qui permet à l'utilisateur d'ajouter un stage à son historique.
 
@@ -69,6 +69,6 @@ class Historique :
         Retour : 
             un booléen qui indique si la tâche a bien été effectuée
         """
-        return HistoriqueDAO.ajouter_historique(email, URL_page)
+        return HistoriqueDAO.ajouter_historique(email, URL_page, titre)
     
     

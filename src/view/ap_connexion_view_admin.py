@@ -16,7 +16,6 @@ class ApConnexionViewAdmin(AbstractView):
                     "Liste d'envie",
                     "Profil",
                     "Recherche - Notifications",
-                    "Publication",
                     "Site",
                     "Quitter",
                 ],

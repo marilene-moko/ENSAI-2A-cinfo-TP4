@@ -19,6 +19,7 @@ class HistoriqueView(AbstractView):
                     "Supprimer l'historique",
                     "Exporter l'historique",
                     "Importer l'historique",
+                    "Revenir à la page précédente",
                     "Quitter",
                 ],
             }
@@ -37,17 +38,15 @@ class HistoriqueView(AbstractView):
             liste = HistoriqueService.afficher_historique_utilisateur(
                 adresse_mail=Session().email
             )
-            print(liste)
             if len(liste) > 0:
                 liste_modif = {
-                    "titre": [
-                        liste[stage]["titre"][1] for stage in range(0, len(liste))
-                    ],
+                    "titre": [liste[stage]["titre"] for stage in range(0, len(liste))],
                     "url_page": [
-                        liste[stage]["url_page"][1] for stage in range(0, len(liste))
+                        liste[stage]["url_page"] for stage in range(0, len(liste))
                     ],
                     "date_visite": [
-                        liste[stage]["date_visite"][1] for stage in range(0, len(liste))
+                        liste[stage]["date_visite"].strftime("%Y/%m/%d")
+                        for stage in range(0, len(liste))
                     ],
                 }
                 historique = tabulate(
@@ -59,9 +58,11 @@ class HistoriqueView(AbstractView):
                     ],
                     tablefmt="fancy_grid",
                     disable_numparse=True,
-                    colalign=["left", "center", "center", "center", "center"],
+                    colalign=["center", "center", "center"],
                 )
                 print(historique)
+            else:
+                print("Votre historique est vide")
             return Statut.def_statut(Session().statut)
 
         elif reponse["choix"] == "Supprimer l'historique":
@@ -101,4 +102,7 @@ class HistoriqueView(AbstractView):
                     print("Votre historique a bien été exporté")
                 else:
                     print("Une erreur s'est produite. Veuillez essayer ultérieurement.")
+            return Statut.def_statut(Session().statut)
+
+        elif reponse["choix"] == "Revenir à la page précédente":
             return Statut.def_statut(Session().statut)

@@ -33,7 +33,7 @@ class ListeEnvieDAO(metaclass=Singleton):
             return res
 
     @staticmethod
-    def supprimer_listeEnvie_utilisateur(adresse_mail, identifiant_voeu):
+    def supprimer_listeEnvie_utilisateur(adresse_mail, identifiant_stage):
         """
         Supprime un voeu de la liste d'envie d'un utilisateur.
         Plusieurs tests pour savoir si le voeu existe et s'il appartient
@@ -51,8 +51,8 @@ class ListeEnvieDAO(metaclass=Singleton):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    'SELECT adresse_mail FROM "Projet_Info".voeu WHERE identifiant_voeu = %(identifiant_voeu)s;',
-                    {"identifiant_voeu": identifiant_voeu},
+                    'SELECT adresse_mail FROM "Projet_Info".voeu WHERE identifiant_stage = %(identifiant_stage)s;',
+                    {"identifiant_stage": identifiant_stage},
                 )
                 row = cursor.fetchone()
 
@@ -70,8 +70,8 @@ class ListeEnvieDAO(metaclass=Singleton):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    'DELETE FROM "Projet_Info".voeu WHERE identifiant_voeu = %(identifiant_voeu)s;',
-                    {"identifiant_voeu": identifiant_voeu},
+                    'DELETE FROM "Projet_Info".voeu WHERE identifiant_stage = %(identifiant_stage)s;',
+                    {"identifiant_stage": identifiant_stage},
                 )
 
         return True

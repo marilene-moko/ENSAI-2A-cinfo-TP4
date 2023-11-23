@@ -1,12 +1,8 @@
-import os
 import requests
 
-from typing import List, Optional
+
 from bs4 import BeautifulSoup
 from business_object.stage.stage_factory import stageFactory
-from business_object.stage.stage_layout import Stagelayout
-from dao.historique_dao import HistoriqueDAO
-from dao.listeenvie_dao import ListeEnvieDAO
 
 
 class Stageclientvisiteur:

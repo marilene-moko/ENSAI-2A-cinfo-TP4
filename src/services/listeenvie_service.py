@@ -11,12 +11,12 @@ class ListeEnvieService:
         return dao.afficher_listeEnvie_utilisateur(adresse_mail)
 
     @staticmethod
-    def supprimer_listeEnvie_utilisateur(adresse_mail, identifiant_voeu):
+    def supprimer_listeEnvie_utilisateur(adresse_mail, identifiant_stage):
         """
         Call the DAO function to remove a wish from the user's wishlist.
         """
         dao = ListeEnvieDAO()
-        return dao.supprimer_listeEnvie_utilisateur(adresse_mail, identifiant_voeu)
+        return dao.supprimer_listeEnvie_utilisateur(adresse_mail, identifiant_stage)
 
     @staticmethod
     def ajouter_stage_listeEnvie_utilisateur(
