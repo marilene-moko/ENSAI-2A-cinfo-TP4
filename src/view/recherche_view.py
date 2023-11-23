@@ -1,5 +1,6 @@
 from InquirerPy import prompt
 from tabulate import tabulate
+import textwrap
 
 from view.abstract_view import AbstractView
 from view.session import Session
@@ -69,11 +70,11 @@ class RechercheView(AbstractView):
             if liste_stage is not None:
                 liste_stage_modif = {
                     "titre": [
-                        liste_stage[stage][1][0:75]
+                        textwrap.fill(liste_stage[stage][1], 50)
                         for stage in range(0, len(liste_stage))
                     ],
                     "description": [
-                        liste_stage[stage][2][0:100]
+                        textwrap.fill(liste_stage[stage][2][0:300], 100)
                         for stage in range(0, len(liste_stage))
                     ],
                     "specialite": [
@@ -123,16 +124,17 @@ class RechercheView(AbstractView):
                     HistoriqueService().ajouter_historique(
                         Session().email, recherche[6], recherche[1]
                     )
-                    favori = prompt(self.__fav)
-                    if favori[0] is True:
-                        ListeEnvieService().ajouter_stage_listeEnvie_utilisateur(
-                            Session().email,
-                            recherche[6],
-                            recherche[3],
-                            recherche[1],
-                            recherche[4],
-                            recherche[7],
-                        )
+                    if Session().email != "adresse_mail_visiteur":
+                        favori = prompt(self.__fav)
+                        if favori[0] is True:
+                            ListeEnvieService().ajouter_stage_listeEnvie_utilisateur(
+                                Session().email,
+                                recherche[6],
+                                recherche[3],
+                                recherche[1],
+                                recherche[4],
+                                recherche[7],
+                            )
                     parcours = prompt(self.__revenir_menu)
             else:
                 print("La recherche demandée n'a pas de résultats")
@@ -146,11 +148,11 @@ class RechercheView(AbstractView):
             if liste_stage is not None:
                 liste_stage_modif = {
                     "titre": [
-                        liste_stage[stage][1][0:75]
+                        textwrap.fill(liste_stage[stage][1], 50)
                         for stage in range(0, len(liste_stage))
                     ],
                     "description": [
-                        liste_stage[stage][2][0:100]
+                        textwrap.fill(liste_stage[stage][2][0:300], 100)
                         for stage in range(0, len(liste_stage))
                     ],
                     "specialite": [
@@ -200,16 +202,17 @@ class RechercheView(AbstractView):
                     HistoriqueService().ajouter_historique(
                         Session().email, recherche[6], recherche[1]
                     )
-                    favori = prompt(self.__fav)
-                    if favori[0] is True:
-                        ListeEnvieService().ajouter_stage_listeEnvie_utilisateur(
-                            Session().email,
-                            recherche[6],
-                            recherche[3],
-                            recherche[1],
-                            recherche[4],
-                            recherche[7],
-                        )
+                    if Session().email != "adresse_mail_visiteur":
+                        favori = prompt(self.__fav)
+                        if favori[0] is True:
+                            ListeEnvieService().ajouter_stage_listeEnvie_utilisateur(
+                                Session().email,
+                                recherche[6],
+                                recherche[3],
+                                recherche[1],
+                                recherche[4],
+                                recherche[7],
+                            )
                     parcours = prompt(self.__revenir_menu)
             else:
                 print("La recherche demandée n'a pas de résultats")
@@ -223,11 +226,11 @@ class RechercheView(AbstractView):
             if liste_stage is not None:
                 liste_stage_modif = {
                     "titre": [
-                        liste_stage[stage][1][0:75]
+                        textwrap.fill(liste_stage[stage][1], 50)
                         for stage in range(0, len(liste_stage))
                     ],
                     "description": [
-                        liste_stage[stage][2][0:100]
+                        textwrap.fill(liste_stage[stage][2][0:300], 100)
                         for stage in range(0, len(liste_stage))
                     ],
                     "specialite": [
@@ -277,16 +280,17 @@ class RechercheView(AbstractView):
                     HistoriqueService().ajouter_historique(
                         Session().email, recherche[6], recherche[1]
                     )
-                    favori = prompt(self.__fav)
-                    if favori[0] is True:
-                        ListeEnvieService().ajouter_stage_listeEnvie_utilisateur(
-                            Session().email,
-                            recherche[6],
-                            recherche[3],
-                            recherche[1],
-                            recherche[4],
-                            recherche[7],
-                        )
+                    if Session().email != "adresse_mail_visiteur":
+                        favori = prompt(self.__fav)
+                        if favori[0] is True:
+                            ListeEnvieService().ajouter_stage_listeEnvie_utilisateur(
+                                Session().email,
+                                recherche[6],
+                                recherche[3],
+                                recherche[1],
+                                recherche[4],
+                                recherche[7],
+                            )
                     parcours = prompt(self.__revenir_menu)
             else:
                 print("La recherche demandée n'a pas de résultats")

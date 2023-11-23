@@ -37,53 +37,68 @@ class HistoriqueView(AbstractView):
             liste = HistoriqueService.afficher_historique_utilisateur(
                 adresse_mail=Session().email
             )
-            liste_modif = {
-                "titre": [liste[stage][4][1] for stage in range(0, len(liste))],
-                "url_page": [liste[stage][2][1] for stage in range(0, len(liste))],
-                "date_visite": [liste[stage][1][1] for stage in range(0, len(liste))],
-            }
-            if liste is not None:
+            print(liste)
+            if len(liste) > 0:
+                liste_modif = {
+                    "titre": [
+                        liste[stage]["titre"][1] for stage in range(0, len(liste))
+                    ],
+                    "url_page": [
+                        liste[stage]["url_page"][1] for stage in range(0, len(liste))
+                    ],
+                    "date_visite": [
+                        liste[stage]["date_visite"][1] for stage in range(0, len(liste))
+                    ],
+                }
                 historique = tabulate(
                     liste_modif,
                     headers=[
                         "titre",
-                        "description",
-                        "specialite",
-                        "localisation",
-                        "date_publication",
+                        "url_page",
+                        "date_visite",
                     ],
                     tablefmt="fancy_grid",
                     disable_numparse=True,
                     colalign=["left", "center", "center", "center", "center"],
                 )
                 print(historique)
+            return Statut.def_statut(Session().statut)
 
         elif reponse["choix"] == "Supprimer l'historique":
-            supp = HistoriqueService.supprimer_historique_utilisateur(
-                adresse_mail=Session().email
-            )
-            if supp is True:
-                print("La suppression de votre historique a bien eu lieu")
+            if Session().email == "adresse_mail_visiteur":
+                print("Veuillez-vous connecter pour accéder à cette fonctionnalité")
             else:
-                print(supp)
+                supp = HistoriqueService.supprimer_historique_utilisateur(
+                    adresse_mail=Session().email
+                )
+                if supp is True:
+                    print("La suppression de votre historique a bien eu lieu")
+                else:
+                    print(supp)
             return Statut.def_statut(Session().statut)
 
         elif reponse["choix"] == "Exporter l'historique":
-            exporter = HistoriqueService.exporter_historique(
-                adresse_mail=Session().email
-            )
-            if exporter is True:
-                print("Votre historique a bien été exporté")
+            if Session().email == "adresse_mail_visiteur":
+                print("Veuillez-vous connecter pour accéder à cette fonctionnalité")
             else:
-                print("Une erreur s'est produite. Veuillez essayer ultérieurement.")
+                exporter = HistoriqueService.exporter_historique(
+                    adresse_mail=Session().email
+                )
+                if exporter is True:
+                    print("Votre historique a bien été exporté")
+                else:
+                    print("Une erreur s'est produite. Veuillez essayer ultérieurement.")
             return Statut.def_statut(Session().statut)
 
         elif reponse["choix"] == "Importer l'historique":
-            importer = HistoriqueService.importer_historique(
-                adresse_mail=Session().email
-            )
-            if importer is True:
-                print("Votre historique a bien été exporté")
+            if Session().email == "adresse_mail_visiteur":
+                print("Veuillez-vous connecter pour accéder à cette fonctionnalité")
             else:
-                print("Une erreur s'est produite. Veuillez essayer ultérieurement.")
+                importer = HistoriqueService.importer_historique(
+                    adresse_mail=Session().email
+                )
+                if importer is True:
+                    print("Votre historique a bien été exporté")
+                else:
+                    print("Une erreur s'est produite. Veuillez essayer ultérieurement.")
             return Statut.def_statut(Session().statut)

@@ -40,4 +40,4 @@ class HistoriqueService:
         Call the DAO function to add history data.
         """
         dao = HistoriqueDAO()
-        return dao.ajouter_historique(adresse_mail, URL_page)
+        return dao.ajouter_historique(adresse_mail, URL_page, titre)

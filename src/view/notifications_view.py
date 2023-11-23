@@ -1,5 +1,6 @@
 from InquirerPy import prompt
 from tabulate import tabulate
+import textwrap
 
 from view.abstract_view import AbstractView
 from view.session import Session
@@ -18,7 +19,7 @@ class NotificationsView(AbstractView):
                 "name": "choix",
                 "message": f" {Session().pseudo}",
                 "choices": [
-                    "Rechercher",
+                    "Envoyer des notifications",
                     "Quitter",
                 ],
             }
@@ -90,11 +91,11 @@ class NotificationsView(AbstractView):
                 if liste_stage is not None:
                     liste_stage_modif = {
                         "titre": [
-                            liste_stage[stage][1][0:75]
+                            textwrap.fill(liste_stage[stage][1], 50)
                             for stage in range(0, len(liste_stage))
                         ],
                         "description": [
-                            liste_stage[stage][2][0:100]
+                            textwrap.fill(liste_stage[stage][2][0:300], 100)
                             for stage in range(0, len(liste_stage))
                         ],
                         "specialite": [
@@ -171,11 +172,11 @@ class NotificationsView(AbstractView):
                 if liste_stage is not None:
                     liste_stage_modif = {
                         "titre": [
-                            liste_stage[stage][1][0:75]
+                            textwrap.fill(liste_stage[stage][1], 50)
                             for stage in range(0, len(liste_stage))
                         ],
                         "description": [
-                            liste_stage[stage][2][0:100]
+                            textwrap.fill(liste_stage[stage][2][0:300], 100)
                             for stage in range(0, len(liste_stage))
                         ],
                         "specialite": [
@@ -183,7 +184,7 @@ class NotificationsView(AbstractView):
                             for stage in range(0, len(liste_stage))
                         ],
                         "localisation": [
-                            liste_stage[stage][4]
+                            textwrap.fill(liste_stage[stage][4], 15)
                             for stage in range(0, len(liste_stage))
                         ],
                         "date_publication": [
