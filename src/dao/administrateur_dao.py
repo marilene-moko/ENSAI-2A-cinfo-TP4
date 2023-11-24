@@ -2,10 +2,10 @@ from typing import List, Optional
 from utils.singleton import Singleton
 
 from dao.db_connection import DBConnection
-from dao.professeur_dao import ProfesseurDao
+from dao.utilisateur_dao import UtilisateurDao
 
 
-class AdministrateurDao(ProfesseurDao):
+class AdministrateurDao(UtilisateurDao):
     @staticmethod
     def modifierDroitsUtilisateur(email_utilisateur, nv_statut):
         """

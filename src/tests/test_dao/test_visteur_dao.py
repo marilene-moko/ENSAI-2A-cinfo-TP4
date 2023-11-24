@@ -6,13 +6,6 @@ from dao.db_connection import DBConnection
 
 
 class TestUtilisateurDao(unittest.TestCase):
-    def setUp(self):
-        # Initialiser
-        self.visiteur_dao = VisiteurDao()
-
-    def tearDown(self):
-        pass
-
     def test_hash_mdp(self):
         hashed_mdp = VisiteurDao.hash_mdp("MotdePASSE!")
 
