@@ -1,6 +1,5 @@
 import unittest
 
-from client.utilisateur.utilisateur.utilisateur_factory import UtilisateurFactory
 from dao.visiteur_dao import VisiteurDao
 from dao.db_connection import DBConnection
 
