@@ -29,3 +29,7 @@ class AdministrateurClient(ProfesseurClient):
             un str qui indique si la modification des droits a bien été faite
         """
         return AdministrateurDao.modifierDroitsUtilisateur(adresse_mail, nv_statut)
+
+    @staticmethod
+    def get_users():
+        return AdministrateurDao.get_users()
