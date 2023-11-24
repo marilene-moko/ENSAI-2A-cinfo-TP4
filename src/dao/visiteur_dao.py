@@ -49,19 +49,20 @@ class VisiteurDao(metaclass=Singleton):
         """
         created = False
 
-        # Get the id type
-        with DBConnection().connection as connection:
-            with connection.cursor() as cursor:
-                cursor.execute(
-                    "SELECT *                                         "
-                    'FROM "Projet_Info".Personne                      '
-                    "WHERE adresse_mail = %(adresse_mail)s;           ",
-                    {"adresse_mail": adresse_mail},
-                )
-                res = cursor.fetchone()
-        if res:
-            return created
-        else:
+        try:
+            # Get the id type
+            with DBConnection().connection as connection:
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        "SELECT *                                         "
+                        'FROM "Projet_Info".Personne                      '
+                        "WHERE adresse_mail = %(adresse_mail)s;           ",
+                        {"adresse_mail": adresse_mail},
+                    )
+                    utilisateur_existe = cursor.fetchone()
+            if utilisateur_existe:
+                return created
+
             with DBConnection().connection as connection:
                 with connection.cursor() as cursor:
                     cursor.execute(
@@ -76,11 +77,16 @@ class VisiteurDao(metaclass=Singleton):
                             "statut": statut,
                         },
                     )
-                    res = cursor.rowcount
-            if res:
+                    lignes_modif = cursor.rowcount
+
+            if lignes_modif:
                 created = True
 
-            return created
+        except Exception as e:
+            # Gérer les exceptions (par exemple, les erreurs de base de données)
+            print(f"Erreur lors de l'inscription de l'utilisateur : {e}")
+
+        return created
 
 
 """ 
