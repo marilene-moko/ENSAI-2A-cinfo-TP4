@@ -178,6 +178,12 @@ class UtilisateurDao(VisiteurDao):
                     'DELETE FROM "Projet_Info".Personne WHERE adresse_mail = %(mail)s;',
                     {"mail": adresse_mail},
                 )
-                row_count = cursor.fetchone()["count"]
-            return row_count == 0
+                cursor.execute(
+                    'SELECT COUNT(*) FROM "Projet_Info".Personne WHERE adresse_mail = %(mail)s;',
+                    {"mail": adresse_mail},
+                )
+                row_count = cursor.fetchone()[
+                    "count"
+                ]  # Récupérer le nombre de lignes correspondantes
+                return row_count == 0
         return supp
