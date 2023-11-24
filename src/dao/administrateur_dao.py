@@ -17,7 +17,7 @@ class AdministrateurDao(UtilisateurDao):
                             ce statut ne peut qu'être : 'utilisateur', 'professeur', 'administrateur'
 
         Retour :
-            un str qui indique si la modification des droits a bien été faite
+            un booléen qui indique si la modification des droits a bien été faite
         """
 
         # Vérifier que l'utilisateur avec cet email existe
