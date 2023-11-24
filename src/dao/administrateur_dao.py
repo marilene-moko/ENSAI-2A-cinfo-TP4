@@ -38,3 +38,13 @@ class AdministrateurDao(ProfesseurDao):
 
                 if cursor.rowcount:
                     return True
+
+    @staticmethod
+    def get_users():
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    'SELECT nom, prenom, adresse_mail, statut FROM "Projet_Info".Personne;',
+                )
+                users = cursor.fetchall()  # Récupérer tous les utilisateurs
+        return users

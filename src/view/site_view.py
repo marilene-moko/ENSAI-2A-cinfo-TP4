@@ -16,6 +16,7 @@ class SiteView(AbstractView):
                 "name": "choix",
                 "message": f" {Session().pseudo}",
                 "choices": [
+                    "Afficher les profils",
                     "Modifier des profils",
                     "Supprimer des profils",
                     "Revenir à la page précédente",
@@ -86,3 +87,31 @@ class SiteView(AbstractView):
 
         elif reponse["choix"] == "Revenir à la page précédente":
             return Statut.def_statut(Session().statut)
+
+        elif reponse["choix"] == "Afficher les profils":
+            users = AdministrateurClient(
+                identifiant_personne=Session().email,
+                nom=Session(),
+                prenom=Session().prenom,
+                adresse_mail=Session().email,
+                mot_de_passe=Session().mot_de_passe,
+            ).get_users()  # Récupérer les utilisateurs
+
+            if users:  # Vérifier si des utilisateurs ont été récupérés
+                # En-tête
+                print("N°\tNom\tPrénom\tAdresse e-mail\tStatut")
+                print("-" * 60)  # Ligne de séparation après l'en-tête
+
+                # Affichage de chaque utilisateur avec un numéro et une séparation
+                for i, user in enumerate(users, start=1):
+                    print(
+                        f"{i}\t{user['nom']}\t{user['prenom']}\t{user['adresse_mail']}\t{user['statut']}"
+                    )
+                    print("-" * 60)  # Ligne de séparation entre chaque utilisateur
+            else:
+                print(
+                    "Aucun utilisateur trouvé."
+                )  # Si aucun utilisateur n'est retourné
+            from view.ap_connexion_view_admin import ApConnexionViewAdmin
+
+            return ApConnexionViewAdmin()
