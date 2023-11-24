@@ -1,11 +1,105 @@
 Identifiant_page,date_visite,titre,URL_page,adresse_mail
-85,2023-11-24,Stage - Data Marketing et Analytics BtoB H/F,https://www.stage.fr/job/6568923/stage-data-marketing-et-analytics-btob-h-f/,c
-86,2023-11-24,Stage - Data Marketing et Analytics BtoB H/F,https://www.stage.fr/job/6568916/stage-data-marketing-et-analytics-btob-h-f/,c
-87,2023-11-24,STAGE - CHEF DE PROJET DATA ACHATS H/F,https://www.stage.fr/job/6565205/stage-chef-de-projet-data-achats-h-f/,c
-88,2023-11-24,Assistant(e) Chargé(e) d'Etudes Quantitatives, Pôle Wellbeing, Stage de 6 mois, F/H,https://www.stage.fr/job/6535447/assistant-e-chargé-e-d-etudes-quantitatives-pôle-wellbeing-stage-de-6-mois-f-h/,c
-89,2023-11-24,Assistant(e) Chargé(e) d'Etudes Quantitatives, Pôle Wellbeing, Stage de 6 mois, F/H,https://www.stage.fr/job/6535447/assistant-e-chargé-e-d-etudes-quantitatives-pôle-wellbeing-stage-de-6-mois-f-h/,c
-90,2023-11-24,Assistant(e) Chargé(e) d'Etudes Quantitatives, Pôle Wellbeing, Stage de 6 mois, F/H,https://www.stage.fr/job/6548134/assistant-e-chargé-e-d-etudes-quantitatives-pôle-wellbeing-stage-de-6-mois-f-h/,c
-91,2023-11-24,Data Analyst impact (stage),https://www.stage.fr/job/6542566/data-analyst-impact-stage/,c
-92,2023-11-24,Stage - Data Engineer - Banque - Île de France H/F (Stage),https://www.stage.fr/job/6552330/stage-data-engineer-banque-île-de-france-h-f-stage/,c
-93,2023-11-24,STAGE - CHEF DE PROJET DATA ACHATS H/F,https://www.stage.fr/job/6565205/stage-chef-de-projet-data-achats-h-f/,c
-94,2023-11-24,Stage Energy Data Analyst,https://www.stage.fr/job/6568986/stage-energy-data-analyst/,c
+103,2023-10-25,stage1,https://www.example.com/page1,t
+104,2023-10-26,stage3,https://www.example.com/page2,t
+105,2023-10-27,stage2,https://www.example.com/page3,t
+106,2023-10-28,stage4,https://www.example.com/page4,t
+107,2023-10-29,stage5,https://www.example.com/page5,t
+109,2023-10-25,stage1,https://www.example.com/page1,t
+110,2023-10-26,stage3,https://www.example.com/page2,t
+111,2023-10-27,stage2,https://www.example.com/page3,t
+112,2023-10-28,stage4,https://www.example.com/page4,t
+113,2023-10-29,stage5,https://www.example.com/page5,t
+115,2023-10-25,stage1,https://www.example.com/page1,t
+116,2023-10-26,stage3,https://www.example.com/page2,t
+48,2023-11-24,Stage - Chargé(e) de projets SIRH (H/F) - Janvier 2024 - 6 mois,https://www.stage.fr/job/6548418/stage-chargé-e-de-projets-sirh-h-f-janvier-2024-6-mois/,t
+49,2023-11-24,Stage - Chargé(e) de projets SIRH (H/F) - Janvier 2024 - 6 mois,https://www.stage.fr/job/6548418/stage-chargé-e-de-projets-sirh-h-f-janvier-2024-6-mois/,t
+117,2023-10-27,stage2,https://www.example.com/page3,t
+118,2023-10-28,stage4,https://www.example.com/page4,t
+119,2023-10-29,stage5,https://www.example.com/page5,t
+121,2023-10-25,stage1,https://www.example.com/page1,t
+122,2023-10-26,stage3,https://www.example.com/page2,t
+123,2023-10-27,stage2,https://www.example.com/page3,t
+124,2023-10-28,stage4,https://www.example.com/page4,t
+125,2023-10-29,stage5,https://www.example.com/page5,t
+127,2023-10-25,stage1,https://www.example.com/page1,t
+128,2023-10-26,stage3,https://www.example.com/page2,t
+129,2023-10-27,stage2,https://www.example.com/page3,t
+130,2023-10-28,stage4,https://www.example.com/page4,t
+131,2023-10-29,stage5,https://www.example.com/page5,t
+133,2023-10-25,stage1,https://www.example.com/page1,t
+134,2023-10-26,stage3,https://www.example.com/page2,t
+135,2023-10-27,stage2,https://www.example.com/page3,t
+136,2023-10-28,stage4,https://www.example.com/page4,t
+137,2023-10-29,stage5,https://www.example.com/page5,t
+139,2023-10-25,stage1,https://www.example.com/page1,t
+140,2023-10-26,stage3,https://www.example.com/page2,t
+141,2023-10-27,stage2,https://www.example.com/page3,t
+142,2023-10-28,stage4,https://www.example.com/page4,t
+143,2023-10-29,stage5,https://www.example.com/page5,t
+145,2023-10-25,stage1,https://www.example.com/page1,t
+146,2023-10-26,stage3,https://www.example.com/page2,t
+147,2023-10-27,stage2,https://www.example.com/page3,t
+148,2023-10-28,stage4,https://www.example.com/page4,t
+149,2023-10-29,stage5,https://www.example.com/page5,t
+151,2023-10-25,stage1,https://www.example.com/page1,t
+152,2023-10-26,stage3,https://www.example.com/page2,t
+153,2023-10-27,stage2,https://www.example.com/page3,t
+154,2023-10-28,stage4,https://www.example.com/page4,t
+155,2023-10-29,stage5,https://www.example.com/page5,t
+157,2023-10-25,stage1,https://www.example.com/page1,t
+158,2023-10-26,stage3,https://www.example.com/page2,t
+159,2023-10-27,stage2,https://www.example.com/page3,t
+160,2023-10-28,stage4,https://www.example.com/page4,t
+161,2023-10-29,stage5,https://www.example.com/page5,t
+163,2023-10-25,stage1,https://www.example.com/page1,t
+164,2023-10-26,stage3,https://www.example.com/page2,t
+165,2023-10-27,stage2,https://www.example.com/page3,t
+166,2023-10-28,stage4,https://www.example.com/page4,t
+167,2023-10-29,stage5,https://www.example.com/page5,t
+170,2023-10-25,stage1,https://www.example.com/page1,t
+171,2023-10-26,stage3,https://www.example.com/page2,t
+172,2023-10-27,stage2,https://www.example.com/page3,t
+173,2023-10-28,stage4,https://www.example.com/page4,t
+174,2023-10-29,stage5,https://www.example.com/page5,t
+177,2023-10-25,stage1,https://www.example.com/page1,t
+178,2023-10-26,stage3,https://www.example.com/page2,t
+179,2023-10-27,stage2,https://www.example.com/page3,t
+180,2023-10-28,stage4,https://www.example.com/page4,t
+181,2023-10-29,stage5,https://www.example.com/page5,t
+183,2023-11-24,Stage - Chargé(e) de projets SIRH (H/F) - Janvier 2024 - 6 mois,https://www.stage.fr/job/6548418/stage-chargé-e-de-projets-sirh-h-f-janvier-2024-6-mois/,t
+185,2023-10-25,stage1,https://www.example.com/page1,t
+186,2023-10-26,stage3,https://www.example.com/page2,t
+187,2023-10-27,stage2,https://www.example.com/page3,t
+188,2023-10-28,stage4,https://www.example.com/page4,t
+189,2023-10-29,stage5,https://www.example.com/page5,t
+191,2023-11-24,Stage - Chargé(e) de projets SIRH (H/F) - Janvier 2024 - 6 mois,https://www.stage.fr/job/6548418/stage-chargé-e-de-projets-sirh-h-f-janvier-2024-6-mois/,t
+193,2023-10-25,stage1,https://www.example.com/page1,t
+194,2023-10-26,stage3,https://www.example.com/page2,t
+195,2023-10-27,stage2,https://www.example.com/page3,t
+196,2023-10-28,stage4,https://www.example.com/page4,t
+197,2023-10-29,stage5,https://www.example.com/page5,t
+199,2023-11-24,Stage - Chargé(e) de projets SIRH (H/F) - Janvier 2024 - 6 mois,https://www.stage.fr/job/6548418/stage-chargé-e-de-projets-sirh-h-f-janvier-2024-6-mois/,t
+201,2023-10-25,stage1,https://www.example.com/page1,t
+202,2023-10-26,stage3,https://www.example.com/page2,t
+203,2023-10-27,stage2,https://www.example.com/page3,t
+204,2023-10-28,stage4,https://www.example.com/page4,t
+205,2023-10-29,stage5,https://www.example.com/page5,t
+207,2023-11-24,Stage - Chargé(e) de projets SIRH (H/F) - Janvier 2024 - 6 mois,https://www.stage.fr/job/6548418/stage-chargé-e-de-projets-sirh-h-f-janvier-2024-6-mois/,t
+209,2023-10-25,stage1,https://www.example.com/page1,t
+210,2023-10-26,stage3,https://www.example.com/page2,t
+211,2023-10-27,stage2,https://www.example.com/page3,t
+212,2023-10-28,stage4,https://www.example.com/page4,t
+213,2023-10-29,stage5,https://www.example.com/page5,t
+215,2023-11-24,Stage - Chargé(e) de projets SIRH (H/F) - Janvier 2024 - 6 mois,https://www.stage.fr/job/6548418/stage-chargé-e-de-projets-sirh-h-f-janvier-2024-6-mois/,t
+217,2023-10-25,stage1,https://www.example.com/page1,t
+218,2023-10-26,stage3,https://www.example.com/page2,t
+219,2023-10-27,stage2,https://www.example.com/page3,t
+220,2023-10-28,stage4,https://www.example.com/page4,t
+221,2023-10-29,stage5,https://www.example.com/page5,t
+223,2023-11-24,Stage - Chargé(e) de projets SIRH (H/F) - Janvier 2024 - 6 mois,https://www.stage.fr/job/6548418/stage-chargé-e-de-projets-sirh-h-f-janvier-2024-6-mois/,t
+225,2023-10-25,stage1,https://www.example.com/page1,t
+226,2023-10-26,stage3,https://www.example.com/page2,t
+227,2023-10-27,stage2,https://www.example.com/page3,t
+228,2023-10-28,stage4,https://www.example.com/page4,t
+229,2023-10-29,stage5,https://www.example.com/page5,t
+231,2023-11-24,Stage - Chargé(e) de projets SIRH (H/F) - Janvier 2024 - 6 mois,https://www.stage.fr/job/6548418/stage-chargé-e-de-projets-sirh-h-f-janvier-2024-6-mois/,t
