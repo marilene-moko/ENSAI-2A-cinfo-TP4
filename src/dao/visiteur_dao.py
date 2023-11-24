@@ -87,25 +87,3 @@ class VisiteurDao(metaclass=Singleton):
             print(f"Erreur lors de l'inscription de l'utilisateur : {e}")
 
         return created
-
-
-""" 
-if __name__ == "__main__":
-    # Pour charger les variables d'environnement contenues dans le fichier .env
-    import dotenv
-    from business_object.attack.physical_attack import PhysicalFormulaAttack
-
-    dotenv.load_dotenv(override=True)
-
-    # Création d'un utilisateur et ajout en BDD
-    mon_utilisateur = PhysicalFormulaAttack(
-        nom=Toto,
-        prenom=,
-        email=,
-        mdp=
-    )
-
-    mon_utilisateur.mdp = UtilisateurDao().hash_password(mon_utilisateur.mdp)
-    succes = UtilisateurDao().add_utilisateur(mon_utilisateur)
-    print("Utilisateur created in database : " + str(succes))
- """

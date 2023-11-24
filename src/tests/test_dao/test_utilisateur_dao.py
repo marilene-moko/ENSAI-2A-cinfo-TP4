@@ -19,12 +19,6 @@ class TestUtilisateurDao(unittest.TestCase):
         # on regarde si l'utilisateur existe bien
         self.assertIsNotNone(utilisateur_exists)
 
-    ####A faire quand la fonction sera finie###
-    """
-    def test_afficher_profil(self):
-        resultat_attendu = "Voici les informations de votre profil : '"
-    """
-
     def test_modifier_nom(self):
         resultat_vrai = UtilisateurDao.modifier_nom("sophie.boubet@yahoo.com", "Boubet")
         resultat_attendu_vrai = True
