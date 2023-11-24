@@ -66,7 +66,7 @@ class TestUtilisateurDao(unittest.TestCase):
         # on regarde s'il est bien impossible de changer le prénom sans email
         self.assertFalse(resultat_faux)
 
-        # on recharge le prénom pour pouvoir refaire le test plus tard
+        # on recharge le énom pour pouvoir refaire le test plus tard
         modif = False
         mail = "sophie.boubet@yahoo.com"
         nombre = "s"
@@ -98,7 +98,7 @@ class TestUtilisateurDao(unittest.TestCase):
         # on recharge le mot de passe pour pouvoir refaire le test plus tard
         modif = False
         mail = "sophie.boubet@yahoo.com"
-        mdp = "TEST35!"
+        mdp = "Testtest356!"
 
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
