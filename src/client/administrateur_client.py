@@ -1,10 +1,20 @@
 from client.professeur_client import ProfesseurClient
 from dao.administrateur_dao import AdministrateurDao
+import datetime as dt
 
 
 class AdministrateurClient(ProfesseurClient):
-    def __init__(self):
-        super().__init__()
+    def __init__(
+        self,
+        identifiant_personne,
+        nom,
+        prenom,
+        adresse_mail,
+        mot_de_passe,
+        dateDerniereConnection=0,
+    ):
+        super().__init__(identifiant_personne, nom, prenom, adresse_mail, mot_de_passe)
+        self.dateDerniereConnection = dt.date.today()
 
     @staticmethod
     def modifierDroitsUtilisateur(adresse_mail, nv_statut):
@@ -19,3 +29,7 @@ class AdministrateurClient(ProfesseurClient):
             un str qui indique si la modification des droits a bien été faite
         """
         return AdministrateurDao.modifierDroitsUtilisateur(adresse_mail, nv_statut)
+
+    @staticmethod
+    def get_users():
+        return AdministrateurDao.get_users()

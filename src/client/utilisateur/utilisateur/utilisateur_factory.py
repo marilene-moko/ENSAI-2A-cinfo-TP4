@@ -8,6 +8,7 @@ class UtilisateurFactory(metaclass=Singleton):
         nom: str = None,
         prenom: str = None,
         mdp: str = None,
+        statut: str = None,
     ) -> Utilisateurlayout:
         utilisateur = None
 
@@ -17,6 +18,7 @@ class UtilisateurFactory(metaclass=Singleton):
                 nom=nom,
                 prenom=prenom,
                 mot_de_passe=mdp,
+                statut=statut,
             )
 
         return utilisateur

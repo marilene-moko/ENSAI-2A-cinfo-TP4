@@ -26,16 +26,14 @@ class ListeEnvieDAO(metaclass=Singleton):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    "Select *             "
-                    'FROM "Projet_Info".voeu'
-                    "WHERE adresse_mail = %(adresse_mail)s;",
+                    'Select * FROM "Projet_Info".voeu WHERE adresse_mail = %(adresse_mail)s;',
                     {"adresse_mail": adresse_mail},
                 )
                 res = cursor.fetchall()
             return res
 
     @staticmethod
-    def supprimer_listeEnvie_utilisateur(adresse_mail, identifiant_voeu):
+    def supprimer_listeEnvie_utilisateur(adresse_mail, identifiant_stage):
         """
         Supprime un voeu de la liste d'envie d'un utilisateur.
         Plusieurs tests pour savoir si le voeu existe et s'il appartient
@@ -53,8 +51,8 @@ class ListeEnvieDAO(metaclass=Singleton):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    'SELECT adresse_mail FROM "Projet_Info".voeu WHERE identifiant_voeu = %(identifiant_voeu)s;',
-                    {"identifiant_voeu": identifiant_voeu},
+                    'SELECT adresse_mail FROM "Projet_Info".voeu WHERE identifiant_stage = %(identifiant_stage)s;',
+                    {"identifiant_stage": identifiant_stage},
                 )
                 row = cursor.fetchone()
 
@@ -72,14 +70,16 @@ class ListeEnvieDAO(metaclass=Singleton):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    'DELETE FROM "Projet_Info".voeu WHERE identifiant_voeu = %(identifiant_voeu)s;',
-                    {"identifiant_voeu": identifiant_voeu},
+                    'DELETE FROM "Projet_Info".voeu WHERE identifiant_stage = %(identifiant_stage)s;',
+                    {"identifiant_stage": identifiant_stage},
                 )
 
         return True
 
     @staticmethod
-    def ajouter_stage_listeEnvie_utilisateur(adresse_mail, identifiant_stage):
+    def ajouter_stage_listeEnvie_utilisateur(
+        adresse_mail, identifiant_stage, specialite, titre, localisation, employeur
+    ):
         """
         Permet d'ajouter un stage a la liste d'envie d'un utilisateur en utilisant son id.
         On vérifie en amont si le voeu est déjà présent ou non et si le stage existe bien
@@ -98,10 +98,10 @@ class ListeEnvieDAO(metaclass=Singleton):
             with connection.cursor() as cursor:
                 # Vérifier si le stage est déjà dans la liste d'envies de l'utilisateur
                 cursor.execute(
-                    'SELECT * FROM "Projet_Info".voeu WHERE adresse_mail = %(adresse_mail)s AND URL_voeu = %(URL_voeu)s;',
+                    'SELECT * FROM "Projet_Info".voeu WHERE adresse_mail = %(adresse_mail)s AND identifiant_stage = %(identifiant_stage)s;',
                     {
                         "adresse_mail": adresse_mail,
-                        "identifiant_stage": stage.URL_stage,
+                        "identifiant_stage": identifiant_stage,
                     },
                 )
                 existing_entry = cursor.fetchone()
@@ -111,15 +111,15 @@ class ListeEnvieDAO(metaclass=Singleton):
 
                 # Ajouter le stage à la liste d'envies de l'utilisateur
                 cursor.execute(
-                    'INSERT INTO "Projet_Info".voeu (adresse_mail, URL_voeu, Categorie, Intitule, Ville , Entreprise )'
-                    "VALUES (%(adresse_mail)s, %(URL_voeu)s, %(Categorie)s, %(Intitule)s, %(Ville)s, %(Entreprise)s  );",
+                    'INSERT INTO "Projet_Info".voeu (adresse_mail, identifiant_stage, Categorie, Intitule, Ville , Entreprise )'
+                    "VALUES (%(adresse_mail)s, %(identifiant_stage)s, %(Categorie)s, %(Intitule)s, %(Ville)s, %(Entreprise)s  );",
                     {
                         "adresse_mail": adresse_mail,
-                        "URL_voeu": stage.URL_stage,
-                        "Categorie": stage.specialite,
-                        "Intitule": stage.titre,
-                        "Ville": stage.localisation,
-                        "Entreprise": stage.employeur,
+                        "identifiant_stage": identifiant_stage,
+                        "Categorie": specialite,
+                        "Intitule": titre,
+                        "Ville": localisation,
+                        "Entreprise": employeur,
                     },
                 )
 
@@ -146,23 +146,22 @@ class ListeEnvieDAO(metaclass=Singleton):
                 with DBConnection().connection as connection:
                     with connection.cursor() as cursor:
                         for line in f:
-                            data = line.strip().split(
-                                ","
-                            )  # Supposer que le CSV est délimité par des virgules
+                            d = line.strip().split(",")
+                            print(
+                                d
+                            )  # Supposer que le CSV est délimité par des virgules. Appellation d pour data
                             # Assurez-vous que l'identifiant de l'utilisateur est utilisé pour l'insertion
-                            sql = """INSERT INTO "Projet_Info".voeu (URL_voeu, Categorie, Intitule, Ville, Poste, Entreprise, adresse_mail)
-                                    VALUES (%s, %s, %s, %s, %s, %s, %s);"""
                             cursor.execute(
-                                sql,
-                                (
-                                    data[0],
-                                    data[1],
-                                    data[2],
-                                    data[3],
-                                    data[4],
-                                    data[5],
-                                    adresse_mail,
-                                ),
+                                'INSERT INTO "Projet_Info".voeu (identifiant_stage, categorie, intitule, ville, entreprise, adresse_mail)'
+                                "Values (%(identifiant_stage)s, %(categorie)s, %(intitule)s, %(ville)s, %(entreprise)s, %(adresse_mail)s);",
+                                {
+                                    "identifiant_stage": d[0],
+                                    "categorie": d[1],
+                                    "intitule": d[2],
+                                    "ville": d[3],
+                                    "entreprise": d[4],
+                                    "adresse_mail": adresse_mail,
+                                },
                             )
             return True  # L'importation a réussi
         except Exception as e:
@@ -192,16 +191,17 @@ class ListeEnvieDAO(metaclass=Singleton):
                         {"adresse_mail": adresse_mail},
                     )
                     res = cursor.fetchall()
-                    with open("data/exporterVoeux.txt", "w", newline="") as f:
+                    with open(
+                        "data/exporterVoeux.txt", "w", newline="", encoding="utf-8"
+                    ) as f:
                         if f.tell() == 0:
                             # Écrire le header seulement si le fichier est vide
                             header = [
+                                "identifiant_stage_int",
                                 "identifiant_voeu",
-                                "URL_voeu",
                                 "Categorie",
                                 "Intitule",
                                 "Ville",
-                                "Poste",
                                 "Entreprise",
                                 "adresse_mail",
                             ]
@@ -209,14 +209,13 @@ class ListeEnvieDAO(metaclass=Singleton):
                         # Écrire les données
                         for row in res:
                             row_data = [
-                                str(row["identifiant_voeu"]),
-                                row["URL_voeu"],
-                                row["Categorie"],
-                                row["Intitule"],
-                                row["Ville"],
-                                row["Poste"],
-                                row["Entreprise"],
-                                str(row["adresse_mail"]),
+                                str(row["identifiant_stage_int"]),
+                                (row["identifiant_stage"]),
+                                (row["categorie"]),
+                                (row["intitule"]),
+                                (row["ville"]),
+                                (row["entreprise"]),
+                                (row["adresse_mail"]),
                             ]
                             f.write(",".join(row_data) + "\n")
             return True  # L'exportation a réussi

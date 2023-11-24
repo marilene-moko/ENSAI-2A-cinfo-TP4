@@ -1,9 +1,6 @@
-from typing import List, Optional
-
 from client.utilisateur.utilisateur.utilisateur_factory import UtilisateurFactory
 from dao.db_connection import DBConnection
 from dao.visiteur_dao import VisiteurDao
-from dao.historique_dao import HistoriqueDAO
 
 
 class UtilisateurDao(VisiteurDao):
@@ -28,17 +25,16 @@ class UtilisateurDao(VisiteurDao):
                     {"adresse_mail": adresse_mail, "mot_de_passe": mot_de_passe},
                 )
                 res = cursor.fetchone()
-
-        utilisateur = None
-
         if res:
             utilisateur = UtilisateurFactory.instantiate_utilisateur(
                 email=res["adresse_mail"],
                 nom=res["nom"],
                 prenom=res["prenom"],
                 mdp=res["mot_de_passe"],
+                statut=res["statut"],
             )
-
+        else:
+            utilisateur = None
         return utilisateur
 
     @staticmethod
@@ -81,7 +77,7 @@ class UtilisateurDao(VisiteurDao):
             with connection.cursor() as cursor:
                 cursor.execute(
                     'UPDATE "Projet_Info".Personne                        '
-                    "   SET    nom = %(modification)s                     "
+                    "   SET    nom = %(nom)s                     "
                     " WHERE adresse_mail = %(adresse_mail)s                             ",
                     {"adresse_mail": adresse_mail, "nom": modification},
                 )
@@ -112,7 +108,7 @@ class UtilisateurDao(VisiteurDao):
             with connection.cursor() as cursor:
                 cursor.execute(
                     'UPDATE "Projet_Info".Personne                        '
-                    "   SET    prenom = %(modification)s                     "
+                    "   SET    prenom = %(prenom)s                     "
                     " WHERE adresse_mail = %(adresse_mail)s                             ",
                     {"adresse_mail": adresse_mail, "prenom": modification},
                 )
@@ -143,7 +139,7 @@ class UtilisateurDao(VisiteurDao):
             with connection.cursor() as cursor:
                 cursor.execute(
                     'UPDATE "Projet_Info".Personne                        '
-                    "   SET    mot_de_passe = %(modification)s                     "
+                    "   SET    mot_de_passe = %(mot_de_passe)s                     "
                     " WHERE adresse_mail = %(adresse_mail)s                             ",
                     {"adresse_mail": adresse_mail, "mot_de_passe": modification},
                 )
@@ -171,30 +167,23 @@ class UtilisateurDao(VisiteurDao):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    'DELETE FROM "Projet_Info".Personne                  '
-                    "WHERE adresse_mail = %(adresse_mail)s;                            ",
+                    'DELETE FROM "Projet_Info".page_visitee WHERE adresse_mail = %(mail)s;',
+                    {"mail": adresse_mail},
                 )
-                if cursor.rowcount:
-                    supp = True
+                cursor.execute(
+                    'DELETE FROM "Projet_Info".voeu WHERE adresse_mail = %(mail)s;',
+                    {"mail": adresse_mail},
+                )
+                cursor.execute(
+                    'DELETE FROM "Projet_Info".Personne WHERE adresse_mail = %(mail)s;',
+                    {"mail": adresse_mail},
+                )
+                cursor.execute(
+                    'SELECT COUNT(*) FROM "Projet_Info".Personne WHERE adresse_mail = %(mail)s;',
+                    {"mail": adresse_mail},
+                )
+                row_count = cursor.fetchone()[
+                    "count"
+                ]  # Récupérer le nombre de lignes correspondantes
+                return row_count == 0
         return supp
-
-
-""" 
-if __name__ == "__main__":
-    # Pour charger les variables d'environnement contenues dans le fichier .env
-    import dotenv
-    from business_object.attack.physical_attack import PhysicalFormulaAttack
-
-    dotenv.load_dotenv(override=True)
-
-    # Création d'une attaque et ajout en BDD
-    mon_utilisateur = PhysicalFormulaAttack(
-        nom=,
-        prenom=,
-        email=,
-        mdp=
-    )
-
-    succes = UtilisateurDao().add_utilisateur(mon_utilisateur)
-    print("Utilisateur created in database : " + str(succes))
- """

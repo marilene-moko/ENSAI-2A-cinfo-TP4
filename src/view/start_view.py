@@ -3,6 +3,8 @@ from InquirerPy import prompt
 from view.abstract_view import AbstractView
 from view.session import Session
 
+from services.historique_service import HistoriqueService
+
 
 class StartView(AbstractView):
     def __init__(self):
@@ -27,6 +29,10 @@ class StartView(AbstractView):
     def make_choice(self):
         reponse = prompt(self.__questions)
         if reponse["choix"] == "Quitter":
+            if Session().statut == "visiteur":
+                HistoriqueService.supprimer_historique_utilisateur(
+                    adresse_mail=Session().email
+                )
             pass
 
         elif reponse["choix"] == "Connection":

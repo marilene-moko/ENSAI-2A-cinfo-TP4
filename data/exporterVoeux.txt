@@ -1,0 +1,16 @@
+identifiant_stage_int,identifiant_voeu,Categorie,Intitule,Ville,Entreprise,adresse_mail
+14,https://www.stage.fr/job/6542566/data-analyst-impact-stage/,data,Data Analyst impact (stage),
+                    Paris, France
+                ,
+                    Alvie
+                ,c
+15,https://www.stage.fr/job/6552330/stage-data-engineer-banque-île-de-france-h-f-stage/,data,Stage - Data Engineer - Banque - Île de France H/F (Stage),
+                    Paris, France
+                ,
+                    Sopra-Steria
+                ,c
+23,https://www.stage.fr/job/6565205/stage-chef-de-projet-data-achats-h-f/,Data,STAGE - CHEF DE PROJET DATA ACHATS H/F,
+                    Paris, France
+                ,
+                    Bouygues Construction
+                ,c

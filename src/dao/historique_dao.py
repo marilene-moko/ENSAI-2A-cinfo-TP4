@@ -1,4 +1,3 @@
-from typing import List, Optional
 from utils.singleton import Singleton
 from dao.db_connection import DBConnection
 import datetime
@@ -52,9 +51,11 @@ class HistoriqueDAO(metaclass=Singleton):
                                 ","
                             )  # Supposer que le CSV est délimité par des virgules
                             # Assurez-vous que l'identifiant de l'utilisateur est utilisé pour l'insertion
-                            sql = """INSERT INTO "Projet_Info".page_visitee (date_visite, URL_page, adresse_mail)
-                                    VALUES (%s, %s, %s);"""
-                            cursor.execute(sql, (data[0], data[1], adresse_mail))
+                            sql = """INSERT INTO "Projet_Info".page_visitee (date_visite, URL_page, titre, adresse_mail)
+                                    VALUES (%s, %s, %s, %s);"""
+                            cursor.execute(
+                                sql, (data[0], data[1], data[2], adresse_mail)
+                            )
             return True  # L'importation a réussi
         except Exception as e:
             return False  # L'importation a échoué
@@ -103,12 +104,15 @@ class HistoriqueDAO(metaclass=Singleton):
                         {"adresse_mail": adresse_mail},
                     )
                     res = cursor.fetchall()
-                    with open("data/exporterHistorique.txt", "w", newline="") as f:
+                    with open(
+                        "data/exporterHistorique.txt", "w", newline="", encoding="utf-8"
+                    ) as f:
                         if f.tell() == 0:
                             # Écrire le header seulement si le fichier est vide
                             header = [
                                 "Identifiant_page",
                                 "date_visite",
+                                "titre",
                                 "URL_page",
                                 "adresse_mail",
                             ]
@@ -118,6 +122,7 @@ class HistoriqueDAO(metaclass=Singleton):
                             row_data = [
                                 str(row["identifiant_page"]),
                                 str(row["date_visite"]),
+                                str(row["titre"]),
                                 row["url_page"],
                                 str(row["adresse_mail"]),
                             ]
@@ -151,7 +156,7 @@ class HistoriqueDAO(metaclass=Singleton):
             return False  # La suppression de l'historique a échoué
 
     @staticmethod
-    def ajouter_historique(adresse_mail, URL_page):
+    def ajouter_historique(adresse_mail, URL_page, titre):
         """
         Ajoute les informations de la recherche dans la table page_visitee avec l'adresse_mail de la personne ayant fait la recherche
 
@@ -163,17 +168,18 @@ class HistoriqueDAO(metaclass=Singleton):
             un booléen qui indique si la tâche a bien été effectuée
         """
         try:
-            current_date = datetime.date.today()
+            date_visite = datetime.date.today()
 
             with DBConnection().connection as connection:
                 with connection.cursor() as cursor:
                     cursor.execute(
-                        'INSERT INTO "Projet_Info".page_visitee (date_visite, URL_page, adresse_mail) '
-                        "VALUES (%(current_date)s, %(URL_page)s, %(adresse_mail)s);",
+                        'INSERT INTO "Projet_Info".page_visitee (date_visite, URL_page, adresse_mail, titre) '
+                        "VALUES (%(date_visite)s, %(URL_page)s, %(adresse_mail)s, %(titre)s);",
                         {
-                            "current_date": current_date,
+                            "date_visite": date_visite,
                             "URL_page": URL_page,
                             "adresse_mail": adresse_mail,
+                            "titre": titre,
                         },
                     )
                     connection.commit()  # N'oubliez pas de commettre la transaction

@@ -1,5 +1,6 @@
 from InquirerPy import prompt
 from tabulate import tabulate
+import textwrap
 
 from view.abstract_view import AbstractView
 from view.session import Session
@@ -7,6 +8,7 @@ from view.fct_statut import Statut
 
 from client.utilisateur.visiteur.stage_client_visiteur import Stageclientvisiteur
 from utils.send_email import Notification
+from services.historique_service import HistoriqueService
 
 
 class NotificationsView(AbstractView):
@@ -81,31 +83,34 @@ class NotificationsView(AbstractView):
         elif reponse["choix"] == "Envoyer des notifications":
             answers = prompt(self.__recherche)
             if (answers[0] is True) & (answers[1] is True):
-                localisation = input("Localisation: ")
                 specialite = input("Spécialité: ")
+                localisation = input("Localisation: ")
                 liste_stage = Stageclientvisiteur().get_stage_spe_loc(
                     specialite, localisation
                 )
-                liste_stage_modif = {
-                    "titre": [
-                        liste_stage[stage][1][0:75]
-                        for stage in range(0, len(liste_stage))
-                    ],
-                    "description": [
-                        liste_stage[stage][2][0:100]
-                        for stage in range(0, len(liste_stage))
-                    ],
-                    "specialite": [
-                        liste_stage[stage][3] for stage in range(0, len(liste_stage))
-                    ],
-                    "localisation": [
-                        liste_stage[stage][4] for stage in range(0, len(liste_stage))
-                    ],
-                    "date_publication": [
-                        liste_stage[stage][8] for stage in range(0, len(liste_stage))
-                    ],
-                }
                 if liste_stage is not None:
+                    liste_stage_modif = {
+                        "titre": [
+                            textwrap.fill(liste_stage[stage][1], 50)
+                            for stage in range(0, len(liste_stage))
+                        ],
+                        "description": [
+                            textwrap.fill(liste_stage[stage][2][0:300], 100)
+                            for stage in range(0, len(liste_stage))
+                        ],
+                        "specialite": [
+                            liste_stage[stage][3]
+                            for stage in range(0, len(liste_stage))
+                        ],
+                        "localisation": [
+                            liste_stage[stage][4]
+                            for stage in range(0, len(liste_stage))
+                        ],
+                        "date_publication": [
+                            liste_stage[stage][8]
+                            for stage in range(0, len(liste_stage))
+                        ],
+                    }
                     table = tabulate(
                         liste_stage_modif,
                         headers=[
@@ -117,7 +122,7 @@ class NotificationsView(AbstractView):
                         ],
                         tablefmt="fancy_grid",
                         disable_numparse=True,
-                        colalign=["left", "center", "center", "center", "center"],
+                        colalign=["center", "center", "center", "center", "center"],
                     )
                     print(table)
                     # Proposer à l'utilisateur de parcourir la liste des voeux
@@ -140,13 +145,23 @@ class NotificationsView(AbstractView):
                         ]
                         recherche = prompt(questions).get("recherche_selectionnee")
                         affichage = Stageclientvisiteur().afficher_stage(recherche)
+                        HistoriqueService().ajouter_historique(
+                            Session().email, recherche[6], recherche[1]
+                        )
                         notif = prompt(self.__notif)
                         if notif[0] is True:
                             mail = prompt(self.__mail)
                             Notification().notify_internship(
-                                Session().pseudo, recherche[1], mail[0]
+                                Session().pseudo,
+                                recherche[1],
+                                recherche[3],
+                                recherche[8],
+                                recherche[4],
+                                mail[0],
                             )
                         parcours = prompt(self.__revenir_menu)
+                else:
+                    print("La recherche demandée n'a pas de résultats")
 
             elif (answers[0] is True) & (answers[1] is False):
                 localisation = "0"
@@ -154,29 +169,29 @@ class NotificationsView(AbstractView):
                 liste_stage = Stageclientvisiteur().get_stage_spe_loc(
                     specialite, localisation
                 )
-                liste_stage = Stageclientvisiteur().get_stage_spe_loc(
-                    specialite, localisation
-                )
-                liste_stage_modif = {
-                    "titre": [
-                        liste_stage[stage][1][0:75]
-                        for stage in range(0, len(liste_stage))
-                    ],
-                    "description": [
-                        liste_stage[stage][2][0:100]
-                        for stage in range(0, len(liste_stage))
-                    ],
-                    "specialite": [
-                        liste_stage[stage][3] for stage in range(0, len(liste_stage))
-                    ],
-                    "localisation": [
-                        liste_stage[stage][4] for stage in range(0, len(liste_stage))
-                    ],
-                    "date_publication": [
-                        liste_stage[stage][8] for stage in range(0, len(liste_stage))
-                    ],
-                }
                 if liste_stage is not None:
+                    liste_stage_modif = {
+                        "titre": [
+                            textwrap.fill(liste_stage[stage][1], 50)
+                            for stage in range(0, len(liste_stage))
+                        ],
+                        "description": [
+                            textwrap.fill(liste_stage[stage][2][0:300], 100)
+                            for stage in range(0, len(liste_stage))
+                        ],
+                        "specialite": [
+                            liste_stage[stage][3]
+                            for stage in range(0, len(liste_stage))
+                        ],
+                        "localisation": [
+                            textwrap.fill(liste_stage[stage][4], 15)
+                            for stage in range(0, len(liste_stage))
+                        ],
+                        "date_publication": [
+                            liste_stage[stage][8]
+                            for stage in range(0, len(liste_stage))
+                        ],
+                    }
                     table = tabulate(
                         liste_stage_modif,
                         headers=[
@@ -211,13 +226,23 @@ class NotificationsView(AbstractView):
                         ]
                         recherche = prompt(questions).get("recherche_selectionnee")
                         affichage = Stageclientvisiteur().afficher_stage(recherche)
+                        HistoriqueService().ajouter_historique(
+                            Session().email, recherche[6], recherche[1]
+                        )
                         notif = prompt(self.__notif)
                         if notif[0] is True:
                             mail = prompt(self.__mail)
                             Notification().notify_internship(
-                                Session().pseudo, affichage, mail[0]
+                                Session().pseudo,
+                                recherche[1],
+                                recherche[3],
+                                recherche[8],
+                                recherche[4],
+                                mail[0],
                             )
                         parcours = prompt(self.__revenir_menu)
+                else:
+                    print("La recherche demandée n'a pas de résultats")
 
             elif (answers[0] is False) & (answers[1] is True):
                 localisation = input("Localisation: ")
@@ -225,29 +250,29 @@ class NotificationsView(AbstractView):
                 liste_stage = Stageclientvisiteur().get_stage_spe_loc(
                     specialite, localisation
                 )
-                liste_stage = Stageclientvisiteur().get_stage_spe_loc(
-                    specialite, localisation
-                )
-                liste_stage_modif = {
-                    "titre": [
-                        liste_stage[stage][1][0:75]
-                        for stage in range(0, len(liste_stage))
-                    ],
-                    "description": [
-                        liste_stage[stage][2][0:100]
-                        for stage in range(0, len(liste_stage))
-                    ],
-                    "specialite": [
-                        liste_stage[stage][3] for stage in range(0, len(liste_stage))
-                    ],
-                    "localisation": [
-                        liste_stage[stage][4] for stage in range(0, len(liste_stage))
-                    ],
-                    "date_publication": [
-                        liste_stage[stage][8] for stage in range(0, len(liste_stage))
-                    ],
-                }
                 if liste_stage is not None:
+                    liste_stage_modif = {
+                        "titre": [
+                            liste_stage[stage][1][0:75]
+                            for stage in range(0, len(liste_stage))
+                        ],
+                        "description": [
+                            liste_stage[stage][2][0:100]
+                            for stage in range(0, len(liste_stage))
+                        ],
+                        "specialite": [
+                            liste_stage[stage][3]
+                            for stage in range(0, len(liste_stage))
+                        ],
+                        "localisation": [
+                            liste_stage[stage][4]
+                            for stage in range(0, len(liste_stage))
+                        ],
+                        "date_publication": [
+                            liste_stage[stage][8]
+                            for stage in range(0, len(liste_stage))
+                        ],
+                    }
                     table = tabulate(
                         liste_stage_modif,
                         headers=[
@@ -281,18 +306,27 @@ class NotificationsView(AbstractView):
                             }
                         ]
                         recherche = prompt(questions).get("recherche_selectionnee")
-
                         affichage = Stageclientvisiteur().afficher_stage(recherche)
+                        HistoriqueService().ajouter_historique(
+                            Session().email, recherche[6], recherche[1]
+                        )
                         notif = prompt(self.__notif)
                         if notif[0] is True:
                             mail = prompt(self.__mail)
                             Notification().notify_internship(
-                                Session().pseudo, recherche[1], mail[0]
+                                Session().pseudo,
+                                recherche[1],
+                                recherche[3],
+                                recherche[8],
+                                recherche[4],
+                                mail[0],
                             )
                         parcours = prompt(self.__revenir_menu)
+                else:
+                    print("La recherche demandée n'a pas de résultats")
             else:
                 print("Il est nécessaire de rentrer au moins l'un des deux")
                 continu = prompt(self.__continuer)
                 if continu[0] is True:
                     return NotificationsView()
-            Statut().def_statut(Session().statut)
+            return Statut().def_statut(Session().statut)

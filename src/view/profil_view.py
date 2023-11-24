@@ -17,6 +17,7 @@ class ProfilView(AbstractView):
                     "Afficher son profil",
                     "Modifier son profil",
                     "Supprimer son profil",
+                    "Revenir à la page précédente",
                     "Quitter",
                 ],
             }
@@ -32,7 +33,23 @@ class ProfilView(AbstractView):
             pass
 
         elif reponse["choix"] == "Afficher son profil":
-            Statut.def_statut(Session().statut)
+            print("Nom :")
+            print(Session().nom)
+            print("\n")
+            print("Prénom : ")
+            print(Session().prenom)
+            print("\n")
+            print("Email :  ")
+            print(Session().email)
+            print("\n")
+            print("Pseudo :  ")
+            print(Session().pseudo)
+            print("\n")
+            print("\n")
+            print("Statut :")
+            print(Session().statut)
+            print("\n")
+            return Statut().def_statut(Session().statut)
 
         elif reponse["choix"] == "Modifier son profil":
             from view.modif_profil_view import ModifProfilView
@@ -40,11 +57,23 @@ class ProfilView(AbstractView):
             return ModifProfilView()
 
         elif reponse["choix"] == "Supprimer son profil":
-            if UtilisateurClient().supprimer_profil(Session().email) is True:
+            if (
+                UtilisateurClient(
+                    identifiant_personne=0,
+                    nom=Session().nom,
+                    prenom=Session().prenom,
+                    adresse_mail=Session().email,
+                    mot_de_passe=Session().mot_de_passe,
+                ).supprimer_profil(Session().email)
+                is True
+            ):
                 print("Votre compte a bien été supprimé")
                 from view.start_view_sans_logo import StartViewSimple
 
                 return StartViewSimple()
             else:
                 print("Une erreur est survenue. Veuillez essayer ultérieurement.")
-                Statut.def_statut(Session().statut)
+                return Statut.def_statut(Session().statut)
+
+        elif reponse["choix"] == "Revenir à la page précédente":
+            return Statut.def_statut(Session().statut)

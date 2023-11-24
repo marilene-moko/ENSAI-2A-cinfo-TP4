@@ -22,7 +22,7 @@ class ModifProfilView(AbstractView):
             },
             {
                 "type": "confirm",
-                "message": "Voulez-vous changer votre mot de passe? Y/N ",
+                "message": "Voulez-vous changer votre mot de passe? ",
                 "default": False,
             },
         ]
@@ -42,10 +42,8 @@ class ModifProfilView(AbstractView):
                 print(
                     "Votre modification n'a pas pu être enregistrée. Veuillez réessayer s'il-vous-plaît."
                 )
-        elif answers[0] is False:
-            Session().nom = Session().nom
         else:
-            print("Vous devez répondre par Y ou N")
+            Session().nom = Session().nom
 
         if answers[1] is True:
             modif_prenom = input("Choisissez un nouveau prénom")
@@ -56,10 +54,8 @@ class ModifProfilView(AbstractView):
                 print(
                     "Votre modification n'a pas pu être enregistrée. Veuillez réessayer s'il-vous-plaît."
                 )
-        elif answers[1] is False:
-            Session().prenom = Session().prenom
         else:
-            print("Vous devez répondre par Y ou N")
+            Session().prenom = Session().prenom
 
         if answers[2] is True:
             modif_mdp = input("Choisissez un nouveau mot de passe")
@@ -69,9 +65,7 @@ class ModifProfilView(AbstractView):
                 print(
                     "Votre modification n'a pas pu être enregistrée. Veuillez réessayer s'il-vous-plaît."
                 )
-        elif answers[2] is False:
-            Session().mot_de_passe = Session().mot_de_passe
         else:
-            print("Vous devez répondre par Y ou N")
+            Session().mot_de_passe = Session().mot_de_passe
 
-        Statut.def_statut(self, Session().statut)
+        return Statut.def_statut(Session().statut)

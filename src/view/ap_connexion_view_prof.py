@@ -16,7 +16,6 @@ class ApConnexionViewProf(AbstractView):
                     "Liste d'envie",
                     "Profil",
                     "Recherche - Notifications",
-                    "Publication",
                     "Quitter",
                 ],
             }
@@ -50,8 +49,3 @@ class ApConnexionViewProf(AbstractView):
             from view.notifications_view import NotificationsView
 
             return NotificationsView()
-
-        # elif reponse["choix"] == "Publication":
-        #    from view.publication_view import PublicationView
-
-        #    return PublicationView()

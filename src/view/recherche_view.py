@@ -1,5 +1,6 @@
 from InquirerPy import prompt
 from tabulate import tabulate
+import textwrap
 
 from view.abstract_view import AbstractView
 from view.session import Session
@@ -7,6 +8,7 @@ from view.fct_statut import Statut
 
 from client.utilisateur.visiteur.stage_client_visiteur import Stageclientvisiteur
 from services.historique_service import HistoriqueService
+from services.listeenvie_service import ListeEnvieService
 
 
 class RechercheView(AbstractView):
@@ -44,6 +46,13 @@ class RechercheView(AbstractView):
                 "default": False,
             }
         ]
+        self.__fav = [
+            {
+                "type": "confirm",
+                "message": "Voulez-vous enregister ce stage dans vos favoris ?",
+                "default": False,
+            }
+        ]
 
     def display_info(self):
         with open("src/graphical_assets/border.txt", "r", encoding="utf-8") as asset:
@@ -53,29 +62,31 @@ class RechercheView(AbstractView):
     def make_choice(self):
         answers = prompt(self.__questions)
         if (answers[0] is True) & (answers[1] is True):
-            localisation = input("Localisation: ")
             specialite = input("Spécialité: ")
+            localisation = input("Localisation: ")
             liste_stage = Stageclientvisiteur().get_stage_spe_loc(
                 specialite, localisation
             )
-            liste_stage_modif = {
-                "titre": [
-                    liste_stage[stage][1][0:75] for stage in range(0, len(liste_stage))
-                ],
-                "description": [
-                    liste_stage[stage][2][0:100] for stage in range(0, len(liste_stage))
-                ],
-                "specialite": [
-                    liste_stage[stage][3] for stage in range(0, len(liste_stage))
-                ],
-                "localisation": [
-                    liste_stage[stage][4] for stage in range(0, len(liste_stage))
-                ],
-                "date_publication": [
-                    liste_stage[stage][8] for stage in range(0, len(liste_stage))
-                ],
-            }
-            if liste_stage is not None:
+            if len(liste_stage) > 0:
+                liste_stage_modif = {
+                    "titre": [
+                        textwrap.fill(liste_stage[stage][1], 35)
+                        for stage in range(0, len(liste_stage))
+                    ],
+                    "description": [
+                        textwrap.fill(liste_stage[stage][2][0:300], 100)
+                        for stage in range(0, len(liste_stage))
+                    ],
+                    "specialite": [
+                        liste_stage[stage][3] for stage in range(0, len(liste_stage))
+                    ],
+                    "localisation": [
+                        liste_stage[stage][4] for stage in range(0, len(liste_stage))
+                    ],
+                    "date_publication": [
+                        liste_stage[stage][8] for stage in range(0, len(liste_stage))
+                    ],
+                }
                 table = tabulate(
                     liste_stage_modif,
                     headers=[
@@ -87,7 +98,7 @@ class RechercheView(AbstractView):
                     ],
                     tablefmt="fancy_grid",
                     disable_numparse=True,
-                    colalign=["left", "center", "center", "center", "center"],
+                    colalign=["center", "center", "center", "center", "center"],
                 )
                 print(table)
                 # Proposer à l'utilisateur de parcourir la liste des voeux
@@ -111,9 +122,22 @@ class RechercheView(AbstractView):
                     recherche = prompt(questions).get("recherche_selectionnee")
                     affichage = Stageclientvisiteur().afficher_stage(recherche)
                     HistoriqueService().ajouter_historique(
-                        Session().email, recherche[6]
+                        Session().email, recherche[6], recherche[1]
                     )
+                    if Session().email != "adresse_mail_visiteur":
+                        favori = prompt(self.__fav)
+                        if favori[0] is True:
+                            ListeEnvieService().ajouter_stage_listeEnvie_utilisateur(
+                                Session().email,
+                                recherche[6],
+                                recherche[3],
+                                recherche[1],
+                                recherche[4],
+                                recherche[7],
+                            )
                     parcours = prompt(self.__revenir_menu)
+            else:
+                print("La recherche demandée n'a pas de résultats")
 
         elif (answers[0] is True) & (answers[1] is False):
             localisation = "0"
@@ -121,27 +145,26 @@ class RechercheView(AbstractView):
             liste_stage = Stageclientvisiteur().get_stage_spe_loc(
                 specialite, localisation
             )
-            liste_stage = Stageclientvisiteur().get_stage_spe_loc(
-                specialite, localisation
-            )
-            liste_stage_modif = {
-                "titre": [
-                    liste_stage[stage][1][0:75] for stage in range(0, len(liste_stage))
-                ],
-                "description": [
-                    liste_stage[stage][2][0:100] for stage in range(0, len(liste_stage))
-                ],
-                "specialite": [
-                    liste_stage[stage][3] for stage in range(0, len(liste_stage))
-                ],
-                "localisation": [
-                    liste_stage[stage][4] for stage in range(0, len(liste_stage))
-                ],
-                "date_publication": [
-                    liste_stage[stage][8] for stage in range(0, len(liste_stage))
-                ],
-            }
             if liste_stage is not None:
+                liste_stage_modif = {
+                    "titre": [
+                        textwrap.fill(liste_stage[stage][1], 50)
+                        for stage in range(0, len(liste_stage))
+                    ],
+                    "description": [
+                        textwrap.fill(liste_stage[stage][2][0:300], 100)
+                        for stage in range(0, len(liste_stage))
+                    ],
+                    "specialite": [
+                        liste_stage[stage][3] for stage in range(0, len(liste_stage))
+                    ],
+                    "localisation": [
+                        liste_stage[stage][4] for stage in range(0, len(liste_stage))
+                    ],
+                    "date_publication": [
+                        liste_stage[stage][8] for stage in range(0, len(liste_stage))
+                    ],
+                }
                 table = tabulate(
                     liste_stage_modif,
                     headers=[
@@ -177,36 +200,49 @@ class RechercheView(AbstractView):
                     recherche = prompt(questions).get("recherche_selectionnee")
                     affichage = Stageclientvisiteur().afficher_stage(recherche)
                     HistoriqueService().ajouter_historique(
-                        Session().email, recherche[6]
+                        Session().email, recherche[6], recherche[1]
                     )
+                    if Session().email != "adresse_mail_visiteur":
+                        favori = prompt(self.__fav)
+                        if favori[0] is True:
+                            ListeEnvieService().ajouter_stage_listeEnvie_utilisateur(
+                                Session().email,
+                                recherche[6],
+                                recherche[3],
+                                recherche[1],
+                                recherche[4],
+                                recherche[7],
+                            )
                     parcours = prompt(self.__revenir_menu)
+            else:
+                print("La recherche demandée n'a pas de résultats")
+
         elif (answers[0] is False) & (answers[1] is True):
             localisation = input("Localisation: ")
             specialite = "0"
             liste_stage = Stageclientvisiteur().get_stage_spe_loc(
                 specialite, localisation
             )
-            liste_stage = Stageclientvisiteur().get_stage_spe_loc(
-                specialite, localisation
-            )
-            liste_stage_modif = {
-                "titre": [
-                    liste_stage[stage][1][0:75] for stage in range(0, len(liste_stage))
-                ],
-                "description": [
-                    liste_stage[stage][2][0:100] for stage in range(0, len(liste_stage))
-                ],
-                "specialite": [
-                    liste_stage[stage][3] for stage in range(0, len(liste_stage))
-                ],
-                "localisation": [
-                    liste_stage[stage][4] for stage in range(0, len(liste_stage))
-                ],
-                "date_publication": [
-                    liste_stage[stage][8] for stage in range(0, len(liste_stage))
-                ],
-            }
             if liste_stage is not None:
+                liste_stage_modif = {
+                    "titre": [
+                        textwrap.fill(liste_stage[stage][1], 50)
+                        for stage in range(0, len(liste_stage))
+                    ],
+                    "description": [
+                        textwrap.fill(liste_stage[stage][2][0:300], 100)
+                        for stage in range(0, len(liste_stage))
+                    ],
+                    "specialite": [
+                        liste_stage[stage][3] for stage in range(0, len(liste_stage))
+                    ],
+                    "localisation": [
+                        liste_stage[stage][4] for stage in range(0, len(liste_stage))
+                    ],
+                    "date_publication": [
+                        liste_stage[stage][8] for stage in range(0, len(liste_stage))
+                    ],
+                }
                 table = tabulate(
                     liste_stage_modif,
                     headers=[
@@ -240,14 +276,27 @@ class RechercheView(AbstractView):
                         }
                     ]
                     recherche = prompt(questions).get("recherche_selectionnee")
-                    HistoriqueService().ajouter_historique(
-                        Session().email, recherche[6]
-                    )
                     affichage = Stageclientvisiteur().afficher_stage(recherche)
+                    HistoriqueService().ajouter_historique(
+                        Session().email, recherche[6], recherche[1]
+                    )
+                    if Session().email != "adresse_mail_visiteur":
+                        favori = prompt(self.__fav)
+                        if favori[0] is True:
+                            ListeEnvieService().ajouter_stage_listeEnvie_utilisateur(
+                                Session().email,
+                                recherche[6],
+                                recherche[3],
+                                recherche[1],
+                                recherche[4],
+                                recherche[7],
+                            )
                     parcours = prompt(self.__revenir_menu)
+            else:
+                print("La recherche demandée n'a pas de résultats")
         else:
             print("Il est nécessaire de rentrer au moins l'un des deux")
             continu = prompt(self.__continuer)
             if continu[0] is True:
                 return RechercheView()
-        Statut().def_statut(Session().statut)
+        return Statut().def_statut(Session().statut)

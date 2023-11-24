@@ -1,4 +1,3 @@
-import os
 import requests
 from typing import List, Optional
 from bs4 import BeautifulSoup
