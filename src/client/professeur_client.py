@@ -1,10 +1,20 @@
 from client.utilisateur_client import UtilisateurClient
 from dao.professeur_dao import ProfesseurDao
+import datetime as dt
 
 
 class ProfesseurClient(UtilisateurClient):
-    def __init__(self):
-        super().__init__()
+    def __init__(
+        self,
+        identifiant_personne,
+        nom,
+        prenom,
+        adresse_mail,
+        mot_de_passe,
+        dateDerniereConnection=0,
+    ):
+        super().__init__(identifiant_personne, nom, prenom, adresse_mail, mot_de_passe)
+        self.dateDerniereConnection = dt.date.today()
 
     @staticmethod
     def ajouterStage(adresse_mail, titre, URL, categorie, ville, poste):

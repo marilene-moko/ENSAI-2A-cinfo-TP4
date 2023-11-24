@@ -168,16 +168,20 @@ class UtilisateurDao(VisiteurDao):
             with connection.cursor() as cursor:
                 cursor.execute(
                     'DELETE FROM "Projet_Info".page_visitee WHERE adresse_mail = %s;',
-                    (adresse_mail),
+                    (adresse_mail,),
                 )
                 cursor.execute(
                     'DELETE FROM "Projet_Info".voeu WHERE adresse_mail = %s;',
-                    (adresse_mail),
+                    (adresse_mail,),
                 )
                 cursor.execute(
                     'DELETE FROM "Projet_Info".Personne WHERE adresse_mail = %s;',
-                    (adresse_mail),
+                    (adresse_mail,),
                 )
-                if cursor.rowcount == 1:
-                    supp = True
+                cursor.execute(
+                    'SELECT COUNT(*) FROM "Projet_Info".Personne WHERE adresse_mail = %s;',
+                    (adresse_mail,),
+                )
+                row_count = cursor.fetchone()["count"]
+            return row_count == 0
         return supp
