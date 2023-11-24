@@ -45,8 +45,6 @@ class ProfilView(AbstractView):
             print("Pseudo :  ")
             print(Session().pseudo)
             print("\n")
-            print("Mot de passe :")
-            print(Session().mot_de_passe)
             print("\n")
             print("Statut :")
             print(Session().statut)

@@ -1,6 +1,11 @@
-Identifiant_page,date_visite,URL_page,titre,adresse_mail
-6,2023-10-25,aefsdf@fsd3.com,https://www.example.com/page1,t
-7,2023-10-26,aefsdf@fsd2.com,https://www.example.com/page2,t
-8,2023-10-27,aefsdf@fsd1.com,https://www.example.com/page3,t
-9,2023-10-28,aefsdf@fsd5.com,https://www.example.com/page4,t
-10,2023-10-29,aefsdf@fsd5.com,https://www.example.com/page5,t
+Identifiant_page,date_visite,titre,URL_page,adresse_mail
+85,2023-11-24,Stage - Data Marketing et Analytics BtoB H/F,https://www.stage.fr/job/6568923/stage-data-marketing-et-analytics-btob-h-f/,c
+86,2023-11-24,Stage - Data Marketing et Analytics BtoB H/F,https://www.stage.fr/job/6568916/stage-data-marketing-et-analytics-btob-h-f/,c
+87,2023-11-24,STAGE - CHEF DE PROJET DATA ACHATS H/F,https://www.stage.fr/job/6565205/stage-chef-de-projet-data-achats-h-f/,c
+88,2023-11-24,Assistant(e) Chargé(e) d'Etudes Quantitatives, Pôle Wellbeing, Stage de 6 mois, F/H,https://www.stage.fr/job/6535447/assistant-e-chargé-e-d-etudes-quantitatives-pôle-wellbeing-stage-de-6-mois-f-h/,c
+89,2023-11-24,Assistant(e) Chargé(e) d'Etudes Quantitatives, Pôle Wellbeing, Stage de 6 mois, F/H,https://www.stage.fr/job/6535447/assistant-e-chargé-e-d-etudes-quantitatives-pôle-wellbeing-stage-de-6-mois-f-h/,c
+90,2023-11-24,Assistant(e) Chargé(e) d'Etudes Quantitatives, Pôle Wellbeing, Stage de 6 mois, F/H,https://www.stage.fr/job/6548134/assistant-e-chargé-e-d-etudes-quantitatives-pôle-wellbeing-stage-de-6-mois-f-h/,c
+91,2023-11-24,Data Analyst impact (stage),https://www.stage.fr/job/6542566/data-analyst-impact-stage/,c
+92,2023-11-24,Stage - Data Engineer - Banque - Île de France H/F (Stage),https://www.stage.fr/job/6552330/stage-data-engineer-banque-île-de-france-h-f-stage/,c
+93,2023-11-24,STAGE - CHEF DE PROJET DATA ACHATS H/F,https://www.stage.fr/job/6565205/stage-chef-de-projet-data-achats-h-f/,c
+94,2023-11-24,Stage Energy Data Analyst,https://www.stage.fr/job/6568986/stage-energy-data-analyst/,c

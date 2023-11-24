@@ -104,14 +104,16 @@ class HistoriqueDAO(metaclass=Singleton):
                         {"adresse_mail": adresse_mail},
                     )
                     res = cursor.fetchall()
-                    with open("data/exporterHistorique.txt", "w", newline="") as f:
+                    with open(
+                        "data/exporterHistorique.txt", "w", newline="", encoding="utf-8"
+                    ) as f:
                         if f.tell() == 0:
                             # Écrire le header seulement si le fichier est vide
                             header = [
                                 "Identifiant_page",
                                 "date_visite",
-                                "URL_page",
                                 "titre",
+                                "URL_page",
                                 "adresse_mail",
                             ]
                             f.write(",".join(header) + "\n")

@@ -168,8 +168,8 @@ class UtilisateurDao(VisiteurDao):
             with connection.cursor() as cursor:
                 cursor.execute(
                     'DELETE FROM "Projet_Info".Personne WHERE adresse_mail = %s;',
-                    (adresse_mail,),
+                    (adresse_mail),
                 )
-                if cursor.rowcount:
+                if cursor.rowcount():
                     supp = True
         return supp
