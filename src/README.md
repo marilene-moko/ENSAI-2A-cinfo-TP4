@@ -7,7 +7,7 @@ Cependant, pour la correction, s'il fallait se pencher particulièrement sur une
 La classe testée :
 
 De même toutes les classes DAO sont testées par des tests unitaires.
-Cependant, pour la correction, s'il fallait se pencher particulièrement sur une, il faudrait prendre src/dao/utilisateur_dao.py 
+Cependant, pour la correction, s'il fallait se pencher particulièrement sur une, il faudrait prendre src/dao/utilisateur_dao.py et src/tests/test_dao/test_utilisateur_dao.py
 
 
 Pourquoi ce choix ? :
