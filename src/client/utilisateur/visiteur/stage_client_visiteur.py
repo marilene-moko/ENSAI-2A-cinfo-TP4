@@ -203,11 +203,7 @@ class Stageclientvisiteur:
                         date_publication=date_pubstage[20 * (num_page - 1) + i - 1],
                     )
                 )
-                print(
-                    plage_pub_format, "\n", date_pubstage[20 * (num_page - 1) + i - 1]
-                )
                 if plage_pub_format in str(date_pubstage[20 * (num_page - 1) + i - 1]):
-                    print("enfin!")
                     stages_for_plage.append(
                         stageFactory.instantiate_stage(
                             titre=titre_stages[20 * (num_page - 1) + i - 1],
@@ -222,8 +218,6 @@ class Stageclientvisiteur:
                             date_publication=date_pubstage[20 * (num_page - 1) + i - 1],
                         )
                     )
-            print(len(stages))
-            print(len(stages_for_plage))
 
             num_page = num_page + 1
             if specialite != "0" and localisation != "0":
