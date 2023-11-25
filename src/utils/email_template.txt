@@ -1,15 +1,15 @@
 Bonjour,
 
-Nous avons le plaisir de vous informer que {notif_sender} a partage avec vous les details d'une opportunite de stage qui pourrait susciter votre interet. 
+Nous avons le plaisir de vous informer que {notif_sender} à partagé avec vous les détails d'une opportunité de stage qui pourrait susciter votre intéret. 
 
 Les informations relatives à ce stage sont les suivantes :
 
 titre : {internship_name}
-Specialite : {internship_specialite}
+Spécialite : {internship_specialite}
 Date de parution : {intership_date}
 Localisation : {internship_localisation}
 
-Bonne recherche  vous.
+Bonne recherche à vous.
 
 Smart Intership
 

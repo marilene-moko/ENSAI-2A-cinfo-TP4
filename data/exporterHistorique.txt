@@ -1,6 +1,5 @@
 Identifiant_page,date_visite,URL_page,titre,adresse_mail
-6,2023-10-25,aefsdf@fsd3.com,https://www.example.com/page1,t
-7,2023-10-26,aefsdf@fsd2.com,https://www.example.com/page2,t
-8,2023-10-27,aefsdf@fsd1.com,https://www.example.com/page3,t
-9,2023-10-28,aefsdf@fsd5.com,https://www.example.com/page4,t
-10,2023-10-29,aefsdf@fsd5.com,https://www.example.com/page5,t
+40,2023-11-23,[Stage - 6 mois ] Chargé-e de mission Observatoire de la Finance à Impact social - Analyse de données / Data Analyst,https://www.stage.fr/job/6542564/stage-6-mois-chargé-e-de-mission-observatoire-de-la-finance-à-impact-social-analyse-de-données-data-analyst/,Votre@email.fr
+41,2023-11-23,Stage - Data Engineer - Banque - Île de France H/F (Stage),https://www.stage.fr/job/6552330/stage-data-engineer-banque-île-de-france-h-f-stage/,Votre@email.fr
+42,2023-11-23,STAGIAIRE INGÉNIEUR(E) DATA ET MAINTENANCE H/F,https://www.stage.fr/job/6546624/stagiaire-ingénieur-e-data-et-maintenance-h-f/,Votre@email.fr
+43,2023-11-23,STAGIAIRE INGÉNIEUR(E) DATA ET MAINTENANCE H/F,https://www.stage.fr/job/6546624/stagiaire-ingénieur-e-data-et-maintenance-h-f/,Votre@email.fr
