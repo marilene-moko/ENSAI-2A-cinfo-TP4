@@ -1,10 +1,6 @@
 import requests
-from typing import List, Optional
 from bs4 import BeautifulSoup
 from business_object.stage.stage_factory import stageFactory
-from business_object.stage.stage_layout import Stagelayout
-from dao.historique_dao import HistoriqueDAO
-from dao.listeenvie_dao import ListeEnvieDAO
 import time
 
 
@@ -20,7 +16,6 @@ class Stageclientvisiteur:
         plage_pub: str = "0",
         num_page=1,
     ):
-        print(plage_pub)
         stages = None
         resultat_recherche = None
         response = requests.get("""https://www.stage.fr/""")
@@ -204,11 +199,7 @@ class Stageclientvisiteur:
                         date_publication=date_pubstage[20 * (num_page - 1) + i - 1],
                     )
                 )
-                # print(
-                # plage_pub_format, "\n", date_pubstage[20 * (num_page - 1) + i - 1]
-                # )
                 if plage_pub_format in str(date_pubstage[20 * (num_page - 1) + i - 1]):
-                    # print("enfin!")
                     stages_for_plage.append(
                         stageFactory.instantiate_stage(
                             titre=titre_stages[20 * (num_page - 1) + i - 1],
@@ -223,8 +214,6 @@ class Stageclientvisiteur:
                             date_publication=date_pubstage[20 * (num_page - 1) + i - 1],
                         )
                     )
-            # print(len(stages))
-            # print(len(stages_for_plage))
 
             num_page = num_page + 1
             if specialite != "0" and localisation != "0":
@@ -259,7 +248,6 @@ class Stageclientvisiteur:
                 response = requests.get(url)
 
             time.sleep(10)  # pour contourner les erreurs de type 409
-            print(response.status_code)
 
         if len(stages_for_plage) == 0:
             print(
@@ -333,7 +321,7 @@ class Stageclientvisiteur:
                         " *************************",
                     )
                     print("Titre  :")
-                    print(stages[20 * (page - 1) + i][1])
+                    print(stages[1])
                     print("\n")
                     print("Specialite : ")
                     print(stages[20 * (page - 1) + i][3])
