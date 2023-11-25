@@ -167,7 +167,7 @@ class Stageclientvisiteur:
                 annee = plage_pub_split[2]
                 plage_pub_format = jour + " " + mois + ".," + " " + annee
             if len(plage_pub_split) == 2:
-                if plage_pub_split[0].isdigit() == True:
+                if plage_pub_split[0].isdigit() is True:
                     jour = plage_pub_split[0]
                     for i in range(12):
                         if str(plage_pub_split[1]).lower() in mois_check[i]:
