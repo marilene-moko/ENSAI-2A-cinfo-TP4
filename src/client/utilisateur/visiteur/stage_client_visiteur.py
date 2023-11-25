@@ -249,9 +249,9 @@ class Stageclientvisiteur:
 
             time.sleep(10)  # pour contourner les erreurs de type 409
 
-        if len(stages_for_plage) == 0:
+        if len(stages) == 0:
             print(
-                "aucun stage ne correspond à cette plage de temps sur le site stage.fr",
+                "aucun stage ne correspond aux modalités choisies sur le site stage.fr",
             )
         else:
             if plage_pub == "0":
