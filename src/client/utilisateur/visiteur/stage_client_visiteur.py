@@ -380,7 +380,7 @@ class Stageclientvisiteur:
 if __name__ == "__main__":
     stagevisiteur = Stageclientvisiteur()
     stages = stagevisiteur.get_stage_spe_loc(
-        specialite="architecture", localisation="Rennes"
+        specialite="data", localisation="Paris", plage_pub="23 novembre 2023"
     )
     print(len(stages))
     stagevisiteur.afficher_stage(stages=stages)
