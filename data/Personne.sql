@@ -15,3 +15,4 @@ INSERT INTO "Projet_Info".personne(nom, prenom, adresse_mail, mot_de_passe, stat
 ('Elkarif','Abdelraouf','abdelraouf.elkarif@gmail.com','Karirif35','eleve'),
 ('Carofil','Mathieu','mathieu.carofil@gmail.com','JusteDance75','eleve'),
 ('Gewoncik','Zuzana','zuzana.gewoncik@gmail.com','Gege75','eleve');
+('Visiteur','Visiteur','Visiteur','58a49412f5e6cacc84ebd0caa60d0ba55814d7e10b3c43ed97fc380cb1acf016','visiteur')
