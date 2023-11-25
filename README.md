@@ -1,4 +1,7 @@
-Bienvenue sur notre application !
+Welcome to our application !
+
+Our goal is to provide an efficient way for our users to search for internships. For example, a user who has created an account or not can search for internships precizing the fields they are looking for and the place too. Once connected to our application, a user will be able to save their researches, list of interests and to import/export them, thus giving a flexible way to look for internships and share their results with some friends.
+Additionnaly, teachers will be able to notify through an email service of internships that they think would be interesting for a students for example.
 
 ## Required packages
 

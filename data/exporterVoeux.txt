@@ -1,16 +1,16 @@
 identifiant_stage_int,identifiant_voeu,Categorie,Intitule,Ville,Entreprise,adresse_mail
-14,https://www.stage.fr/job/6542566/data-analyst-impact-stage/,data,Data Analyst impact (stage),
+35,https://www.stage.fr/job/6568180/stage-de-fin-d-études-data-science-géospatial-février-mars-2024-f-h/,Data,Stage de fin d'études - Data Science Géospatial février/mars 2024 - F/H,
                     Paris, France
                 ,
-                    Alvie
-                ,c
-15,https://www.stage.fr/job/6552330/stage-data-engineer-banque-île-de-france-h-f-stage/,data,Stage - Data Engineer - Banque - Île de France H/F (Stage),
+                    Axionable
+                ,t
+36,https://www.stage.fr/job/6548955/data-analyst-h-f-stage/,Data,Data Analyst (H/F) - Stage,
                     Paris, France
                 ,
-                    Sopra-Steria
-                ,c
-23,https://www.stage.fr/job/6565205/stage-chef-de-projet-data-achats-h-f/,Data,STAGE - CHEF DE PROJET DATA ACHATS H/F,
+                    Hello Watt
+                ,t
+38,https://www.stage.fr/job/6536602/cuisinier-sites-de-compétition-paris-2024-h-f/,cuisine,CUISINIER – SITES DE COMPÉTITION - PARIS 2024 (H/F),
                     Paris, France
                 ,
-                    Bouygues Construction
-                ,c
+                    Jobintree
+                ,t
