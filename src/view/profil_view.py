@@ -45,8 +45,6 @@ class ProfilView(AbstractView):
             print("Pseudo :  ")
             print(Session().pseudo)
             print("\n")
-            print("Mot de passe :")
-            print(Session().mot_de_passe)
             print("\n")
             print("Statut :")
             print(Session().statut)
@@ -59,7 +57,16 @@ class ProfilView(AbstractView):
             return ModifProfilView()
 
         elif reponse["choix"] == "Supprimer son profil":
-            if UtilisateurClient().supprimer_profil(Session().email) is True:
+            if (
+                UtilisateurClient(
+                    identifiant_personne=0,
+                    nom=Session().nom,
+                    prenom=Session().prenom,
+                    adresse_mail=Session().email,
+                    mot_de_passe=Session().mot_de_passe,
+                ).supprimer_profil(Session().email)
+                is True
+            ):
                 print("Votre compte a bien été supprimé")
                 from view.start_view_sans_logo import StartViewSimple
 

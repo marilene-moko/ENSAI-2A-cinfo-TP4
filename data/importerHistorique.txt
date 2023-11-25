@@ -1,6 +1,6 @@
-date_visite,URL_page,adresse_mail
-2023-10-25,https://www.example.com/page1,aefsdf@fsd3.com
-2023-10-26,https://www.example.com/page2,aefsdf@fsd2.com
-2023-10-27,https://www.example.com/page3,aefsdf@fsd1.com
-2023-10-28,https://www.example.com/page4,aefsdf@fsd5.com
-2023-10-29,https://www.example.com/page5,aefsdf@fsd5.com
+date_visite,URL_page,titre
+2023-10-25,https://www.example.com/page1,stage1
+2023-10-26,https://www.example.com/page2,stage3
+2023-10-27,https://www.example.com/page3,stage2
+2023-10-28,https://www.example.com/page4,stage4
+2023-10-29,https://www.example.com/page5,stage5

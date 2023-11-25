@@ -1,4 +1,5 @@
-URL_voeu,Categorie,Intitule,Ville,Entreprise,adresse_mail
-https://www.example.com/1,Informatique,Paris,Stage,ABC Inc.,t
-https://www.example.com/2,Marketing,Analyste,New York,XYZ Corp.,t
-https://www.example.com/3,Finance,Comptable,Londres,123 Ltd.,1
+identifiant_stage,categorie,intitule,ville,entreprise
+https://www.example.com/1,Informatique,Stage,Paris,ABCInc
+https://www.example.com/2,Marketing,Analyse,NewYork,XYZCorp
+https://www.example.com/3,Finance,Comptable,Londres,123Ltd
+https://www.example.com/4,Finance,Comptable,Londressss,123Ltd

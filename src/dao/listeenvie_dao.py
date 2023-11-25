@@ -146,22 +146,22 @@ class ListeEnvieDAO(metaclass=Singleton):
                 with DBConnection().connection as connection:
                     with connection.cursor() as cursor:
                         for line in f:
-                            data = line.strip().split(
-                                ","
-                            )  # Supposer que le CSV est délimité par des virgules
+                            d = line.strip().split(",")
+                            print(
+                                d
+                            )  # Supposer que le CSV est délimité par des virgules. Appellation d pour data
                             # Assurez-vous que l'identifiant de l'utilisateur est utilisé pour l'insertion
-                            sql = """INSERT INTO "Projet_Info".voeu (identifiant_stage, Categorie, Intitule, Ville, Entreprise, adresse_mail)
-                                    VALUES (%s, %s, %s, %s, %s, %s, %s);"""
                             cursor.execute(
-                                sql,
-                                (
-                                    data[0],
-                                    data[1],
-                                    data[2],
-                                    data[3],
-                                    data[4],
-                                    adresse_mail,
-                                ),
+                                'INSERT INTO "Projet_Info".voeu (identifiant_stage, categorie, intitule, ville, entreprise, adresse_mail)'
+                                "Values (%(identifiant_stage)s, %(categorie)s, %(intitule)s, %(ville)s, %(entreprise)s, %(adresse_mail)s);",
+                                {
+                                    "identifiant_stage": d[0],
+                                    "categorie": d[1],
+                                    "intitule": d[2],
+                                    "ville": d[3],
+                                    "entreprise": d[4],
+                                    "adresse_mail": adresse_mail,
+                                },
                             )
             return True  # L'importation a réussi
         except Exception as e:
@@ -191,10 +191,13 @@ class ListeEnvieDAO(metaclass=Singleton):
                         {"adresse_mail": adresse_mail},
                     )
                     res = cursor.fetchall()
-                    with open("data/exporterVoeux.txt", "w", newline="") as f:
+                    with open(
+                        "data/exporterVoeux.txt", "w", newline="", encoding="utf-8"
+                    ) as f:
                         if f.tell() == 0:
                             # Écrire le header seulement si le fichier est vide
                             header = [
+                                "identifiant_stage_int",
                                 "identifiant_voeu",
                                 "Categorie",
                                 "Intitule",
@@ -206,12 +209,13 @@ class ListeEnvieDAO(metaclass=Singleton):
                         # Écrire les données
                         for row in res:
                             row_data = [
-                                str(row["identifiant_stage"]),
-                                row["Categorie"],
-                                row["Intitule"],
-                                row["Ville"],
-                                row["Entreprise"],
-                                str(row["adresse_mail"]),
+                                str(row["identifiant_stage_int"]),
+                                (row["identifiant_stage"]),
+                                (row["categorie"]),
+                                (row["intitule"]),
+                                (row["ville"]),
+                                (row["entreprise"]),
+                                (row["adresse_mail"]),
                             ]
                             f.write(",".join(row_data) + "\n")
             return True  # L'exportation a réussi
