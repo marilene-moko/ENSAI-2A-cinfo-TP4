@@ -1,13 +1,4 @@
-# ENSAI-2A-complement-info-TP
-
-These practical exercises will be useful as part of the IT project
-
-* TP 1: Back to OOP, business objects and strategy design patterns
-* TP 2: Webservices and data formats
-* TP 3: Data Access Object (DAO)
-* TP 4: Creating an HMI (Human Machine Interface)
-
-Author : [Rémi Pépin](https://gitlab.com/remi2J/complement_info_ensai_2022_2023)
+Bienvenue sur notre application !
 
 ## Required packages
 

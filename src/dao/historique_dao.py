@@ -60,7 +60,7 @@ class HistoriqueDAO(metaclass=Singleton):
         except Exception as e:
             return False  # L'importation a échoué
 
-    def importer_historique_modified(self, adresse_mail, stage):
+    def importer_historique_modified(adresse_mail, stage):
         """
         On conserve les liens, des stages qui ont parcourus par les utilisateurs ainsi que les dates auxquelles ils ont été consultés.
         """
@@ -104,14 +104,16 @@ class HistoriqueDAO(metaclass=Singleton):
                         {"adresse_mail": adresse_mail},
                     )
                     res = cursor.fetchall()
-                    with open("data/exporterHistorique.txt", "w", newline="") as f:
+                    with open(
+                        "data/exporterHistorique.txt", "w", newline="", encoding="utf-8"
+                    ) as f:
                         if f.tell() == 0:
                             # Écrire le header seulement si le fichier est vide
                             header = [
                                 "Identifiant_page",
                                 "date_visite",
-                                "URL_page",
                                 "titre",
+                                "URL_page",
                                 "adresse_mail",
                             ]
                             f.write(",".join(header) + "\n")

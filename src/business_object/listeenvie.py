@@ -32,7 +32,9 @@ class ListeEnvie:
         """
         return ListeEnvieDAO.supprimer_listeEnvie_utilisateur(adresse_mail, id_stage)
 
-    def ajouter_stage_listeEnvie_utilisateur(adresse_mail, id_stage):
+    def ajouter_stage_listeEnvie_utilisateur(
+        adresse_mail, identifiant_stage, specialite, titre, localisation, employeur
+    ):
         """
         Méthode qui permet à un utilisateur d'ajouter un stage à sa liste d'envie.
 
@@ -45,7 +47,7 @@ class ListeEnvie:
             un booléen qui indique si la tâche a été affectuée
         """
         return ListeEnvieDAO.ajouter_stage_listeEnvie_utilisateur(
-            adresse_mail, id_stage
+            adresse_mail, identifiant_stage, specialite, titre, localisation, employeur
         )
 
     def importer_voeux(adresse_mail):

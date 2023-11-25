@@ -20,6 +20,7 @@ class NotificationsView(AbstractView):
                 "message": f" {Session().pseudo}",
                 "choices": [
                     "Envoyer des notifications",
+                    "Effectuer une recherche",
                     "Quitter",
                 ],
             }
@@ -79,6 +80,11 @@ class NotificationsView(AbstractView):
         reponse = prompt(self.__questions)
         if reponse["choix"] == "Quitter":
             pass
+
+        elif reponse["choix"] == "Effectuer une recherche":
+            from view.recherche_view import RechercheView
+
+            return RechercheView()
 
         elif reponse["choix"] == "Envoyer des notifications":
             answers = prompt(self.__recherche)
