@@ -8,7 +8,6 @@ from dao.listeenvie_dao import ListeEnvieDAO
 import time
 
 
-### Version du scraping à utiliser
 class Stageclientvisiteur:
     def __init__(self, utility="faire des operations sur les stage"):
         self.utility = utility
@@ -61,7 +60,7 @@ class Stageclientvisiteur:
         print(url)
 
         # On verifie si le lien vers la page fonctionne bien
-        while response.status_code == 200 and num_page <= 5:
+        if response.status_code == 200:
             html = response.text
             soup = BeautifulSoup(html, "lxml")
 
@@ -191,196 +190,144 @@ class Stageclientvisiteur:
                 plage_pub_format = annee
 
             # for i in range(0, len(liens_stages)):
-            for i in range(0, min(20, len(liens_stages) - 20 * (num_page - 1))):
+            for i in range(0, len(liens_stages)):
                 stages.append(
                     stageFactory.instantiate_stage(
-                        titre=titre_stages[20 * (num_page - 1) + i - 1],
-                        description=description_stages[20 * (num_page - 1) + i - 1],
+                        titre=titre_stages[i - 1],
+                        description=description_stages[i - 1],
                         specialite=specialite,
-                        localisation=localisation_stage[20 * (num_page - 1) + i - 1],
+                        localisation=localisation_stage[i - 1],
                         siteSource="stage.fr",
-                        URL_stage=liens_stages[20 * (num_page - 1) + i - 1],
-                        employeur=employeurs[20 * (num_page - 1) + i - 1],
-                        date_publication=date_pubstage[20 * (num_page - 1) + i - 1],
+                        URL_stage=liens_stages[i - 1],
+                        employeur=employeurs[i - 1],
+                        date_publication=date_pubstage[i - 1],
                     )
                 )
-                # print(
-                # plage_pub_format, "\n", date_pubstage[20 * (num_page - 1) + i - 1]
-                # )
-                if plage_pub_format in str(date_pubstage[20 * (num_page - 1) + i - 1]):
-                    # print("enfin!")
+
+                if plage_pub_format in str(date_pubstage[i - 1]):
+                    print("enfin!")
                     stages_for_plage.append(
                         stageFactory.instantiate_stage(
-                            titre=titre_stages[20 * (num_page - 1) + i - 1],
-                            description=description_stages[20 * (num_page - 1) + i - 1],
+                            titre=titre_stages[i - 1],
+                            description=description_stages[i - 1],
                             specialite=specialite,
-                            localisation=localisation_stage[
-                                20 * (num_page - 1) + i - 1
-                            ],
+                            localisation=localisation_stage[i - 1],
                             siteSource="stage.fr",
-                            URL_stage=liens_stages[20 * (num_page - 1) + i - 1],
-                            employeur=employeurs[20 * (num_page - 1) + i - 1],
-                            date_publication=date_pubstage[20 * (num_page - 1) + i - 1],
+                            URL_stage=liens_stages[i - 1],
+                            employeur=employeurs[i - 1],
+                            date_publication=plage_pub_format,
                         )
                     )
-            # print(len(stages))
-            # print(len(stages_for_plage))
-
-            num_page = num_page + 1
-            if specialite != "0" and localisation != "0":
-                url = (
-                    """https://www.stage.fr/jobs/?q="""
-                    + specialite
-                    + "&l="
-                    + localisation
-                    + "&job_type[]=Stage&p="
-                    + str(num_page)
-                )
-
-                response = requests.get(url)
-
-            if specialite != "0" and localisation == "0":
-                url = (
-                    """https://www.stage.fr/jobs/?q="""
-                    + specialite
-                    + """&job_type[]=Stage&job_type[]=Stage&p="""
-                    + str(num_page)
-                )
-                response = requests.get(url)
-
-            if specialite == "0" and localisation != "0":
-                url = (
-                    """https://www.stage.fr/jobs/?q=&l="""
-                    + localisation
-                    + """&job_type%5B%5D=Stage&job_type%5B%5D=Stage&p="""
-                    + str(num_page)
-                )
-
-                response = requests.get(url)
-
-            time.sleep(10)  # pour contourner les erreurs de type 409
-            print(response.status_code)
-
+        result_scrap = [1, 1, 1, 1]
         if len(stages_for_plage) == 0:
-            print(
-                "aucun stage ne correspond à cette plage de temps sur le site stage.fr",
-            )
-        else:
-            if plage_pub == "0":
-                if specialite != 0 and localisation != 0:
-                    print(
-                        len(stages_for_plage),
-                        " stages ont été trouvés  pour la  plage de temps renseignée correspondant à la specialité",
-                        specialite,
-                        "et à la localisation",
-                        localisation,
-                    )
-                if specialite != 0 and localisation == 0:
-                    print(
-                        len(stages_for_plage),
-                        " stages ont été trouvés  pour la  plage de temps renseignée et correspondent à la specialité",
-                        specialite,
-                    )
-                if specialite == 0 and localisation != 0:
-                    print(
-                        len(stages_for_plage),
-                        " stages ont été trouvés  pour la  plage de temps renseignée et correspondent à la localisation",
-                        localisation,
-                    )
-            if plage_pub != "0":
-                if specialite != 0 and localisation != 0:
-                    print(
-                        len(stages_for_plage),
-                        " stages ont été trouvés  pour la  plage de temps",
-                        plage_pub,
-                        "correspondant à la specialité",
-                        specialite,
-                        "et à la localisation",
-                        localisation,
-                    )
-                if specialite != 0 and localisation == 0:
-                    print(
-                        len(stages_for_plage),
-                        " stages ont été trouvés  pour la  plage de temps",
-                        plage_pub,
-                        "correspondant à la specialité",
-                        specialite,
-                    )
-                if specialite == 0 and localisation != 0:
-                    print(
-                        len(stages_for_plage),
-                        " stages ont été trouvés  pour la  plage de temps",
-                        plage_pub,
-                        "et à la localisation",
-                        localisation,
-                    )
+            result_scrap[0] = str(len(stages_for_plage))
+            result_scrap[1] = specialite
+            result_scrap[2] = localisation
+            result_scrap[3] = plage_pub_format
+            return result_scrap
 
         return stages_for_plage
 
-    def afficher_stage(self, stages):
+    def afficher_stage(self, stages, compteur=1):
         page = 1
-        while page >= 0:
-            if len(stages) == 0:
+        while page >= 0 and compteur <= 10:
+            if stages[0] == "0":
                 print(
-                    "aucun stage correspondant à votre/ vos critère(s) n'a été trouvé "
+                    "aucun stage ne correspond à votre recherche sur la  page ",
+                    page,
+                    " du site\n",
                 )
-            if len(stages) >= 20 * (page - 1) + 1:
-                i = 0
-                for i in range(0, min(len(stages) - 20 * (page - 1), 20)):
-                    print(
-                        "******************* Informations relatives au stage ",
-                        20 * (page - 1) + i + 1,
-                        " *************************",
+                rep = "0"
+
+                while rep.upper() != "N" and rep.upper() != "Y":
+                    print("la reponse renseignée est invalide")
+                    rep = input(
+                        "voulez vous continuer vos recherches sur la page suivante du site : Y/N ?",
                     )
-                    print("Titre  :")
-                    print(stages[20 * (page - 1) + i][1])
-                    print("\n")
-                    print("Specialite : ")
-                    print(stages[20 * (page - 1) + i][3])
-                    print("\n")
-                    print("localisation :  ")
-                    print(stages[20 * (page - 1) + i][4])
-                    print("\n")
-                    print("site source :  ")
-                    print(stages[20 * (page - 1) + i][5])
-                    print("\n")
-                    print("Lien vers le stage :")
-                    print(stages[20 * (page - 1) + i][6])
-                    print("\n")
-                    print("employeur :  ")
-                    print(stages[20 * (page - 1) + i][7])
-                    print("\n")
-                    print("date de publication :")
-                    print(stages[20 * (page - 1) + i][8])
-                    print("\n")
-                    print("Description : ")
-                    print(stages[20 * (page - 1) + i][2])
-                    print("\n\n")
+                    if rep.upper() == "N":
+                        page = -1
 
-                if min(len(stages), 20) < 20:
-                    page = -1
-                if min(len(stages), 20) == 20:
-                    rep = "0"
-                    while rep.upper() != "N" and rep.upper() != "Y":
-                        rep = input("Voulez vous voir davantage de stages? : Y/N ")
-                        if rep.upper() == "N":
-                            page = -1
+                    if rep.upper() == "Y":
+                        page = page + 1
+                        compteur += 1
+                        specialite = stages[1]
+                        localisation = stages[2]
+                        plage_pub_format = stages[3]
 
-                        if rep.upper() == "Y":
-                            page = page + 1
+                        stages = self.get_stage_spe_loc(
+                            specialite=specialite,
+                            localisation=localisation,
+                            plage_pub=plage_pub_format,
+                            num_page=page,
+                        )
+                        self.afficher_stage(stages=stages, compteur=page)
 
                         if rep.upper() != "N" and rep.upper() != "Y":
                             print("votre reponse est invalide")
+            if stages[1] != "0":
+                for i in range(len(stages)):
+                    print(
+                        "******************* Informations relatives au stage ",
+                        i + 1,
+                        "de la page",
+                        page,
+                        " *************************",
+                    )
+                    print("Titre  :")
+                    print(stages[i][1])
+                    print("\n")
+                    print("Specialite : ")
+                    print(stages[i][3])
+                    print("\n")
+                    print("localisation :  ")
+                    print(stages[i][4])
+                    print("\n")
+                    print("site source :  ")
+                    print(stages[i][5])
+                    print("\n")
+                    print("Lien vers le stage :")
+                    print(stages[i][6])
+                    print("\n")
+                    print("employeur :  ")
+                    print(stages[i][7])
+                    print("\n")
+                    print("date de publication :")
+                    print(stages[i][8])
+                    print("\n")
+                    print("Description : ")
+                    print(stages[i][2])
+                    print("\n\n")
 
-            else:
-                page = -1
-        print("les stages correspondants à votre recherche ont tous été parcourus")
+                rep = "0"
+                while rep.upper() != "N" and rep.upper() != "Y":
+                    rep = input("Voulez vous voir davantage de stages? : Y/N ")
+                    if rep.upper() == "N":
+                        page = -1
+
+                    if rep.upper() == "Y":
+                        page = page + 1
+                        compteur = compteur + 1
+                        specialite = stages[1][3]
+                        localisation = stages[1][4]
+                        plage_pub_format = stages[3]
+
+                        stages = self.get_stage_spe_loc(
+                            specialite=specialite,
+                            localisation=localisation,
+                            plage_pub=plage_pub_format,
+                            num_page=page,
+                        )
+                        self.afficher_stage(stages=stages, compteur=compteur)
+
+                    if rep.upper() != "N" and rep.upper() != "Y":
+                        print("votre reponse est invalide")
+        print("vous avez parcourus tous les stages correspondants à vos criteres")
 
 
 if __name__ == "__main__":
     stagevisiteur = Stageclientvisiteur()
     stages = stagevisiteur.get_stage_spe_loc(
-        specialite="architecture", localisation="Rennes"
+        specialite="cuisine", localisation="Rennes", plage_pub="novembre 2023"
     )
     print(len(stages))
     stagevisiteur.afficher_stage(stages=stages)
