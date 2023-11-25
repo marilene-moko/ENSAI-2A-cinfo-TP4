@@ -1,2 +1,3 @@
-La classe commentée :
+La classe commentée : 
+
 La classe testée :
