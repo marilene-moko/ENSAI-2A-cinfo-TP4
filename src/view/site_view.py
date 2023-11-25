@@ -1,9 +1,9 @@
 from InquirerPy import prompt
+from tabulate import tabulate
 
 from view.abstract_view import AbstractView
 from view.session import Session
 from client.utilisateur_client import UtilisateurClient
-from client.utilisateur.visiteur.stage_client_visiteur import Stageclientvisiteur
 from client.administrateur_client import AdministrateurClient
 from view.fct_statut import Statut
 
@@ -97,17 +97,28 @@ class SiteView(AbstractView):
                 mot_de_passe=Session().mot_de_passe,
             ).get_users()  # Récupérer les utilisateurs
 
-            if users:  # Vérifier si des utilisateurs ont été récupérés
-                # En-tête
-                print("N°\tNom\tPrénom\tAdresse e-mail\tStatut")
-                print("-" * 60)  # Ligne de séparation après l'en-tête
-
-                # Affichage de chaque utilisateur avec un numéro et une séparation
-                for i, user in enumerate(users, start=1):
-                    print(
-                        f"{i}\t{user['nom']}\t{user['prenom']}\t{user['adresse_mail']}\t{user['statut']}"
-                    )
-                    print("-" * 60)  # Ligne de séparation entre chaque utilisateur
+            if len(users) > 0:
+                liste_modif = {
+                    "Nom": [users[util]["nom"] for util in range(0, len(users))],
+                    "Prénom": [users[util]["prenom"] for util in range(0, len(users))],
+                    "Adresse mail": [
+                        users[util]["adresse_mail"] for util in range(0, len(users))
+                    ],
+                    "Statut": [users[util]["statut"] for util in range(0, len(users))],
+                }
+                table = tabulate(
+                    liste_modif,
+                    headers=[
+                        "Nom",
+                        "Prénom",
+                        "Adresse mail",
+                        "Statut",
+                    ],
+                    tablefmt="fancy_grid",
+                    disable_numparse=True,
+                    colalign=["center", "center", "center", "center"],
+                )
+                print(table)
             else:
                 print(
                     "Aucun utilisateur trouvé."
