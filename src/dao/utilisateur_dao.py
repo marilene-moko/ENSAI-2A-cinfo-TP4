@@ -50,7 +50,7 @@ class UtilisateurDao(VisiteurDao):
             mot_de_passe : str : mot de passe de l'utilisateur
 
         Retour :
-            print un str qui indique les caractéristiques du profil utilisateur
+            print un str qui indique les caractéristiques du profil de l'utilisateur
         """
         print(f"Voici les informations de votre profil: {adresse_mail}")
 
