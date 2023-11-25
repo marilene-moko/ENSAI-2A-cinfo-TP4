@@ -2,6 +2,9 @@ requests
 psycopg2-binary
 dataclasses
 python-dotenv
+dotenv
 fastapi
 inquirerPy
 datetime
+tabulate
+textwrap
