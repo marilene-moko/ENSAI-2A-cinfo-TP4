@@ -50,7 +50,7 @@ class UtilisateurDao(VisiteurDao):
             mot_de_passe : str : mot de passe de l'utilisateur
 
         Retour :
-            un str qui indique les caractéristiques du profil utilisateur
+            print un str qui indique les caractéristiques du profil de l'utilisateur
         """
         print(f"Voici les informations de votre profil: {adresse_mail}")
 
@@ -150,7 +150,7 @@ class UtilisateurDao(VisiteurDao):
     @staticmethod
     def supprimer_profil(adresse_mail):
         """
-        Méthode qui permet à un utilisateur de supprimer son historique.
+        Méthode qui permet à un utilisateur de supprimer son profil.
 
         Paramètres :
             adresse_mail : str : adresse mail de l'utilisateur

@@ -1,10 +1,6 @@
 import requests
-from typing import List, Optional
 from bs4 import BeautifulSoup
 from business_object.stage.stage_factory import stageFactory
-from business_object.stage.stage_layout import Stagelayout
-from dao.historique_dao import HistoriqueDAO
-from dao.listeenvie_dao import ListeEnvieDAO
 import time
 
 
@@ -20,7 +16,6 @@ class Stageclientvisiteur:
         plage_pub: str = "0",
         num_page=1,
     ):
-        print(plage_pub)
         stages = None
         resultat_recherche = None
         response = requests.get("""https://www.stage.fr/""")
@@ -172,7 +167,7 @@ class Stageclientvisiteur:
                 annee = plage_pub_split[2]
                 plage_pub_format = jour + " " + mois + ".," + " " + annee
             if len(plage_pub_split) == 2:
-                if plage_pub_split[0].isdigit() == True:
+                if plage_pub_split[0].isdigit() is True:
                     jour = plage_pub_split[0]
                     for i in range(12):
                         if str(plage_pub_split[1]).lower() in mois_check[i]:
@@ -204,11 +199,7 @@ class Stageclientvisiteur:
                         date_publication=date_pubstage[20 * (num_page - 1) + i - 1],
                     )
                 )
-                # print(
-                # plage_pub_format, "\n", date_pubstage[20 * (num_page - 1) + i - 1]
-                # )
                 if plage_pub_format in str(date_pubstage[20 * (num_page - 1) + i - 1]):
-                    # print("enfin!")
                     stages_for_plage.append(
                         stageFactory.instantiate_stage(
                             titre=titre_stages[20 * (num_page - 1) + i - 1],
@@ -223,8 +214,6 @@ class Stageclientvisiteur:
                             date_publication=date_pubstage[20 * (num_page - 1) + i - 1],
                         )
                     )
-            # print(len(stages))
-            # print(len(stages_for_plage))
 
             num_page = num_page + 1
             if specialite != "0" and localisation != "0":
@@ -259,11 +248,10 @@ class Stageclientvisiteur:
                 response = requests.get(url)
 
             time.sleep(10)  # pour contourner les erreurs de type 409
-            print(response.status_code)
 
-        if len(stages_for_plage) == 0:
+        if len(stages) == 0:
             print(
-                "aucun stage ne correspond à cette plage de temps sur le site stage.fr",
+                "aucun stage ne correspond aux modalités choisies sur le site stage.fr",
             )
         else:
             if plage_pub == "0":
@@ -333,28 +321,28 @@ class Stageclientvisiteur:
                         " *************************",
                     )
                     print("Titre  :")
-                    print(stages[20 * (page - 1) + i][1])
+                    print(stages[1])
                     print("\n")
                     print("Specialite : ")
-                    print(stages[20 * (page - 1) + i][3])
+                    print(stages[3])
                     print("\n")
                     print("localisation :  ")
-                    print(stages[20 * (page - 1) + i][4])
+                    print(stages[4])
                     print("\n")
                     print("site source :  ")
-                    print(stages[20 * (page - 1) + i][5])
+                    print(stages[5])
                     print("\n")
                     print("Lien vers le stage :")
-                    print(stages[20 * (page - 1) + i][6])
+                    print(stages[6])
                     print("\n")
                     print("employeur :  ")
-                    print(stages[20 * (page - 1) + i][7])
+                    print(stages[7])
                     print("\n")
                     print("date de publication :")
-                    print(stages[20 * (page - 1) + i][8])
+                    print(stages[8])
                     print("\n")
                     print("Description : ")
-                    print(stages[20 * (page - 1) + i][2])
+                    print(stages[2])
                     print("\n\n")
 
                 if min(len(stages), 20) < 20:

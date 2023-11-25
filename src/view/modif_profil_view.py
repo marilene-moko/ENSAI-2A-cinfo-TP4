@@ -49,7 +49,7 @@ class ModifProfilView(AbstractView):
         answers = prompt(self.__questions)
         email = Session().email
         if answers[0] is True:
-            modif_nom = input("Choisissez un nouveau nom")
+            modif_nom = input("Choisissez un nouveau nom: ")
             if UtilisateurClient.modifier_nom(email, modif_nom) is True:
                 Session().nom = modif_nom
                 Session().pseudo = Session().nom + " " + Session().prenom
@@ -61,7 +61,7 @@ class ModifProfilView(AbstractView):
             Session().nom = Session().nom
 
         if answers[1] is True:
-            modif_prenom = input("Choisissez un nouveau prénom")
+            modif_prenom = input("Choisissez un nouveau prénom: ")
             if UtilisateurClient.modifier_prenom(email, modif_prenom) is True:
                 Session().prenom = modif_prenom
                 Session().pseudo = Session().nom + " " + Session().prenom
