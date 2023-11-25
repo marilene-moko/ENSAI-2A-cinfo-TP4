@@ -13,4 +13,4 @@ Cependant, pour la correction, s'il fallait se pencher particulièrement sur une
 Pourquoi ce choix ? :
 
 La classe utilisateur est la classe "fondatrice" (classe mère) de toutes les classes utilisateurs connectés, donc il nous paressait intéressant de tester cette classe en particulier.
-En effet, si un dysfonctionnement est présent dans une des méthodes de UtilisateurDAO alors cela se répercutera dans les autres classes qui hérite de UtilisateurDAO.
+En effet, si un dysfonctionnement est présent dans une des méthodes de UtilisateurDAO alors cela se répercutera dans les autres classes qui héritent de UtilisateurDAO.
