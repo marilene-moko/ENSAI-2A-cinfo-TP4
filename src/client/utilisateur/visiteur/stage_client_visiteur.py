@@ -269,99 +269,34 @@ class Stageclientvisiteur:
 
         return stages_for_plage
 
-    def afficher_stage(self, stages):
-        n = len(stages)
-        if n == 0:
-            print(
-                "aucun stage compatible avec votre recherche n'a été trouvé sur le site"
-            )
-        else:
-            k = n // 5
-            if len(stages) <= 5:
-                for i in range(0, n):
-                    print(
-                        "******************* Informations relatives au stage "
-                        + str(i + 1)
-                        + " *************************"
-                    )
-                    print("Titre  :")
-                    print(stages[i][1])
-                    print("\n")
-                    print("Specialite : ")
-                    print(stages[i][3])
-                    print("\n")
-                    print("localisation :  ")
-                    print(stages[i][4])
-                    print("\n")
-                    print("site source :  ")
-                    print(stages[i][5])
-                    print("\n")
-                    print("Lien vers le stage :")
-                    print(stages[i][6])
-                    print("\n")
-                    print("employeur :  ")
-                    print(stages[i][7])
-                    print("\n")
-                    print("date de publication :")
-                    print(stages[i][8])
-                    print("\n")
-                    print("Description : ")
-                    print(stages[i][2])
-                    print("\n\n")
-            if len(stages) > 5:
-                compteur = 1
-
-                while compteur > 0 and compteur <= 5:
-                    i = 0
-                    while i < min(5, len(stages) - (compteur - 1) * 5):
-                        print(
-                            "******************* Informations relatives au stage "
-                            + str((compteur - 1) * 5 + i + 1)
-                            + " *************************"
-                        )
-                        print("Titre  :")
-                        print(stages[(compteur - 1) * 5 + i][1])
-                        print("\n")
-                        print("Specialite : ")
-                        print(stages[(compteur - 1) * 5 + i][3])
-                        print("\n")
-                        print("localisation :  ")
-                        print(stages[(compteur - 1) * 5 + i][4])
-                        print("\n")
-                        print("site source :  ")
-                        print(stages[(compteur - 1) * 5 + i][5])
-                        print("\n")
-                        print("Lien vers le stage :")
-                        print(stages[(compteur - 1) * 5 + i][6])
-                        print("\n")
-                        print("employeur :  ")
-                        print(stages[(compteur - 1) * 5 + i][7])
-                        print("\n")
-                        print("date de publication :")
-                        print(stages[(compteur - 1) * 5 + i][8])
-                        print("\n")
-                        print("Description : ")
-                        print(stages[(compteur - 1) * 5 + i][2])
-                        print("\n\n")
-                        i += 1
-                    rep = "0"
-                    if (compteur - 1) * 5 + 5 < len(stages):
-                        while rep.upper() != "N" and rep.upper() != "Y":
-                            rep = input("voulez vous voir davantage de stages? Y/N   ")
-                            if rep.upper() == "Y":
-                                compteur = compteur + 1
-                                # print(compteur)
-                                # print(rep.upper())
-                            if rep.upper() == "N":
-                                print("vous avez terminé votre parcours")
-                                compteur = -1
-                            if rep.upper() != "N" and rep.upper() != "Y":
-                                print(
-                                    "la reponse renseignée est invalide, repondez par Y ou par N"
-                                )
-                    else:
-                        compteur = -1
-        print("les stages correspondants à votre recherche ont tous été parcourus")
+    def afficher_stage(self, stage):
+        print(
+            "******************* Informations relatives au stage *************************"
+        )
+        print("Titre  :")
+        print(stage[1])
+        print("\n")
+        print("Specialite : ")
+        print(stage[3])
+        print("\n")
+        print("localisation :  ")
+        print(stage[4])
+        print("\n")
+        print("site source :  ")
+        print(stage[5])
+        print("\n")
+        print("Lien vers le stage :")
+        print(stage[6])
+        print("\n")
+        print("employeur :  ")
+        print(stage[7])
+        print("\n")
+        print("date de publication :")
+        print(stage[8])
+        print("\n")
+        print("Description : ")
+        print(stage[2])
+        print("\n\n")
 
 
 if __name__ == "__main__":
