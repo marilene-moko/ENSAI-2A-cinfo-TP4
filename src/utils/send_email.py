@@ -20,7 +20,7 @@ class Notification:
         message["From"] = sender_email
         message["To"] = receiver_email
         message["Subject"] = subject
-        message.attach(MIMEText(body, "plain"))
+        message.attach(MIMEText(body, "plain", "utf-8"))
 
         server = smtplib.SMTP(smtp_server, smtp_port)
         server.starttls()
@@ -39,7 +39,7 @@ class Notification:
     ):
         cwd = os.getcwd()
         # Charger le contenu du modèle d'e-mail depuis le fichier email_template.txt
-        with open(cwd + "/src/utils/email_template.txt", "r") as file:
+        with open(cwd + "/src/utils/email_template.txt", "r", encoding="utf-8") as file:
             email_template = file.read()
 
         # Remplacer les placeholders dans le modèle
