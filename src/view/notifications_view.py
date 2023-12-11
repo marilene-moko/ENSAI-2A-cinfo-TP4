@@ -97,11 +97,11 @@ class NotificationsView(AbstractView):
                 if liste_stage is not None:
                     liste_stage_modif = {
                         "titre": [
-                            textwrap.fill(liste_stage[stage][1], 50)
+                            textwrap.fill(liste_stage[stage][1], 25)
                             for stage in range(0, len(liste_stage))
                         ],
                         "description": [
-                            textwrap.fill(liste_stage[stage][2][0:300], 100)
+                            textwrap.fill(liste_stage[stage][2][0:300], 75)
                             for stage in range(0, len(liste_stage))
                         ],
                         "specialite": [
@@ -178,11 +178,11 @@ class NotificationsView(AbstractView):
                 if liste_stage is not None:
                     liste_stage_modif = {
                         "titre": [
-                            textwrap.fill(liste_stage[stage][1], 50)
+                            textwrap.fill(liste_stage[stage][1], 25)
                             for stage in range(0, len(liste_stage))
                         ],
                         "description": [
-                            textwrap.fill(liste_stage[stage][2][0:300], 100)
+                            textwrap.fill(liste_stage[stage][2][0:300], 75)
                             for stage in range(0, len(liste_stage))
                         ],
                         "specialite": [
