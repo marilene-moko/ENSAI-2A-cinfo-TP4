@@ -78,18 +78,19 @@ class RechercheView(AbstractView):
             if len(liste_stage) > 0:
                 liste_stage_modif = {
                     "titre": [
-                        textwrap.fill(liste_stage[stage][1], 35)
+                        textwrap.fill(liste_stage[stage][1], 25)
                         for stage in range(0, len(liste_stage))
                     ],
                     "description": [
-                        textwrap.fill(liste_stage[stage][2][0:300], 100)
+                        textwrap.fill(liste_stage[stage][2][0:300], 50)
                         for stage in range(0, len(liste_stage))
                     ],
                     "specialite": [
                         liste_stage[stage][3] for stage in range(0, len(liste_stage))
                     ],
                     "localisation": [
-                        liste_stage[stage][4] for stage in range(0, len(liste_stage))
+                        textwrap.fill(liste_stage[stage][4], 25)
+                        for stage in range(0, len(liste_stage))
                     ],
                     "date_publication": [
                         liste_stage[stage][8] for stage in range(0, len(liste_stage))
@@ -156,18 +157,19 @@ class RechercheView(AbstractView):
             if len(liste_stage) > 0:
                 liste_stage_modif = {
                     "titre": [
-                        textwrap.fill(liste_stage[stage][1], 35)
+                        textwrap.fill(liste_stage[stage][1], 25)
                         for stage in range(0, len(liste_stage))
                     ],
                     "description": [
-                        textwrap.fill(liste_stage[stage][2][0:300], 100)
+                        textwrap.fill(liste_stage[stage][2][0:300], 50)
                         for stage in range(0, len(liste_stage))
                     ],
                     "specialite": [
                         liste_stage[stage][3] for stage in range(0, len(liste_stage))
                     ],
                     "localisation": [
-                        liste_stage[stage][4] for stage in range(0, len(liste_stage))
+                        textwrap.fill(liste_stage[stage][4], 25)
+                        for stage in range(0, len(liste_stage))
                     ],
                     "date_publication": [
                         liste_stage[stage][8] for stage in range(0, len(liste_stage))
@@ -236,18 +238,19 @@ class RechercheView(AbstractView):
             if len(liste_stage) > 0:
                 liste_stage_modif = {
                     "titre": [
-                        textwrap.fill(liste_stage[stage][1], 50)
+                        textwrap.fill(liste_stage[stage][1], 25)
                         for stage in range(0, len(liste_stage))
                     ],
                     "description": [
-                        textwrap.fill(liste_stage[stage][2][0:300], 100)
+                        textwrap.fill(liste_stage[stage][2][0:300], 50)
                         for stage in range(0, len(liste_stage))
                     ],
                     "specialite": [
                         liste_stage[stage][3] for stage in range(0, len(liste_stage))
                     ],
                     "localisation": [
-                        liste_stage[stage][4] for stage in range(0, len(liste_stage))
+                        textwrap.fill(liste_stage[stage][4], 25)
+                        for stage in range(0, len(liste_stage))
                     ],
                     "date_publication": [
                         liste_stage[stage][8] for stage in range(0, len(liste_stage))
@@ -311,18 +314,19 @@ class RechercheView(AbstractView):
             if len(liste_stage) > 0:
                 liste_stage_modif = {
                     "titre": [
-                        textwrap.fill(liste_stage[stage][1], 50)
+                        textwrap.fill(liste_stage[stage][1], 25)
                         for stage in range(0, len(liste_stage))
                     ],
                     "description": [
-                        textwrap.fill(liste_stage[stage][2][0:300], 100)
+                        textwrap.fill(liste_stage[stage][2][0:300], 50)
                         for stage in range(0, len(liste_stage))
                     ],
                     "specialite": [
                         liste_stage[stage][3] for stage in range(0, len(liste_stage))
                     ],
                     "localisation": [
-                        liste_stage[stage][4] for stage in range(0, len(liste_stage))
+                        textwrap.fill(liste_stage[stage][4], 25)
+                        for stage in range(0, len(liste_stage))
                     ],
                     "date_publication": [
                         liste_stage[stage][8] for stage in range(0, len(liste_stage))
@@ -391,18 +395,19 @@ class RechercheView(AbstractView):
             if len(liste_stage) > 0:
                 liste_stage_modif = {
                     "titre": [
-                        textwrap.fill(liste_stage[stage][1], 50)
+                        textwrap.fill(liste_stage[stage][1], 25)
                         for stage in range(0, len(liste_stage))
                     ],
                     "description": [
-                        textwrap.fill(liste_stage[stage][2][0:300], 100)
+                        textwrap.fill(liste_stage[stage][2][0:300], 50)
                         for stage in range(0, len(liste_stage))
                     ],
                     "specialite": [
                         liste_stage[stage][3] for stage in range(0, len(liste_stage))
                     ],
                     "localisation": [
-                        liste_stage[stage][4] for stage in range(0, len(liste_stage))
+                        textwrap.fill(liste_stage[stage][4], 25)
+                        for stage in range(0, len(liste_stage))
                     ],
                     "date_publication": [
                         liste_stage[stage][8] for stage in range(0, len(liste_stage))
@@ -469,18 +474,19 @@ class RechercheView(AbstractView):
             if len(liste_stage) > 0:
                 liste_stage_modif = {
                     "titre": [
-                        textwrap.fill(liste_stage[stage][1], 50)
+                        textwrap.fill(liste_stage[stage][1], 25)
                         for stage in range(0, len(liste_stage))
                     ],
                     "description": [
-                        textwrap.fill(liste_stage[stage][2][0:300], 100)
+                        textwrap.fill(liste_stage[stage][2][0:300], 50)
                         for stage in range(0, len(liste_stage))
                     ],
                     "specialite": [
                         liste_stage[stage][3] for stage in range(0, len(liste_stage))
                     ],
                     "localisation": [
-                        liste_stage[stage][4] for stage in range(0, len(liste_stage))
+                        textwrap.fill(liste_stage[stage][4], 25)
+                        for stage in range(0, len(liste_stage))
                     ],
                     "date_publication": [
                         liste_stage[stage][8] for stage in range(0, len(liste_stage))
@@ -546,18 +552,19 @@ class RechercheView(AbstractView):
             if len(liste_stage) > 0:
                 liste_stage_modif = {
                     "titre": [
-                        textwrap.fill(liste_stage[stage][1], 50)
+                        textwrap.fill(liste_stage[stage][1], 25)
                         for stage in range(0, len(liste_stage))
                     ],
                     "description": [
-                        textwrap.fill(liste_stage[stage][2][0:300], 100)
+                        textwrap.fill(liste_stage[stage][2][0:300], 50)
                         for stage in range(0, len(liste_stage))
                     ],
                     "specialite": [
                         liste_stage[stage][3] for stage in range(0, len(liste_stage))
                     ],
                     "localisation": [
-                        liste_stage[stage][4] for stage in range(0, len(liste_stage))
+                        textwrap.fill(liste_stage[stage][4], 25)
+                        for stage in range(0, len(liste_stage))
                     ],
                     "date_publication": [
                         liste_stage[stage][8] for stage in range(0, len(liste_stage))
