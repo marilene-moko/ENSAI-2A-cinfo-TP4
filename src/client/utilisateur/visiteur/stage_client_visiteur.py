@@ -53,6 +53,9 @@ class Stageclientvisiteur:
 
             response = requests.get(url)
 
+        if specialite == "0" and localisation == "0":
+            url = """https://www.stage.fr/jobs/?job_type[]=Stage"""
+
         print(url)
 
         # On verifie si le lien vers la page fonctionne bien
