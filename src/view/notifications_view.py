@@ -36,6 +36,11 @@ class NotificationsView(AbstractView):
                 "message": "Voulez-vous choisir votre localisation?",
                 "default": False,
             },
+            {
+                "type": "confirm",
+                "message": "Voulez-vous choisir votre localisation?",
+                "default": False,
+            },
         ]
         self.__parcourir_question = [
             {
@@ -91,8 +96,9 @@ class NotificationsView(AbstractView):
             if (answers[0] is True) & (answers[1] is True):
                 specialite = input("Spécialité: ")
                 localisation = input("Localisation: ")
+                date = input("date de publication: ")
                 liste_stage = Stageclientvisiteur().get_stage_spe_loc(
-                    specialite, localisation
+                    specialite, localisation, date
                 )
                 if liste_stage is not None:
                     liste_stage_modif = {

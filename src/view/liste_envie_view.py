@@ -61,7 +61,7 @@ class ListeEnvieView(AbstractView):
                         for stage in range(0, len(liste_envie))
                     ],
                     "localisation": [
-                        liste_envie[stage]["ville"]
+                        textwrap.fill(liste_envie[stage]["ville"], 25)
                         for stage in range(0, len(liste_envie))
                     ],
                     "entreprise": [
