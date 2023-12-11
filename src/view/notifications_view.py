@@ -101,7 +101,7 @@ class NotificationsView(AbstractView):
                             for stage in range(0, len(liste_stage))
                         ],
                         "description": [
-                            textwrap.fill(liste_stage[stage][2][0:300], 75)
+                            textwrap.fill(liste_stage[stage][2][0:300], 50)
                             for stage in range(0, len(liste_stage))
                         ],
                         "specialite": [
@@ -182,7 +182,7 @@ class NotificationsView(AbstractView):
                             for stage in range(0, len(liste_stage))
                         ],
                         "description": [
-                            textwrap.fill(liste_stage[stage][2][0:300], 75)
+                            textwrap.fill(liste_stage[stage][2][0:300], 50)
                             for stage in range(0, len(liste_stage))
                         ],
                         "specialite": [
