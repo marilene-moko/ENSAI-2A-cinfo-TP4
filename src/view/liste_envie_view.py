@@ -49,7 +49,7 @@ class ListeEnvieView(AbstractView):
             if len(liste_envie) > 0:
                 liste_envie_modif = {
                     "titre": [
-                        textwrap.fill(liste_envie[stage]["intitule"], 50)
+                        textwrap.fill(liste_envie[stage]["intitule"], 25)
                         for stage in range(0, len(liste_envie))
                     ],
                     "URL du stage": [
@@ -61,7 +61,7 @@ class ListeEnvieView(AbstractView):
                         for stage in range(0, len(liste_envie))
                     ],
                     "localisation": [
-                        textwrap.fill(liste_envie[stage]["ville"], 25)
+                        textwrap.fill(liste_envie[stage]["ville"], 15)
                         for stage in range(0, len(liste_envie))
                     ],
                     "entreprise": [
