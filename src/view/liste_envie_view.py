@@ -53,7 +53,7 @@ class ListeEnvieView(AbstractView):
                         for stage in range(0, len(liste_envie))
                     ],
                     "URL du stage": [
-                        liste_envie[stage]["identifiant_stage"]
+                        textwrap.fill(liste_envie[stage]["identifiant_stage"], 25)
                         for stage in range(0, len(liste_envie))
                     ],
                     "specialite": [
